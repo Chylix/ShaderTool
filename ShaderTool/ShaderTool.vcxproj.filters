@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="MainWindow">
+      <UniqueIdentifier>{9c65018d-b3f3-4cab-ba72-f77eadaa17f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SyntaxHighlighter">
+      <UniqueIdentifier>{c1a678e0-f64a-4f4b-89fb-3b50d3459b15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="D3DRenderWidget">
+      <UniqueIdentifier>{3e2fe591-c224-4001-b9f9-7f7933d196b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DefaultScene">
+      <UniqueIdentifier>{933a8d17-02a5-4052-a73c-f3c7ef935c2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CodeEditor">
+      <UniqueIdentifier>{29937e48-a94a-4311-bc8d-3bd2883b40b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResourceManager">
+      <UniqueIdentifier>{ddacc1ca-bef0-4491-a35e-4881051da3ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ShaderCreator">
+      <UniqueIdentifier>{c076029e-b28d-41fa-9738-dbc8afb41d2c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ShaderToolMain.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ShaderToolMain.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_ShaderToolMain.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ShaderToolMain.cpp">
+      <Filter>MainWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="SyntaxHighlighter.cpp">
+      <Filter>SyntaxHighlighter</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SyntaxHighlighter.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SyntaxHighlighter.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DRenderWidget.cpp">
+      <Filter>D3DRenderWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_D3DRenderWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_D3DRenderWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultScene.cpp">
+      <Filter>DefaultScene</Filter>
+    </ClCompile>
+    <ClCompile Include="CodeEditor.cpp">
+      <Filter>CodeEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="LineNumberArea.cpp">
+      <Filter>CodeEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CodeEditor.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CodeEditor.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CTexturePainter.cpp">
+      <Filter>ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CTexturePainter.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CTexturePainter.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CShaderCreator.cpp">
+      <Filter>ShaderCreator</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="ShaderToolMain.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ShaderToolMain.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ShaderToolMain.h">
+      <Filter>MainWindow</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SyntaxHighlighter.h">
+      <Filter>SyntaxHighlighter</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D3DRenderWidget.h">
+      <Filter>D3DRenderWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="CodeEditor.h">
+      <Filter>CodeEditor</Filter>
+    </CustomBuild>
+    <CustomBuild Include="CTexturePainter.h">
+      <Filter>ResourceManager</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GeneratedFiles\ui_ShaderToolMain.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultScene.h">
+      <Filter>DefaultScene</Filter>
+    </ClInclude>
+    <ClInclude Include="LineNumberArea.h">
+      <Filter>CodeEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderCreator.h">
+      <Filter>ShaderCreator</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,780 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien\World">
+      <UniqueIdentifier>{69186e04-2e09-430f-aa1e-29fd64503f47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\World">
+      <UniqueIdentifier>{9643ea9f-fabe-4462-938c-23fd1d053a5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Time">
+      <UniqueIdentifier>{f846ddfb-9dc7-4963-818f-e06cbcbe5fda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Time">
+      <UniqueIdentifier>{455c72fb-4991-42b7-932a-2a38630c6dce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Input">
+      <UniqueIdentifier>{a166a3c8-21f2-42d4-903a-29e3a654ade9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\World\Entity">
+      <UniqueIdentifier>{493ca8a9-1061-4b35-8871-a9c5062b5884}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\World\Entity">
+      <UniqueIdentifier>{66ef1a70-ac54-416d-b3a5-ed937fb27b40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Window">
+      <UniqueIdentifier>{13243e3e-f181-44f9-9492-741cbf82a446}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Window">
+      <UniqueIdentifier>{7fbcaa0b-5ef3-4064-b8c2-d849b7d82fd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Input\Gamepad">
+      <UniqueIdentifier>{2c1910a4-6c1e-4c89-86b8-bf3d92e49b9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Input\Keyboard">
+      <UniqueIdentifier>{eaeb3984-6a34-441c-a534-9a5da3fc73bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Input\Mouse">
+      <UniqueIdentifier>{a6cf0299-63fc-4a3a-a8dc-6a26f9442a84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Resource">
+      <UniqueIdentifier>{00fbe54a-6ec2-46a9-a226-2fb9916e7d6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Resource">
+      <UniqueIdentifier>{61dcd59f-a61c-4cb1-88c8-e67838920931}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Resource\Resources">
+      <UniqueIdentifier>{13b7a41a-0595-45e5-b73a-80caf6239e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Resource\Parser">
+      <UniqueIdentifier>{d550d0db-f0c4-40fd-b10e-ee0606b88588}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Resource\Resources\TilesetMap">
+      <UniqueIdentifier>{567a1bdc-1119-49c0-91da-361a5d801987}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Resource\Resources\TilesetMap\Layers">
+      <UniqueIdentifier>{b13d104b-4adf-4ab3-a751-a4db262fb34c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Resource\Resources">
+      <UniqueIdentifier>{b677baa5-2dc8-4c3d-bcb4-ab93f54ad238}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Resource\Resources\TilesetMap">
+      <UniqueIdentifier>{23665d30-6e3d-4346-a91c-d20942c12a15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Resource\Resources\TilesetMap\Layers">
+      <UniqueIdentifier>{91a25283-533e-4132-8da7-2e50e76f6523}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Resource\Parser">
+      <UniqueIdentifier>{14da79b3-92ef-4fce-b5d3-414ff3611076}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Resource\Resources\Texture">
+      <UniqueIdentifier>{d227c161-4740-420c-bbac-547c12c570e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Resource\Resources\Texture">
+      <UniqueIdentifier>{cd2f12d8-ea9e-4038-a36f-c589f3510dec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Physic">
+      <UniqueIdentifier>{c883ff63-5aae-45b1-8dcf-f9a980ca995f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Physic">
+      <UniqueIdentifier>{0bc4fdb1-4f01-4134-8e3a-b950eaf0d9ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Physic\Collider">
+      <UniqueIdentifier>{803dfabb-078e-4140-8aa6-f3a77e241729}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Physic\Collider">
+      <UniqueIdentifier>{e193d3fb-05f6-4234-86a1-458abadab8c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Physic\Body">
+      <UniqueIdentifier>{cbbec432-cdd1-4e3c-8727-f32986fe4c6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Graphics">
+      <UniqueIdentifier>{83ce876f-fe94-40c7-ba1a-0ede0490fde9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Graphics">
+      <UniqueIdentifier>{192b20bf-e196-43f5-b8ca-2d5b98ba14ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Rendering">
+      <UniqueIdentifier>{d5ba01e9-2cfb-41e4-bdf3-2077bd41c7da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Rendering">
+      <UniqueIdentifier>{7d5e0812-8dcb-469b-8c26-a1086a6c8fd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Rendering\Drawables">
+      <UniqueIdentifier>{15d97f77-6de1-42df-a21c-815fbee8bf13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Rendering\Drawables">
+      <UniqueIdentifier>{e30d4275-185f-46f6-aa7a-2fad18cac6df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Rendering\Material">
+      <UniqueIdentifier>{52bd95c0-5061-417e-8209-e9a21bba48fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Rendering\Material">
+      <UniqueIdentifier>{7887de8a-d83a-4204-a55b-5f3a0a9ce3c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Resource\Resources\Mesh">
+      <UniqueIdentifier>{5136731f-a462-4ccc-b117-10454f6be685}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Resource\Resources\Mesh">
+      <UniqueIdentifier>{540ecaad-3c2d-4614-b004-28cccb169ba8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Rendering\Camera">
+      <UniqueIdentifier>{19645587-ccff-42aa-ac2a-65e317731c1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Physic\Body">
+      <UniqueIdentifier>{858de906-085b-47ad-9dbd-f65927608600}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Physic\Collision">
+      <UniqueIdentifier>{06fb4cf8-86fd-4e6e-a4f4-238128d01c85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Physic\Collision">
+      <UniqueIdentifier>{23143f8f-7516-4d1c-9f5b-f5ecb76ae71b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Rendering\Camera">
+      <UniqueIdentifier>{b73bc194-1d6e-4977-b065-f33735511e4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Rendering\Material\ConstantBuffer">
+      <UniqueIdentifier>{26cf9f8f-c796-4d22-9555-7c467956442d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Debug">
+      <UniqueIdentifier>{b877340b-0c1a-47ca-a641-3c73897628b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Debug">
+      <UniqueIdentifier>{b399a2e4-6ed0-4f14-93c2-f220a9220664}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Resource\Resources\Shader">
+      <UniqueIdentifier>{200415dc-8b19-4f85-9aa1-a4081b9af42c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Resource\Resources\Shader">
+      <UniqueIdentifier>{02035484-a548-4783-9e03-01adaa867602}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Rendering\Material\ConstantBuffer">
+      <UniqueIdentifier>{004a5ec6-7311-464c-9353-87583fc9705a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Resource\Resources\TilesetMap\Layers\Object">
+      <UniqueIdentifier>{61897cbc-e838-4925-8451-c1868aae1fcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Resource\FileWatcher">
+      <UniqueIdentifier>{302ecbc8-5fdd-4c60-9949-3fe3758874e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Resource\FileWatcher">
+      <UniqueIdentifier>{d0bebe81-538d-4b5d-9409-1a3a3694cfdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Core">
+      <UniqueIdentifier>{c76f5eab-6c62-4f30-af4e-9d1a895eb114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Core">
+      <UniqueIdentifier>{7c930c32-da65-489a-a228-b0b342a55fc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Resource\Resources\TWF">
+      <UniqueIdentifier>{3fdd0573-8369-480c-9b01-a7abd84594c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Resource\Resources\TWF">
+      <UniqueIdentifier>{65014bff-8141-4e1a-995c-09379eaad0b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Rendering\Batches">
+      <UniqueIdentifier>{fc406d33-5d51-4cf0-a1ab-2bf1e08d633b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Rendering\Batches">
+      <UniqueIdentifier>{f3239fb4-5c94-41a6-8602-71d65ffafa8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Scenes">
+      <UniqueIdentifier>{30d16996-f41f-4f47-988b-b0ba17b99d3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Scenes">
+      <UniqueIdentifier>{fdd5977b-2356-40e5-89d8-bb491e573866}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Resource\ResourceManager">
+      <UniqueIdentifier>{e1f2f63d-4c1f-4073-b9eb-40580430343e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Rendering\RenderTargets">
+      <UniqueIdentifier>{74925fa1-dc87-4eb6-9c13-69e44ff531e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Rendering\Render Targets">
+      <UniqueIdentifier>{45e3a750-5a58-43ff-98b7-85cefaf5b6e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Font">
+      <UniqueIdentifier>{120ff453-5d5c-47b3-a410-9902d6aa7573}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Font">
+      <UniqueIdentifier>{4e416251-a3a4-4da6-978f-ceb77c8f08ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Audio">
+      <UniqueIdentifier>{295d3b4c-227b-4e8f-87e8-188ff2edf816}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Resource\Resources\Audio">
+      <UniqueIdentifier>{47ed2e65-ef14-4c2f-a147-06677e4de88c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Audio">
+      <UniqueIdentifier>{3657dfa2-dba4-4957-8ff5-b5cad1dcd1e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Resource\Resources\Audio">
+      <UniqueIdentifier>{c517ebf9-9d5c-46b2-955f-613253a08ca1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\UI">
+      <UniqueIdentifier>{5b07e42e-bbbe-4da4-af2e-fcdb071837a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\UI">
+      <UniqueIdentifier>{6a0d434f-1d61-4a9b-a9a3-9d7e462a6e15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Resource\Writer">
+      <UniqueIdentifier>{79fd12aa-5672-41ff-9788-c55182873812}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Resource\Writer">
+      <UniqueIdentifier>{93235498-ec41-4638-a994-e974bac99c54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Physic\Input">
+      <UniqueIdentifier>{ed027113-beeb-4f88-8087-b4a80f51c7fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Physic\Input\Mouse">
+      <UniqueIdentifier>{6d6a7c13-f9f1-4df0-96ff-0e48d9633088}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Physic\Input\Keyboard">
+      <UniqueIdentifier>{b8995dd3-7ef4-4444-984a-35a3ba7bdc81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Physic\Input\Gamepad">
+      <UniqueIdentifier>{0fd22b9c-39dd-44c3-bb83-edd3c08094b3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\CEngine.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CWorld.cpp">
+      <Filter>Quelldateien\World</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CTime.cpp">
+      <Filter>Quelldateien\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CInput.cpp">
+      <Filter>Quelldateien\Physic\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CEntity.cpp">
+      <Filter>Quelldateien\World\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CTransform.cpp">
+      <Filter>Quelldateien\World\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CWindow.cpp">
+      <Filter>Quelldateien\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CGamepad.cpp">
+      <Filter>Quelldateien\Physic\Input\Gamepad</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CKeyboard.cpp">
+      <Filter>Quelldateien\Physic\Input\Keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CMouse.cpp">
+      <Filter>Quelldateien\Physic\Input\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CXboxController.cpp">
+      <Filter>Quelldateien\Physic\Input\Gamepad</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IBehaviour.cpp">
+      <Filter>Quelldateien\World\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPhysicEntity.cpp">
+      <Filter>Quelldateien\Physic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPhysicWorld.cpp">
+      <Filter>Quelldateien\Physic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CMapLayer.cpp">
+      <Filter>Quelldateien\Resource\Resources\TilesetMap\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CMapImageLayer.cpp">
+      <Filter>Quelldateien\Resource\Resources\TilesetMap\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CTileset.cpp">
+      <Filter>Quelldateien\Resource\Resources\TilesetMap\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IMapLayer.cpp">
+      <Filter>Quelldateien\Resource\Resources\TilesetMap\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CTilesetMap.cpp">
+      <Filter>Quelldateien\Resource\Resources\TilesetMap</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CTMXParser.cpp">
+      <Filter>Quelldateien\Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="extern\include\loadPNG\lodepng.cpp">
+      <Filter>Quelldateien\Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CFileReader.cpp">
+      <Filter>Quelldateien\Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CTexture2D.cpp">
+      <Filter>Quelldateien\Resource\Resources\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CGraphics.cpp">
+      <Filter>Quelldateien\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CAABBCollider.cpp">
+      <Filter>Quelldateien\Physic\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ICollider.cpp">
+      <Filter>Quelldateien\Physic\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CBody.cpp">
+      <Filter>Quelldateien\Physic\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCollision.cpp">
+      <Filter>Quelldateien\Physic\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IDrawable.cpp">
+      <Filter>Quelldateien\Rendering\Drawables</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CMeshDrawable.cpp">
+      <Filter>Quelldateien\Rendering\Drawables</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CMaterial.cpp">
+      <Filter>Quelldateien\Rendering\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CMesh.cpp">
+      <Filter>Quelldateien\Resource\Resources\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CRenderer.cpp">
+      <Filter>Quelldateien\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCollisionEvent.cpp">
+      <Filter>Quelldateien\Physic\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCamera.cpp">
+      <Filter>Quelldateien\Rendering\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="src\COBJParser.cpp">
+      <Filter>Quelldateien\Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CDebug.cpp">
+      <Filter>Quelldateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CDebugCamera.cpp">
+      <Filter>Quelldateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CSphereCollider.cpp">
+      <Filter>Quelldateien\Physic\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CHLSLParser.cpp">
+      <Filter>Quelldateien\Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IShader.cpp">
+      <Filter>Quelldateien\Resource\Resources\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CVertexShader.cpp">
+      <Filter>Quelldateien\Resource\Resources\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CPixelShader.cpp">
+      <Filter>Quelldateien\Resource\Resources\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CConstantBuffer.cpp">
+      <Filter>Quelldateien\Rendering\Material\ConstantBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CObjectLayer.cpp">
+      <Filter>Quelldateien\Resource\Resources\TilesetMap\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\COBBCollider.cpp">
+      <Filter>Quelldateien\Physic\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CObjectLayer.cpp">
+      <Filter>Quelldateien\Resource\Resources\TilesetMap\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CID.cpp">
+      <Filter>Quelldateien\World\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CFileWatcher.cpp">
+      <Filter>Quelldateien\Resource\FileWatcher</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CRandom.cpp">
+      <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CTWFParser.cpp">
+      <Filter>Quelldateien\Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CTWFData.cpp">
+      <Filter>Quelldateien\Resource\Resources\TWF</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CResourceManager.cpp">
+      <Filter>Quelldateien\Resource\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CDebugLogfile.cpp">
+      <Filter>Quelldateien\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IScene.cpp">
+      <Filter>Quelldateien\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CSceneHolder.cpp">
+      <Filter>Quelldateien\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CSceneManager.cpp">
+      <Filter>Quelldateien\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CRenderTarget.cpp">
+      <Filter>Quelldateien\Rendering\Render Targets</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CFontManager.cpp">
+      <Filter>Quelldateien\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CFont.cpp">
+      <Filter>Quelldateien\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CText.cpp">
+      <Filter>Quelldateien\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CFontDrawable.cpp">
+      <Filter>Quelldateien\Rendering\Drawables</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CGeometryShader.cpp">
+      <Filter>Quelldateien\Resource\Resources\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CRenderBatch.cpp">
+      <Filter>Quelldateien\Rendering\Batches</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CInstancedMeshBatch.cpp">
+      <Filter>Quelldateien\Rendering\Batches</Filter>
+    </ClCompile>
+    <ClCompile Include="include\CPostEffectDrawable.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CFontFace.cpp">
+      <Filter>Quelldateien\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CInstancedFontBatch.cpp">
+      <Filter>Quelldateien\Rendering\Batches</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CSoundEngine.cpp">
+      <Filter>Quelldateien\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CSound.cpp">
+      <Filter>Quelldateien\Resource\Resources\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CDDSParser.cpp">
+      <Filter>Quelldateien\Resource\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CUIWorld.cpp">
+      <Filter>Quelldateien\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CUITransform.cpp">
+      <Filter>Quelldateien\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CUIEntity.cpp">
+      <Filter>Quelldateien\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CUIDrawable.cpp">
+      <Filter>Quelldateien\Rendering\Drawables</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CTag.cpp">
+      <Filter>Quelldateien\World\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CRenderQuad.cpp">
+      <Filter>Quelldateien\Rendering\Batches</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CFileWriter.cpp">
+      <Filter>Quelldateien\Resource\Writer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CShaderGenerator.cpp">
+      <Filter>Quelldateien\Resource\Resources\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CViewport.cpp">
+      <Filter>Quelldateien\Window</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\CEngine.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CWorld.h">
+      <Filter>Headerdateien\World</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CTime.h">
+      <Filter>Headerdateien\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CInput.h">
+      <Filter>Headerdateien\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CTransform.h">
+      <Filter>Headerdateien\World\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CEntity.h">
+      <Filter>Headerdateien\World\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EngineDefines.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CWindow.h">
+      <Filter>Headerdateien\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EButtonState.h">
+      <Filter>Headerdateien\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CGamepad.h">
+      <Filter>Headerdateien\Input\Gamepad</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EKey.h">
+      <Filter>Headerdateien\Input\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CKeyboard.h">
+      <Filter>Headerdateien\Input\Keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CMouse.h">
+      <Filter>Headerdateien\Input\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CXboxController.h">
+      <Filter>Headerdateien\Input\Gamepad</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EGamepadButton.h">
+      <Filter>Headerdateien\Input\Gamepad</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EMouseButton.h">
+      <Filter>Headerdateien\Input\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="extern\include\loadPNG\lodepng.h">
+      <Filter>Headerdateien\Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CTMXParser.h">
+      <Filter>Headerdateien\Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CTilesetMap.h">
+      <Filter>Headerdateien\Resource\Resources\TilesetMap</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CMapImageLayer.h">
+      <Filter>Headerdateien\Resource\Resources\TilesetMap\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CMapLayer.h">
+      <Filter>Headerdateien\Resource\Resources\TilesetMap\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CTileset.h">
+      <Filter>Headerdateien\Resource\Resources\TilesetMap\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IMapLayer.h">
+      <Filter>Headerdateien\Resource\Resources\TilesetMap\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CResourceManager.h">
+      <Filter>Headerdateien\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EFileType.h">
+      <Filter>Headerdateien\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CFileReader.h">
+      <Filter>Headerdateien\Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CTexture2D.h">
+      <Filter>Headerdateien\Resource\Resources\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IBehaviour.h">
+      <Filter>Headerdateien\World\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CPhysicEntity.h">
+      <Filter>Headerdateien\Physic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CPhysicWorld.h">
+      <Filter>Headerdateien\Physic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ECollider.h">
+      <Filter>Headerdateien\Physic\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CBody.h">
+      <Filter>Headerdateien\Physic\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CGraphics.h">
+      <Filter>Headerdateien\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IDrawable.h">
+      <Filter>Headerdateien\Rendering\Drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CMeshDrawable.h">
+      <Filter>Headerdateien\Rendering\Drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CMaterial.h">
+      <Filter>Headerdateien\Rendering\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CMesh.h">
+      <Filter>Headerdateien\Resource\Resources\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CRenderer.h">
+      <Filter>Headerdateien\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CAABBCollider.h">
+      <Filter>Headerdateien\Physic\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ICollider.h">
+      <Filter>Headerdateien\Physic\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CCollision.h">
+      <Filter>Headerdateien\Physic\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CCamera.h">
+      <Filter>Headerdateien\Rendering\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CCollisionEvent.h">
+      <Filter>Headerdateien\Physic\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CConstantBuffer.h">
+      <Filter>Headerdateien\Rendering\Material\ConstantBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\COBJParser.h">
+      <Filter>Headerdateien\Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CDebug.h">
+      <Filter>Headerdateien\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CDebugCamera.h">
+      <Filter>Headerdateien\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ECollisionState.h">
+      <Filter>Headerdateien\Physic\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CSphereCollider.h">
+      <Filter>Headerdateien\Physic\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CHLSLParser.h">
+      <Filter>Headerdateien\Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IShader.h">
+      <Filter>Headerdateien\Resource\Resources\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CVertexShader.h">
+      <Filter>Headerdateien\Resource\Resources\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CPixelShader.h">
+      <Filter>Headerdateien\Resource\Resources\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CObjectLayer.h">
+      <Filter>Headerdateien\Resource\Resources\TilesetMap\Layers\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CLayerObject.h">
+      <Filter>Headerdateien\Resource\Resources\TilesetMap\Layers\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\COBBCollider.h">
+      <Filter>Headerdateien\Physic\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CID.h">
+      <Filter>Headerdateien\World\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CFileWatcher.h">
+      <Filter>Headerdateien\Resource\FileWatcher</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CRandom.h">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CStringHasher.h">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CTWFParser.h">
+      <Filter>Headerdateien\Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CTWFData.h">
+      <Filter>Headerdateien\Resource\Resources\TWF</Filter>
+    </ClInclude>
+    <ClInclude Include="src\CResourceManager.hpp">
+      <Filter>Quelldateien\Resource\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CDebugLogfile.h">
+      <Filter>Headerdateien\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CInstancedMeshBatch.h">
+      <Filter>Headerdateien\Rendering\Batches</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SEngineConfiguration.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IScene.h">
+      <Filter>Headerdateien\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CSceneHolder.h">
+      <Filter>Headerdateien\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CSceneManager.h">
+      <Filter>Headerdateien\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CRenderTarget.h">
+      <Filter>Headerdateien\Rendering\RenderTargets</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CFrameContainer.h">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CElementContainer.h">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CFontManager.h">
+      <Filter>Headerdateien\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CFont.h">
+      <Filter>Headerdateien\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CText.h">
+      <Filter>Headerdateien\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CFontDrawable.h">
+      <Filter>Headerdateien\Rendering\Drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CGeometryShader.h">
+      <Filter>Headerdateien\Resource\Resources\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CRenderBatch.h">
+      <Filter>Headerdateien\Rendering\Batches</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CPostEffectDrawable.h">
+      <Filter>Headerdateien\Rendering\Drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CFontFace.h">
+      <Filter>Headerdateien\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CInstancedFontBatch.h">
+      <Filter>Headerdateien\Rendering\Batches</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CSound.h">
+      <Filter>Headerdateien\Resource\Resources\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CDDSParser.h">
+      <Filter>Headerdateien\Resource\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CUIWorld.h">
+      <Filter>Headerdateien\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CUIEntity.h">
+      <Filter>Headerdateien\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CUITransform.h">
+      <Filter>Headerdateien\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SUIScreenInformation.h">
+      <Filter>Headerdateien\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CUIDrawable.h">
+      <Filter>Headerdateien\Rendering\Drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SafeDeletes.h">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CTag.h">
+      <Filter>Headerdateien\World\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CRenderQuad.h">
+      <Filter>Headerdateien\Rendering\Batches</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CSoundEngine.h">
+      <Filter>Headerdateien\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CFileWriter.h">
+      <Filter>Headerdateien\Resource\Writer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CShaderGenerator.h">
+      <Filter>Headerdateien\Resource\Resources\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CViewport.h">
+      <Filter>Headerdateien\Window</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
