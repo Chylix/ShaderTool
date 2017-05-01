@@ -27,7 +27,8 @@ protected:
 	virtual void dropEvent(QDropEvent * e);
 
 private:
-	const int m_DefaultTextureSize = 100;
+	int m_DefaultTextureSize;
+	int m_DefaultTexturesPerRow = 5;
 	std::vector<SShaderTexture> m_Pictures;
 	QPainter* m_pCurrentPainter;
 	int m_YParam = 0;

@@ -11,6 +11,7 @@ public:
 	void UpdateMaterial(triebWerk::CMaterial* a_pNewMaterial);
 	void UpdateLoadedTextures(const char* a_pShaderTexture);
 	void UpdateUsedTextures(int usedSlot);
+	void ClearUsedTextures();
 
 	void Start() final;
 	void Update() final;
@@ -22,6 +23,6 @@ private:
 	triebWerk::CMaterial* m_pMaterial;
 	triebWerk::CEntity* m_pEntity;
 	std::vector<std::string> m_LoadedTextures;
-	std::vector<int> m_UsedTexture;
+	std::vector<int> m_UsedTextures;
 
 };

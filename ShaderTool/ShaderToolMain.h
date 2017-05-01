@@ -16,6 +16,7 @@ public:
 	CShaderToolMain(QWidget *parent = Q_NULLPTR);
 	const QString m_WindowName = "ShaderTool";
 	const QString m_ShaderDefaultCode =
+		"//Default input descriptor\n"
 		"struct PS_Data\n"
 		"{\n"
 		"  float4 position : SV_POSITION;\n"

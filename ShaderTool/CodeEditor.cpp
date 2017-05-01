@@ -13,7 +13,7 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 
 	m_Font.setFamily("Consolas");
 	m_Font.setFixedPitch(true);
-	m_Font.setPointSize(10);
+	m_Font.setPointSize(9);
 	this->setFont(m_Font);
 
 	QPalette p = this->palette();

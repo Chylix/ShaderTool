@@ -26,7 +26,12 @@ void CDefaultScene::UpdateLoadedTextures(const char * a_pShaderTexture)
 
 void CDefaultScene::UpdateUsedTextures(int a_Slot)
 {
-	m_UsedTexture.push_back(a_Slot);
+	m_UsedTextures.push_back(a_Slot);
+}
+
+void CDefaultScene::ClearUsedTextures()
+{
+	m_UsedTextures.clear();
 }
 
 triebWerk::CEntity* ent;
@@ -83,9 +88,9 @@ void CDefaultScene::Update()
 	//	m_pPostEffect->GetMaterial(0)->m_pPixelShader.SetTexture(i, twResourceManager->GetTexture2D(m_LoadedTextures[i].c_str()));
 	//}
 
-	for (size_t i = 0; i < m_UsedTexture.size(); i++)
+	for (size_t i = 0; i < m_UsedTextures.size(); i++)
 	{
-		m_pPostEffect->GetMaterial(0)->m_pPixelShader.SetTexture(i, twResourceManager->GetTexture2D(m_LoadedTextures[m_UsedTexture[i]].c_str()));
+		m_pPostEffect->GetMaterial(0)->m_pPixelShader.SetTexture(i, twResourceManager->GetTexture2D(m_LoadedTextures[m_UsedTextures[i]].c_str()));
 	}
 
 	m_pPostEffectMaterial->m_ConstantBuffer.SetValueInBuffer(5, &res);

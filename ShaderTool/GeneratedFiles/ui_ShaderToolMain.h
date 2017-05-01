@@ -30,46 +30,50 @@ class Ui_ShaderToolMain
 {
 public:
     QWidget *centralWidget;
-    QPushButton *compileButton;
     QWidget *gridLayoutWidget;
-    QGridLayout *gridLayout;
-    D3DRenderWidget *widget;
+    QGridLayout *viewportLayout;
+    D3DRenderWidget *viewport;
     QWidget *gridLayoutWidget_2;
     QGridLayout *gridLayout_2;
     CodeEditor *plainTextEdit;
-    QTextEdit *textEdit;
     QWidget *gridLayoutWidget_3;
-    QGridLayout *gridLayout_3;
-    CTexturePainter *widget_2;
+    QGridLayout *resourceLyout;
+    CTexturePainter *resourceViewer;
     QTextBrowser *textBrowser;
+    QTextEdit *textEdit;
+    QPushButton *compileButton;
 
     void setupUi(QMainWindow *ShaderToolMain)
     {
         if (ShaderToolMain->objectName().isEmpty())
             ShaderToolMain->setObjectName(QStringLiteral("ShaderToolMain"));
-        ShaderToolMain->resize(1059, 797);
+        ShaderToolMain->resize(1058, 797);
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(ShaderToolMain->sizePolicy().hasHeightForWidth());
+        ShaderToolMain->setSizePolicy(sizePolicy);
+        ShaderToolMain->setWindowOpacity(1);
+        ShaderToolMain->setStyleSheet(QStringLiteral(""));
         centralWidget = new QWidget(ShaderToolMain);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        compileButton = new QPushButton(centralWidget);
-        compileButton->setObjectName(QStringLiteral("compileButton"));
-        compileButton->setGeometry(QRect(980, 520, 81, 31));
         gridLayoutWidget = new QWidget(centralWidget);
         gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
         gridLayoutWidget->setGeometry(QRect(0, -20, 531, 541));
-        gridLayout = new QGridLayout(gridLayoutWidget);
-        gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        gridLayout->setContentsMargins(0, 0, 0, 0);
-        widget = new D3DRenderWidget(gridLayoutWidget);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setEnabled(true);
+        viewportLayout = new QGridLayout(gridLayoutWidget);
+        viewportLayout->setSpacing(6);
+        viewportLayout->setContentsMargins(11, 11, 11, 11);
+        viewportLayout->setObjectName(QStringLiteral("viewportLayout"));
+        viewportLayout->setContentsMargins(0, 0, 0, 0);
+        viewport = new D3DRenderWidget(gridLayoutWidget);
+        viewport->setObjectName(QStringLiteral("viewport"));
+        viewport->setEnabled(true);
 
-        gridLayout->addWidget(widget, 1, 0, 1, 1);
+        viewportLayout->addWidget(viewport, 1, 0, 1, 1);
 
         gridLayoutWidget_2 = new QWidget(centralWidget);
         gridLayoutWidget_2->setObjectName(QStringLiteral("gridLayoutWidget_2"));
-        gridLayoutWidget_2->setGeometry(QRect(530, 0, 531, 521));
+        gridLayoutWidget_2->setGeometry(QRect(530, 0, 531, 491));
         gridLayout_2 = new QGridLayout(gridLayoutWidget_2);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -80,35 +84,28 @@ public:
         plainTextEdit->setStyleSheet(QLatin1String(".QLineEdit, .QPlainTextEdit\n"
 "{\n"
 "background-color: rgb(76, 76, 76);\n"
+"border: 0;\n"
 "}"));
         plainTextEdit->setTabChangesFocus(true);
 
         gridLayout_2->addWidget(plainTextEdit, 0, 0, 1, 1);
 
-        textEdit = new QTextEdit(centralWidget);
-        textEdit->setObjectName(QStringLiteral("textEdit"));
-        textEdit->setGeometry(QRect(530, 520, 551, 31));
-        textEdit->setStyleSheet(QLatin1String(".QTextEdit\n"
-"{\n"
-"background-color: rgb(76, 76, 76);\n"
-"}"));
-        textEdit->setReadOnly(true);
         gridLayoutWidget_3 = new QWidget(centralWidget);
         gridLayoutWidget_3->setObjectName(QStringLiteral("gridLayoutWidget_3"));
-        gridLayoutWidget_3->setGeometry(QRect(530, 550, 531, 251));
-        gridLayout_3 = new QGridLayout(gridLayoutWidget_3);
-        gridLayout_3->setSpacing(6);
-        gridLayout_3->setContentsMargins(11, 11, 11, 11);
-        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
-        gridLayout_3->setContentsMargins(0, 0, 0, 0);
-        widget_2 = new CTexturePainter(gridLayoutWidget_3);
-        widget_2->setObjectName(QStringLiteral("widget_2"));
-        widget_2->setStyleSheet(QLatin1String(".QLineEdit, .QPlainTextEdit\n"
+        gridLayoutWidget_3->setGeometry(QRect(530, 520, 531, 281));
+        resourceLyout = new QGridLayout(gridLayoutWidget_3);
+        resourceLyout->setSpacing(6);
+        resourceLyout->setContentsMargins(11, 11, 11, 11);
+        resourceLyout->setObjectName(QStringLiteral("resourceLyout"));
+        resourceLyout->setContentsMargins(0, 0, 0, 0);
+        resourceViewer = new CTexturePainter(gridLayoutWidget_3);
+        resourceViewer->setObjectName(QStringLiteral("resourceViewer"));
+        resourceViewer->setStyleSheet(QLatin1String(".QLineEdit, .QPlainTextEdit\n"
 "{\n"
-"background-color: rgb(76, 76, 76);\n"
+"border: 0;\n"
 "}"));
 
-        gridLayout_3->addWidget(widget_2, 0, 0, 1, 1);
+        resourceLyout->addWidget(resourceViewer, 0, 0, 1, 1);
 
         textBrowser = new QTextBrowser(centralWidget);
         textBrowser->setObjectName(QStringLiteral("textBrowser"));
@@ -116,14 +113,33 @@ public:
         textBrowser->setStyleSheet(QLatin1String(".QTextBrowser\n"
 "{\n"
 "background-color: rgb(76, 76, 76);\n"
+"border: 0;\n"
+"}"));
+        textEdit = new QTextEdit(centralWidget);
+        textEdit->setObjectName(QStringLiteral("textEdit"));
+        textEdit->setGeometry(QRect(530, 490, 551, 31));
+        textEdit->setStyleSheet(QLatin1String(".QTextEdit\n"
+"{\n"
+"background-color: rgb(46, 46, 46);\n"
+"border: 0;\n"
+"}"));
+        textEdit->setReadOnly(true);
+        compileButton = new QPushButton(centralWidget);
+        compileButton->setObjectName(QStringLiteral("compileButton"));
+        compileButton->setGeometry(QRect(990, 490, 75, 31));
+        compileButton->setStyleSheet(QLatin1String(".QPushButton\n"
+"{\n"
+"background-color: rgb(56, 56, 56);\n"
+"text-color: rgb(255, 255, 255);\n"
+"border: 0;\n"
+"color:  rgb(255, 255, 255);\n"
+"font-family: Consolas, serif;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(66, 66, 66);\n"
 "}"));
         ShaderToolMain->setCentralWidget(centralWidget);
-        textEdit->raise();
-        compileButton->raise();
-        gridLayoutWidget->raise();
-        gridLayoutWidget_2->raise();
-        gridLayoutWidget_3->raise();
-        textBrowser->raise();
 
         retranslateUi(ShaderToolMain);
 
@@ -133,6 +149,9 @@ public:
     void retranslateUi(QMainWindow *ShaderToolMain)
     {
         ShaderToolMain->setWindowTitle(QApplication::translate("ShaderToolMain", "CShaderToolMain", Q_NULLPTR));
+#ifndef QT_NO_WHATSTHIS
+        compileButton->setWhatsThis(QApplication::translate("ShaderToolMain", "<html><head/><body><p>Compile shader</p></body></html>", Q_NULLPTR));
+#endif // QT_NO_WHATSTHIS
         compileButton->setText(QApplication::translate("ShaderToolMain", "Compile", Q_NULLPTR));
     } // retranslateUi
 

@@ -6,27 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1059</width>
+    <width>1058</width>
     <height>797</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>CShaderToolMain</string>
   </property>
+  <property name="windowOpacity">
+   <double>1.000000000000000</double>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="compileButton">
-    <property name="geometry">
-     <rect>
-      <x>980</x>
-      <y>520</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Compile</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
@@ -36,9 +35,9 @@
       <height>541</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout">
+    <layout class="QGridLayout" name="viewportLayout">
      <item row="1" column="0">
-      <widget class="D3DRenderWidget" name="widget" native="true">
+      <widget class="D3DRenderWidget" name="viewport" native="true">
        <property name="enabled">
         <bool>true</bool>
        </property>
@@ -52,7 +51,7 @@
       <x>530</x>
       <y>0</y>
       <width>531</width>
-      <height>521</height>
+      <height>491</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_2">
@@ -62,6 +61,7 @@
         <string notr="true">.QLineEdit, .QPlainTextEdit
 {
 background-color: rgb(76, 76, 76);
+border: 0;
 }</string>
        </property>
        <property name="tabChangesFocus">
@@ -71,41 +71,22 @@ background-color: rgb(76, 76, 76);
      </item>
     </layout>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>520</y>
-      <width>551</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">.QTextEdit
-{
-background-color: rgb(76, 76, 76);
-}</string>
-    </property>
-    <property name="readOnly">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="QWidget" name="gridLayoutWidget_3">
     <property name="geometry">
      <rect>
       <x>530</x>
-      <y>550</y>
+      <y>520</y>
       <width>531</width>
-      <height>251</height>
+      <height>281</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout_3">
+    <layout class="QGridLayout" name="resourceLyout">
      <item row="0" column="0">
-      <widget class="CTexturePainter" name="widget_2" native="true">
+      <widget class="CTexturePainter" name="resourceViewer" native="true">
        <property name="styleSheet">
         <string notr="true">.QLineEdit, .QPlainTextEdit
 {
-background-color: rgb(76, 76, 76);
+border: 0;
 }</string>
        </property>
       </widget>
@@ -125,15 +106,60 @@ background-color: rgb(76, 76, 76);
      <string notr="true">.QTextBrowser
 {
 background-color: rgb(76, 76, 76);
+border: 0;
 }</string>
     </property>
    </widget>
-   <zorder>textEdit</zorder>
-   <zorder>compileButton</zorder>
-   <zorder>gridLayoutWidget</zorder>
-   <zorder>gridLayoutWidget_2</zorder>
-   <zorder>gridLayoutWidget_3</zorder>
-   <zorder>textBrowser</zorder>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>490</y>
+      <width>551</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">.QTextEdit
+{
+background-color: rgb(46, 46, 46);
+border: 0;
+}</string>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="compileButton">
+    <property name="geometry">
+     <rect>
+      <x>990</x>
+      <y>490</y>
+      <width>75</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Compile shader&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">.QPushButton
+{
+background-color: rgb(56, 56, 56);
+text-color: rgb(255, 255, 255);
+border: 0;
+color:  rgb(255, 255, 255);
+font-family: Consolas, serif;
+}
+
+QPushButton:hover {
+    background-color: rgb(66, 66, 66);
+}</string>
+    </property>
+    <property name="text">
+     <string>Compile</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

@@ -20,7 +20,6 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 	twSceneManager->SetActiveScene("Default");
 
 	connect(m_MainUi.compileButton, SIGNAL(clicked()), this, SLOT(OnCompileClicked()));
-
 	//OnCompileClicked();
 
 	//setAcceptDrops(true);

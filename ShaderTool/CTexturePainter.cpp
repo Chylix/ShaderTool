@@ -8,20 +8,15 @@
 CTexturePainter::CTexturePainter(QWidget *parent) 
 	: QWidget(parent)
 {
-	//auto files = twResourceManager->SearchFolderForAllFiles("data/Assets/Textures");
-
-	//for (auto file : files)
-	//{
-	//	SShaderTexture t;
-	//	t.map = QPixmap(QString::fromStdString(file.FilePath));
-	//	t.name = QString::fromStdString(twResourceManager->RemoveFileType(file.FileName));
-	//	m_Pictures.push_back(t);
-	//}
-
 	setAcceptDrops(true);
 }
 
 void CTexturePainter::paintEvent(QPaintEvent *e) {
+
+	QRect thisRect = rect();
+
+	int size = thisRect.width() / m_DefaultTexturesPerRow;
+	m_DefaultTextureSize = size;
 
 	QPainter painter(this);
 	m_pCurrentPainter = &painter;
@@ -34,18 +29,21 @@ void CTexturePainter::paintEvent(QPaintEvent *e) {
 
 	const int rcWidth = rect().width();
 
+	int columIter = 0;
+
 	for (size_t i = 0; i < m_Pictures.size(); i++)
 	{
-		if ((rcWidth - i * m_DefaultTextureSize) < m_DefaultTextureSize)
+		if ((rcWidth - columIter * m_DefaultTextureSize) < m_DefaultTextureSize)
 		{
-			//Do soemthing
 			m_YParam += m_DefaultTextureSize + 20;
 			m_XParam = 0;
+			columIter = 0;
 		}
 
 		painter.drawPixmap(m_XParam, m_YParam, m_DefaultTextureSize, m_DefaultTextureSize, m_Pictures[i].map);
 		DrawTextAndField(i);
 		m_XParam += m_DefaultTextureSize;
+		columIter++;
 	}
 
 	painter.end();
@@ -86,13 +84,11 @@ std::vector<CTexturePainter::SShaderTexture>& CTexturePainter::GetLoadedTexture(
 
 void CTexturePainter::DrawTextAndField(const int iter)
 {
-	QPen pen(QColor(46, 46, 46));
-	m_pCurrentPainter->setPen(pen);
-
 	QRect textRect = QRect(m_XParam, m_DefaultTextureSize + m_YParam, m_DefaultTextureSize, 20);
 
-	m_pCurrentPainter->drawRect(textRect);
+	m_pCurrentPainter->fillRect(textRect, QColor(46,46,46));
 	QPen penHText(QColor(255, 255, 255));
+	m_pCurrentPainter->setBackground(QColor(46, 46, 46));
 	m_pCurrentPainter->setPen(penHText);
 	QTextOption textOption = QTextOption(Qt::AlignCenter);
 	m_pCurrentPainter->drawText(textRect, QString(std::to_string(iter).c_str()) + ": " + m_Pictures[iter].name, textOption);

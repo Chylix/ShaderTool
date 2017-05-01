@@ -61,6 +61,8 @@ void CShaderCreator::GetUsedTexture(std::string & a_String)
 	size_t iter = 0;
 	size_t pos = 0;
 
+	static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->ClearUsedTextures();
+
 	while (pos != std::string::npos)
 	{
 		pos = a_String.find(": SLOT", iter);
