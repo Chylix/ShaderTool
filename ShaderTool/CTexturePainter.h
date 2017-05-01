@@ -14,6 +14,7 @@ public:
 	{
 		QPixmap map;
 		QString name;
+		QRect rect;
 	};
 
 
@@ -25,7 +26,7 @@ protected:
 	void paintEvent(QPaintEvent* e);
 	virtual void dragEnterEvent(QDragEnterEvent* e);
 	virtual void dropEvent(QDropEvent * e);
-
+	virtual void mousePressEvent(QMouseEvent *event);
 private:
 	int m_DefaultTextureSize;
 	int m_DefaultTexturesPerRow = 5;
@@ -37,5 +38,5 @@ private:
 private:
 	void DrawTextAndField(const int iter);
 	void DrawBackground();
-
+	size_t FindTextureIndexFromPosition(QPoint pos);
 };

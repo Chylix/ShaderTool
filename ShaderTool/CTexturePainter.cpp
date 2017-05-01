@@ -40,7 +40,13 @@ void CTexturePainter::paintEvent(QPaintEvent *e) {
 			columIter = 0;
 		}
 
-		painter.drawPixmap(m_XParam, m_YParam, m_DefaultTextureSize, m_DefaultTextureSize, m_Pictures[i].map);
+		QRect rect;
+		rect.setX(m_XParam);
+		rect.setY(m_YParam);
+		rect.setHeight(m_DefaultTextureSize);
+		rect.setWidth(m_DefaultTextureSize);
+		m_Pictures[i].rect = rect;
+		painter.drawPixmap(rect, m_Pictures[i].map);
 		DrawTextAndField(i);
 		m_XParam += m_DefaultTextureSize;
 		columIter++;
@@ -100,4 +106,42 @@ void CTexturePainter::DrawBackground()
 
 	m_pCurrentPainter->setBackground(QColor(76, 76, 76));
 	m_pCurrentPainter->setBackgroundMode(Qt::BGMode::OpaqueMode);
+}
+
+void CTexturePainter::mousePressEvent(QMouseEvent * event)
+{
+	QPoint pos = event->pos();
+
+	switch (event->button())
+	{
+	case Qt::RightButton:
+	{
+		if (m_Pictures.size() != 0)
+		{
+			size_t index = FindTextureIndexFromPosition(event->pos());
+			m_Pictures.erase(m_Pictures.begin() + index);
+			repaint();
+		}
+	}break;
+	case Qt::LeftButton:
+	{
+		//Maybe do something here
+	}break;
+	}
+	int a = 0;
+}
+
+size_t CTexturePainter::FindTextureIndexFromPosition(QPoint pos)
+{
+	for (size_t i = 0; i < m_Pictures.size(); i++)
+	{
+		bool isIn = m_Pictures[i].rect.contains(pos);
+		if (isIn)
+		{
+			return i;
+		}
+	}
+
+	//TODO: this is dangerous since this could be a valid return
+	return 0;
 }
