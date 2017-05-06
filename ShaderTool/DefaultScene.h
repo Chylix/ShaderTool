@@ -8,9 +8,9 @@ public:
 	CDefaultScene();
 	~CDefaultScene();
 
-	void UpdateMaterial(triebWerk::CMaterial* a_pNewMaterial);
+	void UpdateMaterial(std::vector<triebWerk::CMaterial*>* pMaterials);
 	void UpdateLoadedTextures(const char* a_pShaderTexture);
-	void UpdateUsedTextures(int usedSlot);
+	void UpdateUsedTextures(std::vector<int> usedSlot);
 	void ClearUsedTextures();
 
 	void Start() final;
@@ -20,9 +20,11 @@ public:
 private:
 	triebWerk::CPostEffectDrawable* m_pPostEffect;
 	triebWerk::CMaterial* m_pPostEffectMaterial;
+	triebWerk::CMaterial* m_pPostEffectMaterial2;
 	triebWerk::CMaterial* m_pMaterial;
 	triebWerk::CEntity* m_pEntity;
 	std::vector<std::string> m_LoadedTextures;
-	std::vector<int> m_UsedTextures;
+	std::vector<std::vector<int>> m_UsedTextures;
+	size_t m_CurrentShaderCount;
 
 };

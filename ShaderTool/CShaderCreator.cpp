@@ -13,9 +13,9 @@ CShaderCreator::~CShaderCreator()
 
 }
 
-triebWerk::CMaterial* CShaderCreator::CreateShader(std::string & a_String)
+triebWerk::CMaterial* CShaderCreator::CreateShader(std::string & a_String, int slot)
 {
-	GetUsedTexture(a_String);
+	GetUsedTexture(a_String, slot);
 	std::string constBuffer =
 		"cbuffer constBuffer\n"
 		"{\n"
@@ -31,10 +31,13 @@ triebWerk::CMaterial* CShaderCreator::CreateShader(std::string & a_String)
 
 	a_String.insert(0, constBuffer);
 
+	std::string name = "\\shader" + std::to_string(slot);
+	name += ".hlsl";
+
 	CHAR my_documents[MAX_PATH];
 	HRESULT result = SHGetFolderPathA(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, my_documents);
 	std::string path = my_documents;
-	path += "\\shader.hlsl";
+	path += name;
 
 	triebWerk::CFileWriter writer;
 
@@ -46,22 +49,25 @@ triebWerk::CMaterial* CShaderCreator::CreateShader(std::string & a_String)
 
 	triebWerk::CMaterial* mat = new triebWerk::CMaterial();
 
-	twResourceManager->GetShaderGenerator()->GenerateShader(path.c_str(), mat);
+	bool criticalError = twResourceManager->GetShaderGenerator()->GenerateShader(path.c_str(), mat);
+
+	if (!criticalError)
+	{
+		delete mat;
+		mat = nullptr;
+	}
 
 	return mat;
 }
 
-std::vector<std::string> CShaderCreator::GetLatestErrors()
+void CShaderCreator::GetUsedTexture(std::string & a_String, int slot)
 {
-	return twResourceManager->GetShaderGenerator()->GetLatestErrorMessages();
-}
-
-void CShaderCreator::GetUsedTexture(std::string & a_String)
-{
-	size_t iter = 0;
+	size_t iter = 1;
 	size_t pos = 0;
 
 	static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->ClearUsedTextures();
+
+	std::vector<int> slots;
 
 	while (pos != std::string::npos)
 	{
@@ -74,6 +80,9 @@ void CShaderCreator::GetUsedTexture(std::string & a_String)
 		int pos2 = a_String.find(";", iter);
 		std::string a = a_String.substr(pos, pos2 - (pos));
 		iter += pos2 + a.size();
-		static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->UpdateUsedTextures(stoi(a));
+
+		slots.push_back(stoi(a));
 	}
+
+	static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->UpdateUsedTextures(slots);
 }

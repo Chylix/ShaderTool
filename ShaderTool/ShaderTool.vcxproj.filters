@@ -41,6 +41,9 @@
     <Filter Include="ShaderCreator">
       <UniqueIdentifier>{c076029e-b28d-41fa-9738-dbc8afb41d2c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ShaderManager">
+      <UniqueIdentifier>{6e811eab-6179-4b67-a57a-e137f2494efa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\Debug\moc_ShaderToolMain.cpp">
@@ -101,6 +104,15 @@
     <ClCompile Include="CShaderCreator.cpp">
       <Filter>ShaderCreator</Filter>
     </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>ShaderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ShaderManager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ShaderManager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ShaderToolMain.ui">
@@ -123,6 +135,9 @@
     </CustomBuild>
     <CustomBuild Include="CTexturePainter.h">
       <Filter>ResourceManager</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ShaderManager.h">
+      <Filter>ShaderManager</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

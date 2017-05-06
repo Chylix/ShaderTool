@@ -57,6 +57,9 @@ triebWerk::CMaterial * triebWerk::CPostEffectDrawable::GetMaterial(const char * 
 
 void triebWerk::CPostEffectDrawable::RemoveMaterial(const int a_SlotToRemove)
 {
+	if ((m_Materials.size() - 1) < a_SlotToRemove)
+		return;
+
 	delete m_Materials[a_SlotToRemove];
 	m_Materials.erase(m_Materials.begin() + a_SlotToRemove);
 }
@@ -88,4 +91,9 @@ bool triebWerk::CPostEffectDrawable::IsDrawableValid()
 		return true;
 	else
 		return false;
+}
+
+int triebWerk::CPostEffectDrawable::GetMaterialCount() const
+{
+	return m_Materials.size();
 }

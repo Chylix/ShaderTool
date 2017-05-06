@@ -27,11 +27,15 @@ bool triebWerk::CShaderGenerator::Initialize(CGraphics * a_pGraphicHandle, const
 	return true;
 }
 
-std::vector<std::string> triebWerk::CShaderGenerator::GetLatestErrorMessages()
+triebWerk::CShaderGenerator::SShaderErrors triebWerk::CShaderGenerator::GetLatestErrorMessages()
 {
 	m_ClearMessages = true;
 
-	return m_LatestErrorMessages;
+	SShaderErrors error;
+	error.ErrorMessages = m_LatestErrorMessages;
+	error.ErrorLines = m_LatestErrorLines;
+
+	return error;
 }
 
 bool triebWerk::CShaderGenerator::GenerateShader(const char * a_pShaderPath, CMaterial * a_pMaterialOut)
@@ -45,14 +49,15 @@ bool triebWerk::CShaderGenerator::GenerateShader(const char * a_pShaderPath, CMa
 	if (vertexError != nullptr)
 	{
 		vertexShader = m_pDefaultVSByteCode;
-		LogErrors(vertexError);
+		//LogErrors(vertexError);
 	}
 
 	const char* pixelError = CompilePixelShader(a_pShaderPath, &pixelShader);
 	if (pixelError != nullptr)
 	{
-		pixelShader = m_pDefaultPSByteCode;
 		LogErrors(pixelError);
+		return false;
+		pixelShader = m_pDefaultPSByteCode;
 	}
 
 	//Set material name
@@ -336,6 +341,7 @@ void triebWerk::CShaderGenerator::LogErrors(const char * a_pErrorMessage)
 	if (m_ClearMessages)
 	{
 		m_LatestErrorMessages.clear();
+		m_LatestErrorLines.clear();
 		m_ClearMessages = false;
 	}
 
@@ -344,13 +350,18 @@ void triebWerk::CShaderGenerator::LogErrors(const char * a_pErrorMessage)
 	std::string line = error;
 
 	//C:\Users\Chalix\Documents\shader.hlsl(11,1): error X3000: syntax error: unexpected token '}'
-	size_t line1 = error.find("(")+1;
+	size_t line1 = error.find("(");
 	size_t line2 = error.find(")");
 
 	if (line1 != std::string::npos)
 	{
+		line1++;
 		line = "Line " + error.substr(line1, line2 - line1);
 		line += ": ";
+
+		std::string lineEr = error.substr(line1, line2 - line1);
+		std::string erkd = lineEr.substr(0, lineEr.find(","));
+		m_LatestErrorLines.push_back(stoi(erkd));
 
 		size_t a = error.find(": ", 0) + 2;
 		std::string b = error.substr(a, error.length() - a);

@@ -19,6 +19,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QTextEdit>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "codeeditor.h"
 #include "ctexturepainter.h"
@@ -34,7 +35,7 @@ public:
     QGridLayout *viewportLayout;
     D3DRenderWidget *viewport;
     QWidget *gridLayoutWidget_2;
-    QGridLayout *gridLayout_2;
+    QGridLayout *codelayout;
     CodeEditor *plainTextEdit;
     QWidget *gridLayoutWidget_3;
     QGridLayout *resourceLyout;
@@ -42,6 +43,9 @@ public:
     QTextBrowser *textBrowser;
     QTextEdit *textEdit;
     QPushButton *compileButton;
+    QPushButton *addShader;
+    QWidget *verticalLayoutWidget;
+    QVBoxLayout *shaderLayout;
 
     void setupUi(QMainWindow *ShaderToolMain)
     {
@@ -74,11 +78,11 @@ public:
         gridLayoutWidget_2 = new QWidget(centralWidget);
         gridLayoutWidget_2->setObjectName(QStringLiteral("gridLayoutWidget_2"));
         gridLayoutWidget_2->setGeometry(QRect(530, 0, 531, 491));
-        gridLayout_2 = new QGridLayout(gridLayoutWidget_2);
-        gridLayout_2->setSpacing(6);
-        gridLayout_2->setContentsMargins(11, 11, 11, 11);
-        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
-        gridLayout_2->setContentsMargins(0, 0, 0, 0);
+        codelayout = new QGridLayout(gridLayoutWidget_2);
+        codelayout->setSpacing(6);
+        codelayout->setContentsMargins(11, 11, 11, 11);
+        codelayout->setObjectName(QStringLiteral("codelayout"));
+        codelayout->setContentsMargins(0, 0, 0, 0);
         plainTextEdit = new CodeEditor(gridLayoutWidget_2);
         plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
         plainTextEdit->setStyleSheet(QLatin1String(".QLineEdit, .QPlainTextEdit\n"
@@ -88,7 +92,7 @@ public:
 "}"));
         plainTextEdit->setTabChangesFocus(true);
 
-        gridLayout_2->addWidget(plainTextEdit, 0, 0, 1, 1);
+        codelayout->addWidget(plainTextEdit, 0, 0, 1, 1);
 
         gridLayoutWidget_3 = new QWidget(centralWidget);
         gridLayoutWidget_3->setObjectName(QStringLiteral("gridLayoutWidget_3"));
@@ -117,7 +121,7 @@ public:
 "}"));
         textEdit = new QTextEdit(centralWidget);
         textEdit->setObjectName(QStringLiteral("textEdit"));
-        textEdit->setGeometry(QRect(530, 490, 551, 31));
+        textEdit->setGeometry(QRect(530, 490, 461, 31));
         textEdit->setStyleSheet(QLatin1String(".QTextEdit\n"
 "{\n"
 "background-color: rgb(46, 46, 46);\n"
@@ -139,7 +143,26 @@ public:
 "QPushButton:hover {\n"
 "    background-color: rgb(66, 66, 66);\n"
 "}"));
+        addShader = new QPushButton(centralWidget);
+        addShader->setObjectName(QStringLiteral("addShader"));
+        addShader->setGeometry(QRect(430, 520, 21, 21));
+        verticalLayoutWidget = new QWidget(centralWidget);
+        verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
+        verticalLayoutWidget->setGeometry(QRect(450, 520, 81, 281));
+        shaderLayout = new QVBoxLayout(verticalLayoutWidget);
+        shaderLayout->setSpacing(6);
+        shaderLayout->setContentsMargins(11, 11, 11, 11);
+        shaderLayout->setObjectName(QStringLiteral("shaderLayout"));
+        shaderLayout->setContentsMargins(0, 0, 0, 0);
         ShaderToolMain->setCentralWidget(centralWidget);
+        textBrowser->raise();
+        gridLayoutWidget->raise();
+        gridLayoutWidget_2->raise();
+        gridLayoutWidget_3->raise();
+        textEdit->raise();
+        compileButton->raise();
+        addShader->raise();
+        verticalLayoutWidget->raise();
 
         retranslateUi(ShaderToolMain);
 
@@ -153,6 +176,7 @@ public:
         compileButton->setWhatsThis(QApplication::translate("ShaderToolMain", "<html><head/><body><p>Compile shader</p></body></html>", Q_NULLPTR));
 #endif // QT_NO_WHATSTHIS
         compileButton->setText(QApplication::translate("ShaderToolMain", "Compile", Q_NULLPTR));
+        addShader->setText(QApplication::translate("ShaderToolMain", "+", Q_NULLPTR));
     } // retranslateUi
 
 };

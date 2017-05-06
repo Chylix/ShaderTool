@@ -97,7 +97,7 @@ void CTexturePainter::DrawTextAndField(const int iter)
 	m_pCurrentPainter->setBackground(QColor(46, 46, 46));
 	m_pCurrentPainter->setPen(penHText);
 	QTextOption textOption = QTextOption(Qt::AlignCenter);
-	m_pCurrentPainter->drawText(textRect, QString(std::to_string(iter).c_str()) + ": " + m_Pictures[iter].name, textOption);
+	m_pCurrentPainter->drawText(textRect, QString(std::to_string(iter+1).c_str()) + ": " + m_Pictures[iter].name, textOption);
 }
 
 void CTexturePainter::DrawBackground()

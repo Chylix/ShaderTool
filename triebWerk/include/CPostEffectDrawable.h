@@ -33,6 +33,8 @@ namespace triebWerk
 		void RemoveMaterial(const int a_SlotToRemove);
 		void RemoveMaterial(const char* a_pNameOfMaterial);
 
+		int GetMaterialCount() const;
+
 		IDrawable::EDrawableType GetType() final;
 		
 		//Probly bad design of IDrawable this function does nothing as PostEffect

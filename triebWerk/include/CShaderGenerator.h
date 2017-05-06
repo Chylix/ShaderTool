@@ -15,6 +15,13 @@ namespace triebWerk
 {
 	class CShaderGenerator : CFileReader
 	{
+	public:
+		struct SShaderErrors
+		{
+			std::vector<int> ErrorLines;
+			std::vector<std::string> ErrorMessages;
+		};
+
 	private:
 		const static UINT m_CompileFlags = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
 
@@ -38,6 +45,7 @@ namespace triebWerk
 
 		bool m_ClearMessages;
 		std::vector<std::string> m_LatestErrorMessages;
+		std::vector<int> m_LatestErrorLines;
 		//ID3DBlob* m_pDefaultHSByteCode;
 		//ID3DBlob* m_pDefaultDSByteCode;
 		//ID3DBlob* m_pDefaultCSByteCode;
@@ -49,7 +57,7 @@ namespace triebWerk
 	public:
 		bool Initialize(CGraphics* a_pGraphicHandle, const char* a_pDefaultShader);
 
-		std::vector<std::string> GetLatestErrorMessages();
+		SShaderErrors GetLatestErrorMessages();
 
 		bool GenerateShader(const char* a_pShaderPath, CMaterial* a_pMaterialOut);
 

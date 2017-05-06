@@ -3,7 +3,10 @@
 #include <QPainter>
 #include <QTextBlock>
 
-CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
+CodeEditor::CodeEditor(QWidget *parent) 
+	: QPlainTextEdit(parent) 
+	, m_ErrorLine(-1)
+	, m_CurrentShaderSlot(0)
 {
 	lineNumberArea = new LineNumberArea(this);
 
@@ -19,6 +22,8 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 	QPalette p = this->palette();
 	p.setColor(QPalette::Base, m_BackgroundColor);
 	this->setPalette(p);
+
+	m_Shaders.push_back(QString()); //cant be empty
 
 	updateLineNumberAreaWidth(0);
 	highlightCurrentLine();
@@ -46,6 +51,18 @@ void CodeEditor::SetText(QString text)
 
 	this->clear();
 	this->textCursor().insertText(text);
+}
+
+void CodeEditor::SetErrorLine(int line)
+{
+	m_ErrorLine = line;
+	repaint();
+}
+
+void CodeEditor::RemoveErrorLine()
+{
+	m_ErrorLine = -1;
+	repaint();
 }
 
 void CodeEditor::updateLineNumberAreaWidth(int /* newBlockCount */)
@@ -99,7 +116,6 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
 	QPainter painter(lineNumberArea);
 	painter.fillRect(event->rect(), m_BackgroundColor);
 
-
 	QTextBlock block = firstVisibleBlock();
 	int blockNumber = block.blockNumber();
 	int top = (int)blockBoundingGeometry(block).translated(contentOffset()).top();
@@ -108,7 +124,10 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
 	while (block.isValid() && top <= event->rect().bottom()) {
 		if (block.isVisible() && bottom >= event->rect().top()) {
 			QString number = QString::number(blockNumber + 1);
-			painter.setPen(m_FontColor);
+			if(number.toInt() == m_ErrorLine)
+				painter.setPen(QColor(125,0,0));
+			else
+				painter.setPen(m_FontColor);
 			painter.drawText(0, top, lineNumberArea->width(), fontMetrics().height(),
 				Qt::AlignRight, number);
 		}

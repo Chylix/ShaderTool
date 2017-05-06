@@ -3,15 +3,16 @@
 #include "D3DRenderWidget.h"
 #include <QLayout.h>
 #include <CEngine.h>
+#include <qlayout.h>
 
 CShaderToolMain::CShaderToolMain(QWidget *parent)
 	: QMainWindow(parent)
 	, m_CodeEditor(nullptr)
 {
 	m_MainUi.setupUi(this);
-	
+
 	setWindowTitle(m_WindowName);
-	
+
 	SetupCodeEditor();
 
 	m_pDefaultScene = new CDefaultScene();
@@ -27,6 +28,7 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 
 void CShaderToolMain::SetupCodeEditor()
 {
+	//TODO: move this to the editor
 	QFont font;
 	font.setFamily("Consolas");
 	font.setFixedPitch(true);
@@ -36,24 +38,38 @@ void CShaderToolMain::SetupCodeEditor()
 
 	m_CodeEditor = m_MainUi.plainTextEdit;
 
-	m_CodeEditor->SetText(m_ShaderDefaultCode);
 	m_SyntaxHighlighter = new CSyntaxHighlighter(m_CodeEditor->document());
 
+	m_ShaderManager.Initialize(m_CodeEditor, &m_MainUi);
 }
 
 void CShaderToolMain::OnCompileClicked()
 {
-	QString shaderTextToCompile = m_CodeEditor->toPlainText();
+	std::vector<SShaderCode>* shaders = m_ShaderManager.GetShaders();
 
-	triebWerk::CMaterial* mat = m_ShaderCreator.CreateShader(shaderTextToCompile.toStdString());
+	std::vector<triebWerk::CMaterial*> materials;
 
-	m_pDefaultScene->UpdateMaterial(mat);
+	for (size_t i = 0; i < shaders->size(); ++i)
+	{
+		materials.push_back(m_ShaderCreator.CreateShader(shaders->at(i).code.toStdString(), i));
+	}
 
-	auto errors = m_ShaderCreator.GetLatestErrors();
+	m_pDefaultScene->UpdateMaterial(&materials);
 
-	errors.erase(errors.begin());
+	auto errors = twResourceManager->GetShaderGenerator()->GetLatestErrorMessages();
+	
+	//TODO: fixed this double none error problem
+	//only a workaround
+	//errors.ErrorMessages.erase(errors.ErrorMessages.begin());
 
-	if (errors.size() == 0)
+	m_CodeEditor->RemoveErrorLine();
+
+	for (auto errorLine : errors.ErrorLines)
+	{
+		m_CodeEditor->SetErrorLine(errorLine - m_ShaderCreator.m_ShaderLineCount);
+	}
+
+	if (errors.ErrorMessages.size() == 0)
 	{
 		m_MainUi.textEdit->setTextColor(Qt::darkGreen);
 		m_MainUi.textEdit->setText("Compilation successful");
@@ -61,12 +77,12 @@ void CShaderToolMain::OnCompileClicked()
 	else
 	{
 		QString string;
-		for (auto error : errors)
+		for (auto error : errors.ErrorMessages)
 		{
 			string.append(error.c_str());
 			string.append("\n");
 		}
-
+	
 		m_MainUi.textEdit->setTextColor(Qt::darkRed);
 		m_MainUi.textEdit->setText(string);
 	}
