@@ -406,7 +406,8 @@ void triebWerk::CRenderer::DrawRenderTarget(CRenderTarget* a_pRenderTarget)
 		}
 
 		//set the rendertarget where the prevoius effect was drawn into
-		a_pRenderTarget->m_pPostEffect->m_Materials[i]->m_pPixelShader.SetTexture(0, &a_pRenderTarget->m_Texture[swapRenderTarget]);
+		if(a_pRenderTarget->m_pPostEffect->m_Materials[i]->m_pPixelShader.NeedsBackBufferTexture())
+			a_pRenderTarget->m_pPostEffect->m_Materials[i]->m_pPixelShader.SetTexture(0, &a_pRenderTarget->m_Texture[swapRenderTarget]);
 
 		//set resources and shader
 		SetShader(a_pRenderTarget->m_pPostEffect->m_Materials[i]);

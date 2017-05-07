@@ -3,6 +3,12 @@
 
 class CDefaultScene : public triebWerk::IScene
 {
+private:
+	struct SShaderTextureHolder
+	{
+		int ShaderSlot;
+		std::vector<int> SlotUsed;
+	};
 
 public:
 	CDefaultScene();
@@ -10,7 +16,7 @@ public:
 
 	void UpdateMaterial(std::vector<triebWerk::CMaterial*>* pMaterials);
 	void UpdateLoadedTextures(const char* a_pShaderTexture);
-	void UpdateUsedTextures(std::vector<int> usedSlot);
+	void UpdateUsedTextures(int slot, std::vector<int> usedSlot);
 	void ClearUsedTextures();
 
 	void Start() final;
@@ -24,7 +30,7 @@ private:
 	triebWerk::CMaterial* m_pMaterial;
 	triebWerk::CEntity* m_pEntity;
 	std::vector<std::string> m_LoadedTextures;
-	std::vector<std::vector<int>> m_UsedTextures;
+	std::vector<SShaderTextureHolder> m_UsedTextures;
 	size_t m_CurrentShaderCount;
 
 };

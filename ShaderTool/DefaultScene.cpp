@@ -34,9 +34,13 @@ void CDefaultScene::UpdateLoadedTextures(const char * a_pShaderTexture)
 	m_LoadedTextures.push_back(a_pShaderTexture);
 }
 
-void CDefaultScene::UpdateUsedTextures(std::vector<int> usedSlot)
+void CDefaultScene::UpdateUsedTextures(int slot, std::vector<int> usedSlot)
 {
-	m_UsedTextures.push_back(usedSlot);
+	SShaderTextureHolder t;
+	t.ShaderSlot = slot;
+	t.SlotUsed = usedSlot;
+
+	m_UsedTextures.push_back(t);
 }
 
 void CDefaultScene::ClearUsedTextures()
@@ -97,20 +101,29 @@ void CDefaultScene::Update()
 		m_pPostEffect->GetMaterial(i)->m_ConstantBuffer.SetValueInBuffer(5, &res);
 	}
 
-	//for (size_t i = 0; i < m_LoadedTextures.size(); i++)
+	//for (size_t i = 0; i < m_UsedTextures.size(); i++)
 	//{
-	//	m_pPostEffect->GetMaterial(0)->m_pPixelShader.SetTexture(i, twResourceManager->GetTexture2D(m_LoadedTextures[i].c_str()));
+	//	for (size_t y = 0; y < m_UsedTextures[i].size(); y++)
+	//	{
+	//		auto e = m_UsedTextures[i];
+	//		int slot = e[y]-1;
+	//		m_pPostEffect->GetMaterial(i)->m_pPixelShader.SetTexture(i, twResourceManager->GetTexture2D(m_LoadedTextures[slot].c_str()));
+	//	}
+	//	
 	//}
 
-	for (size_t i = 0; i < m_UsedTextures.size(); i++)
+	for (SShaderTextureHolder& holder : m_UsedTextures)
 	{
-		for (size_t y = 0; y < m_UsedTextures[i].size(); y++)
+		triebWerk::CMaterial* currentMat = m_pPostEffect->GetMaterial(holder.ShaderSlot);
+
+		for (size_t i = 0; i < holder.SlotUsed.size(); ++i)
 		{
-			auto e = m_UsedTextures[i];
-			m_pPostEffect->GetMaterial(i)->m_pPixelShader.SetTexture(i, twResourceManager->GetTexture2D(m_LoadedTextures[e[y]].c_str()));
+			int slot = holder.SlotUsed[i]-1;
+			currentMat->m_pPixelShader.SetTexture(i, twResourceManager->GetTexture2D(m_LoadedTextures[slot].c_str()));
 		}
-		
+
 	}
+
 }
 
 void CDefaultScene::End()

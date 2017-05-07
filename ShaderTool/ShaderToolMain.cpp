@@ -49,6 +49,8 @@ void CShaderToolMain::OnCompileClicked()
 
 	std::vector<triebWerk::CMaterial*> materials;
 
+	static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->ClearUsedTextures();
+
 	for (size_t i = 0; i < shaders->size(); ++i)
 	{
 		materials.push_back(m_ShaderCreator.CreateShader(shaders->at(i).code.toStdString(), i));

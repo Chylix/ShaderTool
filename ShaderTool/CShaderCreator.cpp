@@ -51,6 +51,11 @@ triebWerk::CMaterial* CShaderCreator::CreateShader(std::string & a_String, int s
 
 	bool criticalError = twResourceManager->GetShaderGenerator()->GenerateShader(path.c_str(), mat);
 
+	size_t usesBackbuffer = a_String.find(": BACKBUFFER");
+
+	if (usesBackbuffer != std::string::npos)
+		mat->m_pPixelShader.UsesBackBufferTexture(true);
+
 	if (!criticalError)
 	{
 		delete mat;
@@ -65,9 +70,11 @@ void CShaderCreator::GetUsedTexture(std::string & a_String, int slot)
 	size_t iter = 1;
 	size_t pos = 0;
 
-	static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->ClearUsedTextures();
-
 	std::vector<int> slots;
+
+	size_t usesBackbuffer = a_String.find(": BACKBUFFER");
+	if (usesBackbuffer != std::string::npos)
+		slots.push_back(1);
 
 	while (pos != std::string::npos)
 	{
@@ -84,5 +91,5 @@ void CShaderCreator::GetUsedTexture(std::string & a_String, int slot)
 		slots.push_back(stoi(a));
 	}
 
-	static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->UpdateUsedTextures(slots);
+	static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->UpdateUsedTextures(slot, slots);
 }
