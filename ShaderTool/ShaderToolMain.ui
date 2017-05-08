@@ -49,9 +49,9 @@
     <property name="geometry">
      <rect>
       <x>530</x>
-      <y>0</y>
+      <y>30</y>
       <width>531</width>
-      <height>491</height>
+      <height>461</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="codelayout">
@@ -163,27 +163,59 @@ QPushButton:hover {
    <widget class="QPushButton" name="addShader">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>520</y>
+      <x>530</x>
+      <y>0</y>
       <width>21</width>
-      <height>21</height>
+      <height>31</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">.QPushButton
+{
+background-color: rgb(56, 56, 56);
+text-color: rgb(255, 255, 255);
+border: 0;
+color:  rgb(255, 255, 255);
+font-family: Consolas, serif;
+}
+
+QPushButton:hover {
+    background-color: rgb(66, 66, 66);
+}</string>
     </property>
     <property name="text">
      <string>+</string>
     </property>
    </widget>
-   <widget class="QWidget" name="verticalLayoutWidget">
+   <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>520</y>
-      <width>81</width>
-      <height>281</height>
+      <x>550</x>
+      <y>0</y>
+      <width>511</width>
+      <height>31</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="shaderLayout"/>
+    <layout class="QHBoxLayout" name="shaderLayout"/>
    </widget>
+   <widget class="QTextBrowser" name="textBrowser_2">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>-130</y>
+      <width>541</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">.QTextBrowser
+{
+background-color: rgb(76, 76, 76);
+border: 0;
+}</string>
+    </property>
+   </widget>
+   <zorder>textBrowser_2</zorder>
    <zorder>textBrowser</zorder>
    <zorder>gridLayoutWidget</zorder>
    <zorder>gridLayoutWidget_2</zorder>
@@ -191,7 +223,7 @@ QPushButton:hover {
    <zorder>textEdit</zorder>
    <zorder>compileButton</zorder>
    <zorder>addShader</zorder>
-   <zorder>verticalLayoutWidget</zorder>
+   <zorder>horizontalLayoutWidget</zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

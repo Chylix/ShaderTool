@@ -112,9 +112,14 @@ void CDefaultScene::Update()
 	//	
 	//}
 
+
+
 	for (SShaderTextureHolder& holder : m_UsedTextures)
 	{
 		triebWerk::CMaterial* currentMat = m_pPostEffect->GetMaterial(holder.ShaderSlot);
+		if (currentMat == nullptr)
+			continue;
+
 
 		for (size_t i = 0; i < holder.SlotUsed.size(); ++i)
 		{

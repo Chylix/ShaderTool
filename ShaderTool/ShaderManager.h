@@ -49,7 +49,7 @@ private:
 
 private:
 	CodeEditor* m_pCodeEditorHandle;
-	QVBoxLayout* m_pLayout;
+	QHBoxLayout* m_pLayout;
 	std::vector<SShaderCode> m_Shaders;
 	std::vector<QPushButton*> m_Buttons;
 	size_t m_CurrentWorkingSlot;

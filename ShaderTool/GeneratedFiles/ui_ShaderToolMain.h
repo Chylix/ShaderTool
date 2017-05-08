@@ -14,12 +14,12 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QTextEdit>
-#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "codeeditor.h"
 #include "ctexturepainter.h"
@@ -44,8 +44,9 @@ public:
     QTextEdit *textEdit;
     QPushButton *compileButton;
     QPushButton *addShader;
-    QWidget *verticalLayoutWidget;
-    QVBoxLayout *shaderLayout;
+    QWidget *horizontalLayoutWidget;
+    QHBoxLayout *shaderLayout;
+    QTextBrowser *textBrowser_2;
 
     void setupUi(QMainWindow *ShaderToolMain)
     {
@@ -77,7 +78,7 @@ public:
 
         gridLayoutWidget_2 = new QWidget(centralWidget);
         gridLayoutWidget_2->setObjectName(QStringLiteral("gridLayoutWidget_2"));
-        gridLayoutWidget_2->setGeometry(QRect(530, 0, 531, 491));
+        gridLayoutWidget_2->setGeometry(QRect(530, 30, 531, 461));
         codelayout = new QGridLayout(gridLayoutWidget_2);
         codelayout->setSpacing(6);
         codelayout->setContentsMargins(11, 11, 11, 11);
@@ -145,16 +146,37 @@ public:
 "}"));
         addShader = new QPushButton(centralWidget);
         addShader->setObjectName(QStringLiteral("addShader"));
-        addShader->setGeometry(QRect(430, 520, 21, 21));
-        verticalLayoutWidget = new QWidget(centralWidget);
-        verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(450, 520, 81, 281));
-        shaderLayout = new QVBoxLayout(verticalLayoutWidget);
+        addShader->setGeometry(QRect(530, 0, 21, 31));
+        addShader->setStyleSheet(QLatin1String(".QPushButton\n"
+"{\n"
+"background-color: rgb(56, 56, 56);\n"
+"text-color: rgb(255, 255, 255);\n"
+"border: 0;\n"
+"color:  rgb(255, 255, 255);\n"
+"font-family: Consolas, serif;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(66, 66, 66);\n"
+"}"));
+        horizontalLayoutWidget = new QWidget(centralWidget);
+        horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
+        horizontalLayoutWidget->setGeometry(QRect(550, 0, 511, 31));
+        shaderLayout = new QHBoxLayout(horizontalLayoutWidget);
         shaderLayout->setSpacing(6);
         shaderLayout->setContentsMargins(11, 11, 11, 11);
         shaderLayout->setObjectName(QStringLiteral("shaderLayout"));
         shaderLayout->setContentsMargins(0, 0, 0, 0);
+        textBrowser_2 = new QTextBrowser(centralWidget);
+        textBrowser_2->setObjectName(QStringLiteral("textBrowser_2"));
+        textBrowser_2->setGeometry(QRect(530, -130, 541, 161));
+        textBrowser_2->setStyleSheet(QLatin1String(".QTextBrowser\n"
+"{\n"
+"background-color: rgb(76, 76, 76);\n"
+"border: 0;\n"
+"}"));
         ShaderToolMain->setCentralWidget(centralWidget);
+        textBrowser_2->raise();
         textBrowser->raise();
         gridLayoutWidget->raise();
         gridLayoutWidget_2->raise();
@@ -162,7 +184,7 @@ public:
         textEdit->raise();
         compileButton->raise();
         addShader->raise();
-        verticalLayoutWidget->raise();
+        horizontalLayoutWidget->raise();
 
         retranslateUi(ShaderToolMain);
 

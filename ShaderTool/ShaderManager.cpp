@@ -17,7 +17,19 @@ void CShaderManager::OnAddShaderClick()
 	QString a = QString::number(static_cast<int>(m_Shaders.size()));
 
 	btn1->setText("Code" + QString(a));
-	btn1->setStyleSheet("background-color: grey");
+	btn1->setStyleSheet(
+		".QPushButton\n"
+		"{\n"
+		"background-color: rgb(76, 76, 76);\n"
+		"text-color: rgb(255, 255, 255);\n"
+		"border: 0;\n"
+		"color:  rgb(255, 255, 255);\n"
+		"font-family: Consolas, serif;\n"
+		"}\n"
+		"QPushButton:hover {\n"
+		"    background-color: rgb(66, 66, 66);\n"
+		"}"
+	);
 	m_pLayout->addWidget(btn1);
 	AddShader();
 
@@ -83,7 +95,31 @@ void CShaderManager::AddShader(QString code)
 void CShaderManager::ChangeActiveButton(int slot)
 {
 	//Change current 
-	m_Buttons[m_CurrentWorkingSlot]->setStyleSheet("background-color: grey");
+	m_Buttons[m_CurrentWorkingSlot]->setStyleSheet(
+		".QPushButton\n"
+		"{\n"
+		"background-color: rgb(76, 76, 76);\n"
+		"text-color: rgb(255, 255, 255);\n"
+		"border: 0;\n"
+		"color:  rgb(255, 255, 255);\n"
+		"font-family: Consolas, serif;\n"
+		"}\n"
+		"QPushButton:hover {\n"
+		"    background-color: rgb(66, 66, 66);\n"
+		"}"
+		);
 
-	m_Buttons[slot]->setStyleSheet("background-color: lightBlue");
+	m_Buttons[slot]->setStyleSheet(
+		".QPushButton\n"
+		"{\n"
+		"background-color: rgb(56, 56, 56);\n"
+		"text-color: rgb(255, 255, 255);\n"
+		"border: 0;\n"
+		"color:  rgb(255, 255, 255);\n"
+		"font-family: Consolas, serif;\n"
+		"}\n"
+		"QPushButton:hover {\n"
+		"    background-color: rgb(66, 66, 66);\n"
+		"}"
+	);
 }

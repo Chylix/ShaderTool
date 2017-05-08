@@ -42,8 +42,6 @@ namespace triebWerk
 		ID3DBlob* m_pDefaultGSByteCode;
 
 		CGraphics* m_pGraphicHandle;
-
-		bool m_ClearMessages;
 		std::vector<std::string> m_LatestErrorMessages;
 		std::vector<int> m_LatestErrorLines;
 		//ID3DBlob* m_pDefaultHSByteCode;

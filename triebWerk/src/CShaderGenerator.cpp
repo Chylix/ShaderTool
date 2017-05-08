@@ -5,7 +5,6 @@ triebWerk::CShaderGenerator::CShaderGenerator()
 	, m_pDefaultVSByteCode(nullptr)
 	, m_pDefaultPSByteCode(nullptr)
 	, m_pDefaultGSByteCode(nullptr)
-	, m_ClearMessages(false)
 	, m_ShaderGenNum(0)
 {
 }
@@ -29,11 +28,12 @@ bool triebWerk::CShaderGenerator::Initialize(CGraphics * a_pGraphicHandle, const
 
 triebWerk::CShaderGenerator::SShaderErrors triebWerk::CShaderGenerator::GetLatestErrorMessages()
 {
-	m_ClearMessages = true;
-
 	SShaderErrors error;
 	error.ErrorMessages = m_LatestErrorMessages;
 	error.ErrorLines = m_LatestErrorLines;
+
+	m_LatestErrorMessages.clear();
+	m_LatestErrorLines.clear();
 
 	return error;
 }
@@ -57,7 +57,7 @@ bool triebWerk::CShaderGenerator::GenerateShader(const char * a_pShaderPath, CMa
 	{
 		LogErrors(pixelError);
 		return false;
-		pixelShader = m_pDefaultPSByteCode;
+		//pixelShader = m_pDefaultPSByteCode;
 	}
 
 	//Set material name
@@ -338,13 +338,6 @@ void triebWerk::CShaderGenerator::CreatePixelShader(CGraphics * a_pGraphicHandle
 
 void triebWerk::CShaderGenerator::LogErrors(const char * a_pErrorMessage)
 {
-	if (m_ClearMessages)
-	{
-		m_LatestErrorMessages.clear();
-		m_LatestErrorLines.clear();
-		m_ClearMessages = false;
-	}
-
 	std::string error = a_pErrorMessage;
 
 	std::string line = error;

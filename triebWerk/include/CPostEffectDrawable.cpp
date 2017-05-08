@@ -57,8 +57,12 @@ triebWerk::CMaterial * triebWerk::CPostEffectDrawable::GetMaterial(const char * 
 
 void triebWerk::CPostEffectDrawable::RemoveMaterial(const int a_SlotToRemove)
 {
-	if ((m_Materials.size() - 1) < a_SlotToRemove)
+	int matSlot = (int)m_Materials.size() - 1;
+	if (matSlot < a_SlotToRemove)
+	{
 		return;
+	}
+
 
 	delete m_Materials[a_SlotToRemove];
 	m_Materials.erase(m_Materials.begin() + a_SlotToRemove);
