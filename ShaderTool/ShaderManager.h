@@ -4,6 +4,7 @@
 #include "ui_ShaderToolMain.h"
 
 class CodeEditor;
+class CShaderManangerButton;
 
 struct SShaderCode
 {
@@ -24,6 +25,7 @@ public:
 
 	void Initialize(CodeEditor* pCodeEditor, Ui_ShaderToolMain* pShaderTool);
 	void ChangeActiveEditorShaderTo(size_t slot);
+	void RemoveShader(size_t slot);
 	std::vector<SShaderCode>* GetShaders();
 	void AddShader(QString code = QString());
 
@@ -33,13 +35,11 @@ private:
 private:
 	//This is the default shader code
 	const QString m_DefaultShaderCode = 
-		"//Default input descriptor\n"
 		"struct PS_Data\n"
 		"{\n"
 		"  float4 position : SV_POSITION;\n"
 		"  float2 uv : UV;\n"
-		"};\n"
-		"\n"
+		"};\n "
 		"//Default Pixel Shader\n"
 		"float4 PS_Main(PS_Data input) : SV_TARGET\n"
 		"{\n"
@@ -51,6 +51,6 @@ private:
 	CodeEditor* m_pCodeEditorHandle;
 	QHBoxLayout* m_pLayout;
 	std::vector<SShaderCode> m_Shaders;
-	std::vector<QPushButton*> m_Buttons;
+	std::vector<CShaderManangerButton*> m_Buttons;
 	size_t m_CurrentWorkingSlot;
 };

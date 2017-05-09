@@ -113,6 +113,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ShaderManager.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="ShaderManagerButton.cpp">
+      <Filter>ShaderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ShaderManagerButton.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ShaderManagerButton.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ShaderToolMain.ui">
@@ -137,6 +146,9 @@
       <Filter>ResourceManager</Filter>
     </CustomBuild>
     <CustomBuild Include="ShaderManager.h">
+      <Filter>ShaderManager</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ShaderManagerButton.h">
       <Filter>ShaderManager</Filter>
     </CustomBuild>
   </ItemGroup>

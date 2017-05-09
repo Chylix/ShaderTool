@@ -146,7 +146,7 @@ public:
 "}"));
         addShader = new QPushButton(centralWidget);
         addShader->setObjectName(QStringLiteral("addShader"));
-        addShader->setGeometry(QRect(530, 0, 21, 31));
+        addShader->setGeometry(QRect(1040, 0, 21, 31));
         addShader->setStyleSheet(QLatin1String(".QPushButton\n"
 "{\n"
 "background-color: rgb(56, 56, 56);\n"
@@ -161,7 +161,7 @@ public:
 "}"));
         horizontalLayoutWidget = new QWidget(centralWidget);
         horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(550, 0, 511, 31));
+        horizontalLayoutWidget->setGeometry(QRect(530, 0, 511, 31));
         shaderLayout = new QHBoxLayout(horizontalLayoutWidget);
         shaderLayout->setSpacing(6);
         shaderLayout->setContentsMargins(11, 11, 11, 11);

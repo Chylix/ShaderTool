@@ -163,7 +163,7 @@ QPushButton:hover {
    <widget class="QPushButton" name="addShader">
     <property name="geometry">
      <rect>
-      <x>530</x>
+      <x>1040</x>
       <y>0</y>
       <width>21</width>
       <height>31</height>
@@ -190,7 +190,7 @@ QPushButton:hover {
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>550</x>
+      <x>530</x>
       <y>0</y>
       <width>511</width>
       <height>31</height>

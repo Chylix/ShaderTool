@@ -6,7 +6,7 @@ CSyntaxHighlighter::CSyntaxHighlighter(QTextDocument* parent)
 	HighlightingRule rule;
 
 	keywordFormat.setForeground(Qt::darkYellow);
-	keywordFormat.setFontWeight(QFont::Bold);
+	//keywordFormat.setFontWeight(QFont::Bold);
 	QStringList keywordPatterns;
 	keywordPatterns
 		// ------Types------
@@ -69,7 +69,8 @@ CSyntaxHighlighter::CSyntaxHighlighter(QTextDocument* parent)
 		<< "\\bunsigned\\b"
 		<< "\\bvirtual\\b"
 		<< "\\bvoid\\b"
-		<< "\\bvolatile\\b";
+		<< "\\bvolatile\\b"
+		<< "\\bTexture2D\\b";
 	foreach(const QString &pattern, keywordPatterns)
 	{
 		rule.pattern = QRegExp(pattern);
