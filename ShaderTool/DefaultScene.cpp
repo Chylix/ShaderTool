@@ -92,8 +92,8 @@ void CDefaultScene::Update()
 
 	float res[2];
 	
-	res[0] = twEngine.GetViewportWidth();
-	res[1] = twEngine.GetViewportHeight();
+	res[0] = twEngine.m_pViewport->GetViewportWidth();
+	res[1] = twEngine.m_pViewport->GetViewportHeight();
 	
 	for (size_t i = 0; i < m_CurrentShaderCount; i++)
 	{
