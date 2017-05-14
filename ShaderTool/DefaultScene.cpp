@@ -113,6 +113,8 @@ void CDefaultScene::Update()
 	//}
 
 
+	if (m_LoadedTextures.size() == 0)
+		return;
 
 	for (SShaderTextureHolder& holder : m_UsedTextures)
 	{
