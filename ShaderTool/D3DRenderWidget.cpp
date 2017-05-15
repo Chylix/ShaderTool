@@ -2,6 +2,9 @@
 #include <CEngine.h>
 #include <QTimer>
 #include <QResizeEvent>
+#include <qshortcut.h>
+#include <qguiapplication.h>
+#include <qscreen.h>
 
 D3DRenderWidget::D3DRenderWidget(QWidget* parent)
 {
@@ -33,16 +36,53 @@ D3DRenderWidget::D3DRenderWidget(QWidget* parent)
 	QTimer* timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(update()));
 	timer->start(16);
+
+	m_InFullscreen = false;
+
+	QShortcut *shortcut = new QShortcut(QKeySequence("Alt+Return"), this);
+	QObject::connect(shortcut, SIGNAL(activated()), this, SLOT(ChangeFullscreen()));
 }
 
 D3DRenderWidget::~D3DRenderWidget()
 {
 }
 
+void D3DRenderWidget::ChangeFullscreen()
+{
+	if (m_InFullscreen == true)
+	{
+		m_InFullscreen = false;
+		this->setParent(m_pParent);
+		this->resize(m_Size);
+		this->showNormal();
+	}
+	else
+	{
+		m_InFullscreen = true;
+		m_pParent = this->parentWidget();
+		m_Size = this->size();
+		this->setParent(0);
+		this->showFullScreen();
+	}
+}
+
 void D3DRenderWidget::resizeEvent(QResizeEvent* evt)
 {
 	QSize a = evt->size();
-	twViewport->Resize(a.width(), a.height());
+	if (m_InFullscreen)
+	{
+		QScreen *screen = QGuiApplication::primaryScreen();
+		QRect  screenGeometry = screen->geometry();
+		int height = screenGeometry.height();
+		int width = screenGeometry.width();
+
+		twViewport->Resize(width, height);
+	}
+	else
+	{
+		twViewport->Resize(a.width(), a.height());
+	}
+
 }
 
 void D3DRenderWidget::paintEvent(QPaintEvent* evt)

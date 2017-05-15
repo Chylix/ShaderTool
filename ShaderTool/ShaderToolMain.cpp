@@ -4,6 +4,7 @@
 #include <QLayout.h>
 #include <CEngine.h>
 #include <qlayout.h>
+#include <qshortcut.h>
 
 CShaderToolMain::CShaderToolMain(QWidget *parent)
 	: QMainWindow(parent)
@@ -21,9 +22,16 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 	twSceneManager->SetActiveScene("Default");
 
 	connect(m_MainUi.compileButton, SIGNAL(clicked()), this, SLOT(OnCompileClicked()));
+	QShortcut *shortcut = new QShortcut(QKeySequence("Ctrl+S"), this);
+	QObject::connect(shortcut, SIGNAL(activated()), this, SLOT(OnCompileClicked()));
 	//OnCompileClicked();
 
 	//setAcceptDrops(true);
+}
+
+void CShaderToolMain::OnFullscreen()
+{
+	m_MainUi.viewport->ChangeFullscreen();
 }
 
 void CShaderToolMain::SetupCodeEditor()

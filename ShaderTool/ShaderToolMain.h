@@ -21,7 +21,7 @@ protected:
 
 public slots:
 	void OnCompileClicked();
-
+	void OnFullscreen();
 
 private:
 	Ui::ShaderToolMain m_MainUi;
