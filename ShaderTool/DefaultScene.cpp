@@ -34,6 +34,16 @@ void CDefaultScene::UpdateLoadedTextures(const char * a_pShaderTexture)
 	m_LoadedTextures.push_back(a_pShaderTexture);
 }
 
+void CDefaultScene::ReplaceLoadedTextures(const size_t slot, const char* a_pShaderTexture)
+{
+	m_LoadedTextures[slot] = a_pShaderTexture;
+}
+
+void CDefaultScene::RemoveLoadedTextures(const size_t slot)
+{
+	m_LoadedTextures.erase(m_LoadedTextures.begin() + slot);
+}
+
 void CDefaultScene::UpdateUsedTextures(int slot, std::vector<int> usedSlot)
 {
 	SShaderTextureHolder t;

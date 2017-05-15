@@ -60,25 +60,24 @@ void CTexturePainter::dragEnterEvent(QDragEnterEvent * e)
 	e->acceptProposedAction();
 }
 
-void CTexturePainter::dropEvent(QDropEvent * e)
+void CTexturePainter::dropEvent(QDropEvent * event)
 {
-	if (e->mimeData()->hasUrls())
-	{
-		auto a = e->mimeData()->urls();
+	//TODO: check if the file is a supported type
+	//Does the event contain data
+	if (!event->mimeData()->hasUrls())
+		return;
 
-		for (size_t i = 0; i < a.size(); i++)
-		{
-			QString x = a[i].toLocalFile();
-			std::string y = x.toStdString();
-			twResourceManager->LoadSpecificFile(y.c_str(), true);
-			SShaderTexture t;
-			t.map = QPixmap(QString::fromStdString(y));
-			std::string name = twResourceManager->AbstractFileNameFromPathOne(y);
-			t.name = QString::fromStdString(twResourceManager->RemoveFileType(name));
-			m_Pictures.push_back(t);
-			static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->UpdateLoadedTextures(t.name.toStdString().c_str());
-		}
+	//Check if we have to replace a texture
+	size_t slot = FindTextureIndexFromPosition(event->pos());
+
+	if (slot != UINT_MAX)
+	{
+		ReplaceTexture(event, slot);
 	}
+	else
+	{
+		AddTexture(event);
+	}	
 
 	this->repaint();
 }
@@ -120,6 +119,7 @@ void CTexturePainter::mousePressEvent(QMouseEvent * event)
 		{
 			size_t index = FindTextureIndexFromPosition(event->pos());
 			m_Pictures.erase(m_Pictures.begin() + index);
+			static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->RemoveLoadedTextures(index);
 			repaint();
 		}
 	}break;
@@ -134,14 +134,59 @@ void CTexturePainter::mousePressEvent(QMouseEvent * event)
 size_t CTexturePainter::FindTextureIndexFromPosition(QPoint pos)
 {
 	for (size_t i = 0; i < m_Pictures.size(); i++)
-	{
-		bool isIn = m_Pictures[i].rect.contains(pos);
-		if (isIn)
+	{ 
+		if (m_Pictures[i].rect.contains(pos))
 		{
 			return i;
 		}
 	}
 
-	//TODO: this is dangerous since this could be a valid return
-	return 0;
+	return UINT_MAX;
+}
+
+void CTexturePainter::ReplaceTexture(const QDropEvent * event, size_t slot)
+{
+	auto url = event->mimeData()->urls()[0]; //just take the first and ignore the others
+
+	std::string filePath = url.toLocalFile().toStdString(); 
+
+	//Load the file
+	twResourceManager->LoadSpecificFile(filePath.c_str(), true);
+
+	//create the texture desc
+	SShaderTexture texture;
+	texture.map = QPixmap(QString(filePath.c_str()));
+	texture.name = GetFileName(filePath);
+
+	//Replace the old texture
+	m_Pictures[slot] = texture;
+
+	static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->ReplaceLoadedTextures(slot, texture.name.toStdString().c_str());
+}
+
+void CTexturePainter::AddTexture(const QDropEvent * event)
+{
+	auto urls = event->mimeData()->urls();
+
+	for (size_t i = 0; i < urls.size(); i++)
+	{
+		std::string filePath = urls[i].toLocalFile().toStdString();
+
+		//Load the file
+		twResourceManager->LoadSpecificFile(filePath.c_str(), true);
+
+		//create the texture desc
+		SShaderTexture texture;
+		texture.map = QPixmap(QString(filePath.c_str()));
+		texture.name = GetFileName(filePath);
+
+		m_Pictures.push_back(texture);
+
+		static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->UpdateLoadedTextures(texture.name.toStdString().c_str());
+	}
+}
+
+QString CTexturePainter::GetFileName(std::string & string)
+{
+	return QString(twResourceManager->AbstractFileNameFromPathOne(twResourceManager->RemoveFileType(string)).c_str());
 }

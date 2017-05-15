@@ -16,6 +16,8 @@ public:
 
 	void UpdateMaterial(std::vector<triebWerk::CMaterial*>* pMaterials);
 	void UpdateLoadedTextures(const char* a_pShaderTexture);
+	void ReplaceLoadedTextures(const size_t slot, const char* a_pShaderTexture);
+	void RemoveLoadedTextures(const size_t slot);
 	void UpdateUsedTextures(int slot, std::vector<int> usedSlot);
 	void ClearUsedTextures();
 

@@ -39,4 +39,7 @@ private:
 	void DrawTextAndField(const int iter);
 	void DrawBackground();
 	size_t FindTextureIndexFromPosition(QPoint pos);
+	void ReplaceTexture(const QDropEvent* event, const size_t slot);
+	void AddTexture(const QDropEvent* event);
+	QString GetFileName(std::string& string);
 };
