@@ -8,8 +8,6 @@
 
 D3DRenderWidget::D3DRenderWidget(QWidget* parent)
 {
-	// Create Device
-	//createDevice();
 	triebWerk::SEngineConfiguration config;
 
 	config.m_PhysicTimeStamp = 0.01f;
@@ -39,7 +37,7 @@ D3DRenderWidget::D3DRenderWidget(QWidget* parent)
 
 	m_InFullscreen = false;
 
-	QShortcut *shortcut = new QShortcut(QKeySequence("Alt+Return"), this);
+	QShortcut *shortcut = new QShortcut(QKeySequence("Ctrl+Return"), this);
 	QObject::connect(shortcut, SIGNAL(activated()), this, SLOT(ChangeFullscreen()));
 }
 
@@ -55,6 +53,7 @@ void D3DRenderWidget::ChangeFullscreen()
 		this->setParent(m_pParent);
 		this->resize(m_Size);
 		this->showNormal();
+		this->unsetCursor();
 	}
 	else
 	{
@@ -63,6 +62,8 @@ void D3DRenderWidget::ChangeFullscreen()
 		m_Size = this->size();
 		this->setParent(0);
 		this->showFullScreen();
+		this->setFocus();
+		this->setCursor(Qt::BlankCursor);
 	}
 }
 
@@ -71,6 +72,7 @@ void D3DRenderWidget::resizeEvent(QResizeEvent* evt)
 	QSize a = evt->size();
 	if (m_InFullscreen)
 	{
+		//Get the highest possible screen resolution
 		QScreen *screen = QGuiApplication::primaryScreen();
 		QRect  screenGeometry = screen->geometry();
 		int height = screenGeometry.height();
@@ -88,4 +90,12 @@ void D3DRenderWidget::resizeEvent(QResizeEvent* evt)
 void D3DRenderWidget::paintEvent(QPaintEvent* evt)
 {
 	twEngine.Run();
+}
+
+void D3DRenderWidget::focusOutEvent(QFocusEvent * event)
+{
+	if (m_InFullscreen)
+	{
+		ChangeFullscreen();
+	}
 }

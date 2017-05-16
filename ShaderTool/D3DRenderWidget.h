@@ -16,6 +16,7 @@ public:
 protected:
 	virtual void resizeEvent(QResizeEvent* evt);
 	virtual void paintEvent(QPaintEvent* evt);
+	virtual void focusOutEvent(QFocusEvent* event);
 private:
 	bool m_InFullscreen;
 	QWidget* m_pParent;
