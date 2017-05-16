@@ -14,10 +14,15 @@ CodeEditor::CodeEditor(QWidget *parent)
 	connect(this, SIGNAL(updateRequest(QRect, int)), this, SLOT(updateLineNumberArea(QRect, int)));
 	connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
 
+	const int tabStop = 2;  // 4 characters
+
 	m_Font.setFamily("Consolas");
 	m_Font.setFixedPitch(true);
 	m_Font.setPointSize(9);
 	this->setFont(m_Font);
+
+	QFontMetrics metrics(m_Font);
+	this->setTabStopWidth(tabStop * metrics.width(' '));
 
 	QPalette p = this->palette();
 	p.setColor(QPalette::Base, m_BackgroundColor);

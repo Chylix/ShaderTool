@@ -86,12 +86,14 @@ public:
         codelayout->setContentsMargins(0, 0, 0, 0);
         plainTextEdit = new CodeEditor(gridLayoutWidget_2);
         plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
+        plainTextEdit->setFocusPolicy(Qt::ClickFocus);
         plainTextEdit->setStyleSheet(QLatin1String(".QLineEdit, .QPlainTextEdit\n"
 "{\n"
 "background-color: rgb(76, 76, 76);\n"
 "border: 0;\n"
 "}"));
-        plainTextEdit->setTabChangesFocus(true);
+        plainTextEdit->setTabChangesFocus(false);
+        plainTextEdit->setTabStopWidth(20);
 
         codelayout->addWidget(plainTextEdit, 0, 0, 1, 1);
 
