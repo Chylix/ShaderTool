@@ -1,9 +1,10 @@
+#include "DefaultScene.h"
+#include "Console.h"
 #include "CTexturePainter.h"
 #include <CEngine.h>
 #include <qevent.h>
 #include <qmimedata.h>
 #include <qlist.h>
-#include "DefaultScene.h"
 
 CTexturePainter::CTexturePainter(QWidget *parent) 
 	: QWidget(parent)
@@ -62,9 +63,8 @@ void CTexturePainter::dragEnterEvent(QDragEnterEvent * e)
 
 void CTexturePainter::dropEvent(QDropEvent * event)
 {
-	//TODO: check if the file is a supported type
-	//Does the event contain data
-	if (!event->mimeData()->hasUrls())
+	//Check if we accept this event
+	if (!event->mimeData()->hasUrls() || !CheckFilesIfSupported(event))
 		return;
 
 	//Check if we have to replace a texture
@@ -189,4 +189,30 @@ void CTexturePainter::AddTexture(const QDropEvent * event)
 QString CTexturePainter::GetFileName(std::string & string)
 {
 	return QString(twResourceManager->AbstractFileNameFromPathOne(twResourceManager->RemoveFileType(string)).c_str());
+}
+
+bool CTexturePainter::CheckFilesIfSupported(const QDropEvent* event)
+{
+	auto urls = event->mimeData()->urls();
+
+	for (size_t i = 0; i < urls.size(); i++)
+	{
+		std::string filePath = urls[i].toLocalFile().toStdString();
+
+		triebWerk::EFileType type = twResourceManager->GetFileType(filePath);
+
+		if (type == triebWerk::EFileType::DDS || type == triebWerk::EFileType::PNG)
+			continue;
+		else
+		{
+			std::string warning = "Filetype is not supported: ";
+			warning += twResourceManager->AbstractFileNameFromPathOne(filePath);
+
+			CConsole::Instance().PrintText(warning.c_str(), CConsole::EPrintType::Warning);
+
+			return false;
+		}
+	}
+
+	return true;
 }

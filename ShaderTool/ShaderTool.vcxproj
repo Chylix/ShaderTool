@@ -75,6 +75,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CodeEditor.cpp" />
+    <ClCompile Include="Console.cpp" />
     <ClCompile Include="CShaderCreator.cpp" />
     <ClCompile Include="CTexturePainter.cpp" />
     <ClCompile Include="D3DRenderWidget.cpp" />
@@ -159,6 +160,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Console.h" />
     <ClInclude Include="ShaderCreator.h" />
     <CustomBuild Include="ShaderManagerButton.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>

@@ -1,6 +1,7 @@
 #include "ShaderToolMain.h"
 #include "SyntaxHighlighter.h"
 #include "D3DRenderWidget.h"
+#include "Console.h"
 #include <QLayout.h>
 #include <CEngine.h>
 #include <qlayout.h>
@@ -24,9 +25,8 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 	connect(m_MainUi.compileButton, SIGNAL(clicked()), this, SLOT(OnCompileClicked()));
 	QShortcut *shortcut = new QShortcut(QKeySequence("Ctrl+S"), this);
 	QObject::connect(shortcut, SIGNAL(activated()), this, SLOT(OnCompileClicked()));
-	//OnCompileClicked();
 
-	//setAcceptDrops(true);
+	CConsole::Instance().Initialize(m_MainUi.textEdit);
 }
 
 void CShaderToolMain::OnFullscreen()
@@ -36,14 +36,6 @@ void CShaderToolMain::OnFullscreen()
 
 void CShaderToolMain::SetupCodeEditor()
 {
-	//TODO: move this to the editor
-	QFont font;
-	font.setFamily("Consolas");
-	font.setFixedPitch(true);
-	font.setPointSize(10);
-
-	m_MainUi.textEdit->setFont(font);
-
 	m_CodeEditor = m_MainUi.plainTextEdit;
 
 	m_SyntaxHighlighter = new CSyntaxHighlighter(m_CodeEditor->document());
@@ -53,6 +45,8 @@ void CShaderToolMain::SetupCodeEditor()
 
 void CShaderToolMain::OnCompileClicked()
 {
+	m_MainUi.viewport->ForceResize();
+
 	std::vector<SShaderCode>* shaders = m_ShaderManager.GetShaders();
 
 	std::vector<triebWerk::CMaterial*> materials;
@@ -81,19 +75,17 @@ void CShaderToolMain::OnCompileClicked()
 
 	if (errors.ErrorMessages.size() == 0)
 	{
-		m_MainUi.textEdit->setTextColor(Qt::darkGreen);
-		m_MainUi.textEdit->setText("Compilation successful");
+		CConsole::Instance().PrintText("Compilation successful", CConsole::EPrintType::Success);
 	}
 	else
 	{
-		QString string;
+		std::string string;
 		for (auto error : errors.ErrorMessages)
 		{
-			string.append(error.c_str());
+			string.append(error);
 			string.append("\n");
 		}
 	
-		m_MainUi.textEdit->setTextColor(Qt::darkRed);
-		m_MainUi.textEdit->setText(string);
+		CConsole::Instance().PrintText(string.c_str(), CConsole::EPrintType::Error);
 	}
 }

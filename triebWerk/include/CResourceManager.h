@@ -131,6 +131,9 @@ namespace triebWerk
 		std::string RemoveFileType(const std::string& a_Name);
 		std::string AbstractFileNameFromPath(const std::string& a_Path);
 		std::string AbstractFileNameFromPathOne(const std::string& a_Path);
+
+		EFileType GetFileType(const std::string& a_FileName);
+
 	private:
 		//Load actual data
 		void LoadFile(const SFile& a_File);
@@ -152,7 +155,7 @@ namespace triebWerk
 		bool CompareFileTypes(const std::string& a_Name, const char* a_ExpectedType);
 
 		std::string AbstractFolderFromPath(const std::string& a_Path);
-		EFileType GetFileType(const std::string& a_FileName);
+
 
 		//If a Filewatcher event occures, load resource new and replace the previous one 
 		void UpdateResourceChanges();

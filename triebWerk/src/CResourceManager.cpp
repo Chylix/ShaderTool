@@ -149,7 +149,7 @@ void triebWerk::CResourceManager::LoadSpecificFile(const char * a_pPath, bool a_
 		fileToLoad.FilePath = a_pPath;
 	}
 
-	fileToLoad.FileName = AbstractFileNameFromPath(a_pPath);
+	fileToLoad.FileName = AbstractFileNameFromPathOne(a_pPath);
 
 
 	LoadFile(fileToLoad);

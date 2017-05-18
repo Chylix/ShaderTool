@@ -44,6 +44,9 @@
     <Filter Include="ShaderManager">
       <UniqueIdentifier>{6e811eab-6179-4b67-a57a-e137f2494efa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Console">
+      <UniqueIdentifier>{f98551fc-8e7e-4c2f-8444-b6291fc68352}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\Debug\moc_ShaderToolMain.cpp">
@@ -122,6 +125,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ShaderManagerButton.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="Console.cpp">
+      <Filter>Console</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ShaderToolMain.ui">
@@ -164,6 +170,9 @@
     </ClInclude>
     <ClInclude Include="ShaderCreator.h">
       <Filter>ShaderCreator</Filter>
+    </ClInclude>
+    <ClInclude Include="Console.h">
+      <Filter>Console</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

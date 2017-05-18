@@ -36,6 +36,7 @@ private:
 	int m_XParam = 0;
 
 private:
+	bool CheckFilesIfSupported(const QDropEvent* event);
 	void DrawTextAndField(const int iter);
 	void DrawBackground();
 	size_t FindTextureIndexFromPosition(QPoint pos);
