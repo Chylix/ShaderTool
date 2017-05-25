@@ -7,6 +7,7 @@ class D3DRenderWidget : public QWidget {
 
 public slots:
 	void ChangeFullscreen();
+	void ForceResize();
 
 public:
 	D3DRenderWidget(QWidget* parent = NULL);

@@ -6,6 +6,15 @@
 #include <qguiapplication.h>
 #include <qscreen.h>
 
+void D3DRenderWidget::ForceResize()
+{
+	//temp workaround 
+	auto size = this->size();
+	size.setHeight(size.height() + 1);
+	size.setWidth(size.width() + 1);
+	this->resize(size);
+}
+
 D3DRenderWidget::D3DRenderWidget(QWidget* parent)
 {
 	triebWerk::SEngineConfiguration config;

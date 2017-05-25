@@ -7,6 +7,7 @@
 #include <qlayout.h>
 #include <qshortcut.h>
 
+
 CShaderToolMain::CShaderToolMain(QWidget *parent)
 	: QMainWindow(parent)
 	, m_CodeEditor(nullptr)
@@ -27,6 +28,10 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 	QObject::connect(shortcut, SIGNAL(activated()), this, SLOT(OnCompileClicked()));
 
 	CConsole::Instance().Initialize(m_MainUi.textEdit);
+	m_ProjectManager.Initialize(m_MainUi.OpenProject, m_MainUi.SaveProject);
+	
+	//What ever this needs to be moved
+	m_ProjectManager.RegisterSerializer(&m_ShaderManager, "3BBA1716-3F89-49F1-B23D-724039F3A9C8");
 }
 
 void CShaderToolMain::OnFullscreen()

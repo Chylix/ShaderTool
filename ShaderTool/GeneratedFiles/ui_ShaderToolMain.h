@@ -47,6 +47,8 @@ public:
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *shaderLayout;
     QTextBrowser *textBrowser_2;
+    QPushButton *OpenProject;
+    QPushButton *SaveProject;
 
     void setupUi(QMainWindow *ShaderToolMain)
     {
@@ -177,6 +179,36 @@ public:
 "background-color: rgb(76, 76, 76);\n"
 "border: 0;\n"
 "}"));
+        OpenProject = new QPushButton(centralWidget);
+        OpenProject->setObjectName(QStringLiteral("OpenProject"));
+        OpenProject->setGeometry(QRect(0, 520, 81, 31));
+        OpenProject->setStyleSheet(QLatin1String(".QPushButton\n"
+"{\n"
+"background-color: rgb(56, 56, 56);\n"
+"text-color: rgb(255, 255, 255);\n"
+"border: 0;\n"
+"color:  rgb(255, 255, 255);\n"
+"font-family: Consolas, serif;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(66, 66, 66);\n"
+"}"));
+        SaveProject = new QPushButton(centralWidget);
+        SaveProject->setObjectName(QStringLiteral("SaveProject"));
+        SaveProject->setGeometry(QRect(80, 520, 81, 31));
+        SaveProject->setStyleSheet(QLatin1String(".QPushButton\n"
+"{\n"
+"background-color: rgb(56, 56, 56);\n"
+"text-color: rgb(255, 255, 255);\n"
+"border: 0;\n"
+"color:  rgb(255, 255, 255);\n"
+"font-family: Consolas, serif;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(66, 66, 66);\n"
+"}"));
         ShaderToolMain->setCentralWidget(centralWidget);
         textBrowser_2->raise();
         textBrowser->raise();
@@ -187,6 +219,8 @@ public:
         compileButton->raise();
         addShader->raise();
         horizontalLayoutWidget->raise();
+        OpenProject->raise();
+        SaveProject->raise();
 
         retranslateUi(ShaderToolMain);
 
@@ -201,6 +235,14 @@ public:
 #endif // QT_NO_WHATSTHIS
         compileButton->setText(QApplication::translate("ShaderToolMain", "Compile", Q_NULLPTR));
         addShader->setText(QApplication::translate("ShaderToolMain", "+", Q_NULLPTR));
+#ifndef QT_NO_WHATSTHIS
+        OpenProject->setWhatsThis(QApplication::translate("ShaderToolMain", "<html><head/><body><p>Compile shader</p></body></html>", Q_NULLPTR));
+#endif // QT_NO_WHATSTHIS
+        OpenProject->setText(QApplication::translate("ShaderToolMain", "Open Project", Q_NULLPTR));
+#ifndef QT_NO_WHATSTHIS
+        SaveProject->setWhatsThis(QApplication::translate("ShaderToolMain", "<html><head/><body><p>Compile shader</p></body></html>", Q_NULLPTR));
+#endif // QT_NO_WHATSTHIS
+        SaveProject->setText(QApplication::translate("ShaderToolMain", "Save Project", Q_NULLPTR));
     } // retranslateUi
 
 };

@@ -221,6 +221,66 @@ border: 0;
 }</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="OpenProject">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>520</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Compile shader&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">.QPushButton
+{
+background-color: rgb(56, 56, 56);
+text-color: rgb(255, 255, 255);
+border: 0;
+color:  rgb(255, 255, 255);
+font-family: Consolas, serif;
+}
+
+QPushButton:hover {
+    background-color: rgb(66, 66, 66);
+}</string>
+    </property>
+    <property name="text">
+     <string>Open Project</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="SaveProject">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>520</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Compile shader&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">.QPushButton
+{
+background-color: rgb(56, 56, 56);
+text-color: rgb(255, 255, 255);
+border: 0;
+color:  rgb(255, 255, 255);
+font-family: Consolas, serif;
+}
+
+QPushButton:hover {
+    background-color: rgb(66, 66, 66);
+}</string>
+    </property>
+    <property name="text">
+     <string>Save Project</string>
+    </property>
+   </widget>
    <zorder>textBrowser_2</zorder>
    <zorder>textBrowser</zorder>
    <zorder>gridLayoutWidget</zorder>
@@ -230,6 +290,8 @@ border: 0;
    <zorder>compileButton</zorder>
    <zorder>addShader</zorder>
    <zorder>horizontalLayoutWidget</zorder>
+   <zorder>OpenProject</zorder>
+   <zorder>SaveProject</zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

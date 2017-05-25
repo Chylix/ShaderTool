@@ -47,6 +47,9 @@
     <Filter Include="Console">
       <UniqueIdentifier>{f98551fc-8e7e-4c2f-8444-b6291fc68352}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ProjectManager">
+      <UniqueIdentifier>{298c2463-096a-4c5b-97c8-ca51ad8a7143}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\Debug\moc_ShaderToolMain.cpp">
@@ -128,6 +131,18 @@
     <ClCompile Include="Console.cpp">
       <Filter>Console</Filter>
     </ClCompile>
+    <ClCompile Include="ProjectManager.cpp">
+      <Filter>ProjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ProjectManager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ProjectManager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectFileReader.cpp">
+      <Filter>ProjectManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ShaderToolMain.ui">
@@ -157,6 +172,9 @@
     <CustomBuild Include="ShaderManagerButton.h">
       <Filter>ShaderManager</Filter>
     </CustomBuild>
+    <CustomBuild Include="ProjectManager.h">
+      <Filter>ProjectManager</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_ShaderToolMain.h">
@@ -173,6 +191,12 @@
     </ClInclude>
     <ClInclude Include="Console.h">
       <Filter>Console</Filter>
+    </ClInclude>
+    <ClInclude Include="ISerializer.h">
+      <Filter>ProjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectFileReader.h">
+      <Filter>ProjectManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

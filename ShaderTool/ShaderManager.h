@@ -2,6 +2,7 @@
 #include <qstring.h>
 #include <vector>
 #include "ui_ShaderToolMain.h"
+#include "ISerializer.h"
 
 class CodeEditor;
 class CShaderManangerButton;
@@ -12,7 +13,7 @@ struct SShaderCode
 	int slot;
 };
 
-class CShaderManager : public QObject
+class CShaderManager : public QObject, public ISerializer
 {
 	Q_OBJECT
 
@@ -28,9 +29,17 @@ public:
 	void RemoveShader(size_t slot);
 	std::vector<SShaderCode>* GetShaders();
 	void AddShader(QString code = QString());
+	void AddButton();
+
+	//ISerializer
+	const char* SaveData() final;
+	void LoadData(const char* pData) final;
+	std::string buffer;
+	//~ISerializer
 
 private:
 	void ChangeActiveButton(int slot);
+	void Reset();
 
 private:
 	//This is the default shader code

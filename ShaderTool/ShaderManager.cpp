@@ -14,19 +14,8 @@ CShaderManager::~CShaderManager()
 
 void CShaderManager::OnAddShaderClick()
 {
-	QString a = QString::number(static_cast<int>(m_Shaders.size()));
-
-	CShaderManangerButton* btn1 = new CShaderManangerButton();
-	connect(btn1, SIGNAL(rightClicked()), this, SLOT(RemoveShader()));
-
-	btn1->setText("Shader_" + QString(a));
-	m_pLayout->addWidget(btn1);
 	AddShader();
-
-	m_Buttons.push_back(btn1);
-
-	int a2 = m_Shaders.size()-1;
-	btn1->Init(a2, this);
+	AddButton();
 }
 
 
@@ -110,10 +99,85 @@ void CShaderManager::AddShader(QString code)
 	m_Shaders.push_back(shader);
 }
 
+void CShaderManager::AddButton()
+{
+	QString a = QString::number(static_cast<int>(m_Shaders.size()));
+
+	CShaderManangerButton* btn1 = new CShaderManangerButton();
+	connect(btn1, SIGNAL(rightClicked()), this, SLOT(RemoveShader()));
+
+	btn1->setText("Shader_" + QString(a));
+	m_pLayout->addWidget(btn1);
+
+	m_Buttons.push_back(btn1);
+
+	int a2 = m_Shaders.size() - 1;
+	btn1->Init(a2, this);
+}
+
+const char * CShaderManager::SaveData()
+{
+	for (size_t i = 0; i < m_Shaders.size(); i++)
+	{
+		buffer.append(m_Shaders[i].code.toStdString());
+		buffer.append("\n~\n");
+	}
+
+	return buffer.c_str();
+}
+
+void CShaderManager::LoadData(const char * pData)
+{
+	Reset();
+
+	std::string data = pData;
+
+	size_t q = 0;
+	size_t iterator = 0;
+	size_t iter = 0;
+
+	while (q != std::string::npos)
+	{
+		SShaderCode shader;
+		q = data.find("~", iterator);
+
+		if (q == std::string::npos)
+			break;
+
+		if (iter == 0)
+		{
+			m_Shaders[iter].code = QString(data.substr(iterator, q - 1).c_str());
+			m_Shaders[iter].slot = m_Shaders.size();
+			m_pCodeEditorHandle->SetText(m_Shaders[0].code);
+			m_CurrentWorkingSlot = 0;
+			ChangeActiveButton(0);
+		}
+		else
+		{
+			AddShader(QString(data.substr(iterator, q - iterator - 1).c_str()));
+			AddButton();
+		}
+
+		iterator = q + 1;
+
+		iter++;
+	}
+
+
+
+
+}
+
 void CShaderManager::ChangeActiveButton(int slot)
 {
 	//change the current one to be deactive
 	m_Buttons[m_CurrentWorkingSlot]->SetAsActive(false);
 	//change the new slot to active
 	m_Buttons[slot]->SetAsActive(true);
+}
+
+void CShaderManager::Reset()
+{
+	for (int i = 0; i < m_Buttons.size(); i++)
+		RemoveShader(i);
 }
