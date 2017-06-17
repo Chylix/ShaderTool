@@ -18,7 +18,6 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
 #include "codeeditor.h"
@@ -31,30 +30,27 @@ class Ui_ShaderToolMain
 {
 public:
     QWidget *centralWidget;
-    QWidget *gridLayoutWidget;
+    QGridLayout *gridLayout;
+    CTexturePainter *resourceViewer;
     QGridLayout *viewportLayout;
     D3DRenderWidget *viewport;
-    QWidget *gridLayoutWidget_2;
     QGridLayout *codelayout;
     CodeEditor *plainTextEdit;
-    QWidget *gridLayoutWidget_3;
     QGridLayout *resourceLyout;
-    CTexturePainter *resourceViewer;
-    QTextBrowser *textBrowser;
+    QHBoxLayout *shaderLayout;
+    QPushButton *addShader;
+    QHBoxLayout *horizontalLayout;
+    QPushButton *SaveProject;
+    QPushButton *OpenProject;
+    QHBoxLayout *console;
     QTextEdit *textEdit;
     QPushButton *compileButton;
-    QPushButton *addShader;
-    QWidget *horizontalLayoutWidget;
-    QHBoxLayout *shaderLayout;
-    QTextBrowser *textBrowser_2;
-    QPushButton *OpenProject;
-    QPushButton *SaveProject;
 
     void setupUi(QMainWindow *ShaderToolMain)
     {
         if (ShaderToolMain->objectName().isEmpty())
             ShaderToolMain->setObjectName(QStringLiteral("ShaderToolMain"));
-        ShaderToolMain->resize(1058, 797);
+        ShaderToolMain->resize(1107, 795);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -64,30 +60,63 @@ public:
         ShaderToolMain->setStyleSheet(QStringLiteral(""));
         centralWidget = new QWidget(ShaderToolMain);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        gridLayoutWidget = new QWidget(centralWidget);
-        gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(0, -20, 531, 541));
-        viewportLayout = new QGridLayout(gridLayoutWidget);
+        centralWidget->setStyleSheet(QLatin1String("    QFrame::layout { margin: 0px }\n"
+"     \n"
+"    QFrame {\n"
+"    	margin-top: 0px;\n"
+"    	margin-right: 0px;\n"
+"    	margin-bottom: 0px;\n"
+"    	margin-left: 0px;\n"
+"    	spacing: 0px;\n"
+"    	padding: 0px;\n"
+"    }\n"
+"\n"
+""));
+        gridLayout = new QGridLayout(centralWidget);
+        gridLayout->setSpacing(0);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        gridLayout->setContentsMargins(0, 0, 0, 0);
+        resourceViewer = new CTexturePainter(centralWidget);
+        resourceViewer->setObjectName(QStringLiteral("resourceViewer"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(resourceViewer->sizePolicy().hasHeightForWidth());
+        resourceViewer->setSizePolicy(sizePolicy1);
+        resourceViewer->setStyleSheet(QLatin1String(".QLineEdit, .QPlainTextEdit\n"
+"{\n"
+"border: 0;\n"
+"}"));
+
+        gridLayout->addWidget(resourceViewer, 5, 1, 1, 1);
+
+        viewportLayout = new QGridLayout();
         viewportLayout->setSpacing(6);
-        viewportLayout->setContentsMargins(11, 11, 11, 11);
         viewportLayout->setObjectName(QStringLiteral("viewportLayout"));
-        viewportLayout->setContentsMargins(0, 0, 0, 0);
-        viewport = new D3DRenderWidget(gridLayoutWidget);
+        viewport = new D3DRenderWidget(centralWidget);
         viewport->setObjectName(QStringLiteral("viewport"));
         viewport->setEnabled(true);
+        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy2.setHorizontalStretch(60);
+        sizePolicy2.setVerticalStretch(60);
+        sizePolicy2.setHeightForWidth(viewport->sizePolicy().hasHeightForWidth());
+        viewport->setSizePolicy(sizePolicy2);
+        viewport->setMinimumSize(QSize(600, 600));
 
         viewportLayout->addWidget(viewport, 1, 0, 1, 1);
 
-        gridLayoutWidget_2 = new QWidget(centralWidget);
-        gridLayoutWidget_2->setObjectName(QStringLiteral("gridLayoutWidget_2"));
-        gridLayoutWidget_2->setGeometry(QRect(530, 30, 531, 461));
-        codelayout = new QGridLayout(gridLayoutWidget_2);
+
+        gridLayout->addLayout(viewportLayout, 0, 0, 5, 1);
+
+        codelayout = new QGridLayout();
         codelayout->setSpacing(6);
-        codelayout->setContentsMargins(11, 11, 11, 11);
         codelayout->setObjectName(QStringLiteral("codelayout"));
-        codelayout->setContentsMargins(0, 0, 0, 0);
-        plainTextEdit = new CodeEditor(gridLayoutWidget_2);
+        plainTextEdit = new CodeEditor(centralWidget);
         plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
+        sizePolicy1.setHeightForWidth(plainTextEdit->sizePolicy().hasHeightForWidth());
+        plainTextEdit->setSizePolicy(sizePolicy1);
+        plainTextEdit->setMinimumSize(QSize(500, 400));
         plainTextEdit->setFocusPolicy(Qt::ClickFocus);
         plainTextEdit->setStyleSheet(QLatin1String(".QLineEdit, .QPlainTextEdit\n"
 "{\n"
@@ -99,58 +128,24 @@ public:
 
         codelayout->addWidget(plainTextEdit, 0, 0, 1, 1);
 
-        gridLayoutWidget_3 = new QWidget(centralWidget);
-        gridLayoutWidget_3->setObjectName(QStringLiteral("gridLayoutWidget_3"));
-        gridLayoutWidget_3->setGeometry(QRect(530, 520, 531, 281));
-        resourceLyout = new QGridLayout(gridLayoutWidget_3);
+
+        gridLayout->addLayout(codelayout, 2, 1, 1, 2);
+
+        resourceLyout = new QGridLayout();
         resourceLyout->setSpacing(6);
-        resourceLyout->setContentsMargins(11, 11, 11, 11);
         resourceLyout->setObjectName(QStringLiteral("resourceLyout"));
-        resourceLyout->setContentsMargins(0, 0, 0, 0);
-        resourceViewer = new CTexturePainter(gridLayoutWidget_3);
-        resourceViewer->setObjectName(QStringLiteral("resourceViewer"));
-        resourceViewer->setStyleSheet(QLatin1String(".QLineEdit, .QPlainTextEdit\n"
-"{\n"
-"border: 0;\n"
-"}"));
 
-        resourceLyout->addWidget(resourceViewer, 0, 0, 1, 1);
+        gridLayout->addLayout(resourceLyout, 7, 1, 1, 2);
 
-        textBrowser = new QTextBrowser(centralWidget);
-        textBrowser->setObjectName(QStringLiteral("textBrowser"));
-        textBrowser->setGeometry(QRect(0, 520, 531, 281));
-        textBrowser->setStyleSheet(QLatin1String(".QTextBrowser\n"
-"{\n"
-"background-color: rgb(76, 76, 76);\n"
-"border: 0;\n"
-"}"));
-        textEdit = new QTextEdit(centralWidget);
-        textEdit->setObjectName(QStringLiteral("textEdit"));
-        textEdit->setGeometry(QRect(530, 490, 461, 31));
-        textEdit->setStyleSheet(QLatin1String(".QTextEdit\n"
-"{\n"
-"background-color: rgb(46, 46, 46);\n"
-"border: 0;\n"
-"}"));
-        textEdit->setReadOnly(true);
-        compileButton = new QPushButton(centralWidget);
-        compileButton->setObjectName(QStringLiteral("compileButton"));
-        compileButton->setGeometry(QRect(990, 490, 75, 31));
-        compileButton->setStyleSheet(QLatin1String(".QPushButton\n"
-"{\n"
-"background-color: rgb(56, 56, 56);\n"
-"text-color: rgb(255, 255, 255);\n"
-"border: 0;\n"
-"color:  rgb(255, 255, 255);\n"
-"font-family: Consolas, serif;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(66, 66, 66);\n"
-"}"));
+        shaderLayout = new QHBoxLayout();
+        shaderLayout->setSpacing(0);
+        shaderLayout->setObjectName(QStringLiteral("shaderLayout"));
+        shaderLayout->setSizeConstraint(QLayout::SetNoConstraint);
         addShader = new QPushButton(centralWidget);
         addShader->setObjectName(QStringLiteral("addShader"));
-        addShader->setGeometry(QRect(1040, 0, 21, 31));
+        sizePolicy.setHeightForWidth(addShader->sizePolicy().hasHeightForWidth());
+        addShader->setSizePolicy(sizePolicy);
+        addShader->setMinimumSize(QSize(40, 40));
         addShader->setStyleSheet(QLatin1String(".QPushButton\n"
 "{\n"
 "background-color: rgb(56, 56, 56);\n"
@@ -163,40 +158,19 @@ public:
 "QPushButton:hover {\n"
 "    background-color: rgb(66, 66, 66);\n"
 "}"));
-        horizontalLayoutWidget = new QWidget(centralWidget);
-        horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(530, 0, 511, 31));
-        shaderLayout = new QHBoxLayout(horizontalLayoutWidget);
-        shaderLayout->setSpacing(6);
-        shaderLayout->setContentsMargins(11, 11, 11, 11);
-        shaderLayout->setObjectName(QStringLiteral("shaderLayout"));
-        shaderLayout->setContentsMargins(0, 0, 0, 0);
-        textBrowser_2 = new QTextBrowser(centralWidget);
-        textBrowser_2->setObjectName(QStringLiteral("textBrowser_2"));
-        textBrowser_2->setGeometry(QRect(530, -130, 541, 161));
-        textBrowser_2->setStyleSheet(QLatin1String(".QTextBrowser\n"
-"{\n"
-"background-color: rgb(76, 76, 76);\n"
-"border: 0;\n"
-"}"));
-        OpenProject = new QPushButton(centralWidget);
-        OpenProject->setObjectName(QStringLiteral("OpenProject"));
-        OpenProject->setGeometry(QRect(0, 520, 81, 31));
-        OpenProject->setStyleSheet(QLatin1String(".QPushButton\n"
-"{\n"
-"background-color: rgb(56, 56, 56);\n"
-"text-color: rgb(255, 255, 255);\n"
-"border: 0;\n"
-"color:  rgb(255, 255, 255);\n"
-"font-family: Consolas, serif;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    background-color: rgb(66, 66, 66);\n"
-"}"));
+
+        shaderLayout->addWidget(addShader, 0, Qt::AlignRight);
+
+
+        gridLayout->addLayout(shaderLayout, 0, 1, 1, 2);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(0);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         SaveProject = new QPushButton(centralWidget);
         SaveProject->setObjectName(QStringLiteral("SaveProject"));
-        SaveProject->setGeometry(QRect(80, 520, 81, 31));
+        sizePolicy1.setHeightForWidth(SaveProject->sizePolicy().hasHeightForWidth());
+        SaveProject->setSizePolicy(sizePolicy1);
         SaveProject->setStyleSheet(QLatin1String(".QPushButton\n"
 "{\n"
 "background-color: rgb(56, 56, 56);\n"
@@ -209,18 +183,77 @@ public:
 "QPushButton:hover {\n"
 "    background-color: rgb(66, 66, 66);\n"
 "}"));
+
+        horizontalLayout->addWidget(SaveProject);
+
+        OpenProject = new QPushButton(centralWidget);
+        OpenProject->setObjectName(QStringLiteral("OpenProject"));
+        sizePolicy1.setHeightForWidth(OpenProject->sizePolicy().hasHeightForWidth());
+        OpenProject->setSizePolicy(sizePolicy1);
+        OpenProject->setStyleSheet(QLatin1String(".QPushButton\n"
+"{\n"
+"background-color: rgb(56, 56, 56);\n"
+"text-color: rgb(255, 255, 255);\n"
+"border: 0;\n"
+"color:  rgb(255, 255, 255);\n"
+"font-family: Consolas, serif;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(66, 66, 66);\n"
+"}"));
+
+        horizontalLayout->addWidget(OpenProject);
+
+
+        gridLayout->addLayout(horizontalLayout, 5, 0, 1, 1);
+
+        console = new QHBoxLayout();
+        console->setSpacing(0);
+        console->setObjectName(QStringLiteral("console"));
+        textEdit = new QTextEdit(centralWidget);
+        textEdit->setObjectName(QStringLiteral("textEdit"));
+        textEdit->setEnabled(true);
+        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(textEdit->sizePolicy().hasHeightForWidth());
+        textEdit->setSizePolicy(sizePolicy3);
+        textEdit->setMinimumSize(QSize(0, 0));
+        textEdit->setMaximumSize(QSize(16777215, 40));
+        textEdit->setStyleSheet(QLatin1String(".QTextEdit\n"
+"{\n"
+"background-color: rgb(46, 46, 46);\n"
+"border: 0;\n"
+"}"));
+        textEdit->setReadOnly(true);
+
+        console->addWidget(textEdit);
+
+        compileButton = new QPushButton(centralWidget);
+        compileButton->setObjectName(QStringLiteral("compileButton"));
+        sizePolicy.setHeightForWidth(compileButton->sizePolicy().hasHeightForWidth());
+        compileButton->setSizePolicy(sizePolicy);
+        compileButton->setMinimumSize(QSize(55, 40));
+        compileButton->setStyleSheet(QLatin1String(".QPushButton\n"
+"{\n"
+"background-color: rgb(56, 56, 56);\n"
+"text-color: rgb(255, 255, 255);\n"
+"border: 0;\n"
+"color:  rgb(255, 255, 255);\n"
+"font-family: Consolas, serif;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(66, 66, 66);\n"
+"}"));
+
+        console->addWidget(compileButton);
+
+
+        gridLayout->addLayout(console, 3, 1, 1, 1);
+
         ShaderToolMain->setCentralWidget(centralWidget);
-        textBrowser_2->raise();
-        textBrowser->raise();
-        gridLayoutWidget->raise();
-        gridLayoutWidget_2->raise();
-        gridLayoutWidget_3->raise();
-        textEdit->raise();
-        compileButton->raise();
-        addShader->raise();
-        horizontalLayoutWidget->raise();
-        OpenProject->raise();
-        SaveProject->raise();
 
         retranslateUi(ShaderToolMain);
 
@@ -230,19 +263,13 @@ public:
     void retranslateUi(QMainWindow *ShaderToolMain)
     {
         ShaderToolMain->setWindowTitle(QApplication::translate("ShaderToolMain", "CShaderToolMain", Q_NULLPTR));
+        addShader->setText(QApplication::translate("ShaderToolMain", "+", Q_NULLPTR));
+        SaveProject->setText(QApplication::translate("ShaderToolMain", "Save Project", Q_NULLPTR));
+        OpenProject->setText(QApplication::translate("ShaderToolMain", "Open Project", Q_NULLPTR));
 #ifndef QT_NO_WHATSTHIS
         compileButton->setWhatsThis(QApplication::translate("ShaderToolMain", "<html><head/><body><p>Compile shader</p></body></html>", Q_NULLPTR));
 #endif // QT_NO_WHATSTHIS
         compileButton->setText(QApplication::translate("ShaderToolMain", "Compile", Q_NULLPTR));
-        addShader->setText(QApplication::translate("ShaderToolMain", "+", Q_NULLPTR));
-#ifndef QT_NO_WHATSTHIS
-        OpenProject->setWhatsThis(QApplication::translate("ShaderToolMain", "<html><head/><body><p>Compile shader</p></body></html>", Q_NULLPTR));
-#endif // QT_NO_WHATSTHIS
-        OpenProject->setText(QApplication::translate("ShaderToolMain", "Open Project", Q_NULLPTR));
-#ifndef QT_NO_WHATSTHIS
-        SaveProject->setWhatsThis(QApplication::translate("ShaderToolMain", "<html><head/><body><p>Compile shader</p></body></html>", Q_NULLPTR));
-#endif // QT_NO_WHATSTHIS
-        SaveProject->setText(QApplication::translate("ShaderToolMain", "Save Project", Q_NULLPTR));
     } // retranslateUi
 
 };

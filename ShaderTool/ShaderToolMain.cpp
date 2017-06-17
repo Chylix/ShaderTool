@@ -14,6 +14,9 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 {
 	m_MainUi.setupUi(this);
 
+	m_MainUi.centralWidget->layout()->setSpacing(0);
+	m_MainUi.centralWidget->layout()->setMargin(0);
+
 	setWindowTitle(m_WindowName);
 
 	SetupCodeEditor();

@@ -16,7 +16,7 @@ class CShaderToolMain : public QMainWindow
 
 public:
 	CShaderToolMain(QWidget *parent = Q_NULLPTR);
-	const QString m_WindowName = "ShaderTool";
+	const QString m_WindowName = "bauWerk";
 
 protected:
 

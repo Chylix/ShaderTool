@@ -50,6 +50,9 @@
     <Filter Include="ProjectManager">
       <UniqueIdentifier>{298c2463-096a-4c5b-97c8-ca51ad8a7143}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SceneManager">
+      <UniqueIdentifier>{3e9a308a-2c52-4ad0-9aa4-8716dd93745e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\Debug\moc_ShaderToolMain.cpp">
@@ -143,6 +146,18 @@
     <ClCompile Include="ProjectFileReader.cpp">
       <Filter>ProjectManager</Filter>
     </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneButton.cpp">
+      <Filter>SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SceneButton.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SceneButton.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ShaderToolMain.ui">
@@ -175,6 +190,9 @@
     <CustomBuild Include="ProjectManager.h">
       <Filter>ProjectManager</Filter>
     </CustomBuild>
+    <CustomBuild Include="SceneButton.h">
+      <Filter>SceneManager</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_ShaderToolMain.h">
@@ -197,6 +215,9 @@
     </ClInclude>
     <ClInclude Include="ProjectFileReader.h">
       <Filter>ProjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>SceneManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

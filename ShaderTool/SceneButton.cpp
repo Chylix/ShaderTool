@@ -1,7 +1,6 @@
-#include "ShaderManagerButton.h"
-#include "ShaderManager.h"
+#include "SceneButton.h"
 
-void CShaderManangerButton::mousePressEvent(QMouseEvent *e)
+void CSceneButton::mousePressEvent(QMouseEvent *e)
 {
 	if (e->button() == Qt::RightButton)
 		Remove();
@@ -9,13 +8,11 @@ void CShaderManangerButton::mousePressEvent(QMouseEvent *e)
 		Change();
 }
 
-void CShaderManangerButton::Init(const size_t shaderSlot, CShaderManager* pParent)
+void CSceneButton::Init(const size_t shaderSlot, CSceneManager* pParent)
 {
 	m_Slot = shaderSlot;
 	m_pParent = pParent;
 
-	//Set the qt attributes
-	this->setMaximumHeight(m_MaximumButtonSize);
 	this->setCursor(Qt::ArrowCursor);
 	this->setAlignment(Qt::AlignHCenter);
 	this->setStyleSheet(
@@ -34,12 +31,12 @@ void CShaderManangerButton::Init(const size_t shaderSlot, CShaderManager* pParen
 	this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 
-void CShaderManangerButton::UpdateSlot(size_t newSlot)
+void CSceneButton::UpdateSlot(size_t newSlot)
 {
 	m_Slot = newSlot;
 }
 
-void CShaderManangerButton::SetAsActive(bool state)
+void CSceneButton::SetAsActive(bool state)
 {
 	if (!
 		state)
@@ -78,12 +75,12 @@ void CShaderManangerButton::SetAsActive(bool state)
 
 }
 
-void CShaderManangerButton::Remove()
+void CSceneButton::Remove()
 {
-	m_pParent->RemoveShader(m_Slot);
+	//m_pParent->RemoveShader(m_Slot);
 }
 
-void CShaderManangerButton::Change()
+void CSceneButton::Change()
 {
-	m_pParent->ChangeActiveEditorShaderTo(m_Slot);
+	//m_pParent->ChangeActiveEditorShaderTo(m_Slot);
 }

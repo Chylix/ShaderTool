@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1058</width>
-    <height>797</height>
+    <width>1107</width>
+    <height>795</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,130 +26,277 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="gridLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>-20</y>
-      <width>531</width>
-      <height>541</height>
-     </rect>
+   <property name="styleSheet">
+    <string notr="true">    QFrame::layout { margin: 0px }
+     
+    QFrame {
+    	margin-top: 0px;
+    	margin-right: 0px;
+    	margin-bottom: 0px;
+    	margin-left: 0px;
+    	spacing: 0px;
+    	padding: 0px;
+    }
+
+</string>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>0</number>
     </property>
-    <layout class="QGridLayout" name="viewportLayout">
-     <item row="1" column="0">
-      <widget class="D3DRenderWidget" name="viewport" native="true">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="gridLayoutWidget_2">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>30</y>
-      <width>531</width>
-      <height>461</height>
-     </rect>
+    <property name="topMargin">
+     <number>0</number>
     </property>
-    <layout class="QGridLayout" name="codelayout">
-     <item row="0" column="0">
-      <widget class="CodeEditor" name="plainTextEdit">
-       <property name="focusPolicy">
-        <enum>Qt::ClickFocus</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">.QLineEdit, .QPlainTextEdit
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <item row="5" column="1">
+     <widget class="CTexturePainter" name="resourceViewer" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">.QLineEdit, .QPlainTextEdit
+{
+border: 0;
+}</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" rowspan="5">
+     <layout class="QGridLayout" name="viewportLayout">
+      <item row="1" column="0">
+       <widget class="D3DRenderWidget" name="viewport" native="true">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>60</horstretch>
+          <verstretch>60</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>600</width>
+          <height>600</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="1" colspan="2">
+     <layout class="QGridLayout" name="codelayout">
+      <item row="0" column="0">
+       <widget class="CodeEditor" name="plainTextEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>500</width>
+          <height>400</height>
+         </size>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::ClickFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">.QLineEdit, .QPlainTextEdit
 {
 background-color: rgb(76, 76, 76);
 border: 0;
 }</string>
-       </property>
-       <property name="tabChangesFocus">
-        <bool>false</bool>
-       </property>
-       <property name="tabStopWidth">
-        <number>20</number>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="gridLayoutWidget_3">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>520</y>
-      <width>531</width>
-      <height>281</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="resourceLyout">
-     <item row="0" column="0">
-      <widget class="CTexturePainter" name="resourceViewer" native="true">
-       <property name="styleSheet">
-        <string notr="true">.QLineEdit, .QPlainTextEdit
+        </property>
+        <property name="tabChangesFocus">
+         <bool>false</bool>
+        </property>
+        <property name="tabStopWidth">
+         <number>20</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="7" column="1" colspan="2">
+     <layout class="QGridLayout" name="resourceLyout"/>
+    </item>
+    <item row="0" column="1" colspan="2">
+     <layout class="QHBoxLayout" name="shaderLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetNoConstraint</enum>
+      </property>
+      <item alignment="Qt::AlignRight">
+       <widget class="QPushButton" name="addShader">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">.QPushButton
 {
+background-color: rgb(56, 56, 56);
+text-color: rgb(255, 255, 255);
 border: 0;
+color:  rgb(255, 255, 255);
+font-family: Consolas, serif;
+}
+
+QPushButton:hover {
+    background-color: rgb(66, 66, 66);
 }</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QTextBrowser" name="textBrowser">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>520</y>
-      <width>531</width>
-      <height>281</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">.QTextBrowser
+        </property>
+        <property name="text">
+         <string>+</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="5" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QPushButton" name="SaveProject">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">.QPushButton
 {
-background-color: rgb(76, 76, 76);
+background-color: rgb(56, 56, 56);
+text-color: rgb(255, 255, 255);
 border: 0;
+color:  rgb(255, 255, 255);
+font-family: Consolas, serif;
+}
+
+QPushButton:hover {
+    background-color: rgb(66, 66, 66);
 }</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>490</y>
-      <width>461</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">.QTextEdit
+        </property>
+        <property name="text">
+         <string>Save Project</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="OpenProject">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">.QPushButton
+{
+background-color: rgb(56, 56, 56);
+text-color: rgb(255, 255, 255);
+border: 0;
+color:  rgb(255, 255, 255);
+font-family: Consolas, serif;
+}
+
+QPushButton:hover {
+    background-color: rgb(66, 66, 66);
+}</string>
+        </property>
+        <property name="text">
+         <string>Open Project</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="3" column="1">
+     <layout class="QHBoxLayout" name="console">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QTextEdit" name="textEdit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">.QTextEdit
 {
 background-color: rgb(46, 46, 46);
 border: 0;
 }</string>
-    </property>
-    <property name="readOnly">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="compileButton">
-    <property name="geometry">
-     <rect>
-      <x>990</x>
-      <y>490</y>
-      <width>75</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="whatsThis">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Compile shader&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">.QPushButton
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="compileButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>55</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="whatsThis">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Compile shader&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">.QPushButton
 {
 background-color: rgb(56, 56, 56);
 text-color: rgb(255, 255, 255);
@@ -161,137 +308,15 @@ font-family: Consolas, serif;
 QPushButton:hover {
     background-color: rgb(66, 66, 66);
 }</string>
-    </property>
-    <property name="text">
-     <string>Compile</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="addShader">
-    <property name="geometry">
-     <rect>
-      <x>1040</x>
-      <y>0</y>
-      <width>21</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">.QPushButton
-{
-background-color: rgb(56, 56, 56);
-text-color: rgb(255, 255, 255);
-border: 0;
-color:  rgb(255, 255, 255);
-font-family: Consolas, serif;
-}
-
-QPushButton:hover {
-    background-color: rgb(66, 66, 66);
-}</string>
-    </property>
-    <property name="text">
-     <string>+</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>0</y>
-      <width>511</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="shaderLayout"/>
-   </widget>
-   <widget class="QTextBrowser" name="textBrowser_2">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>-130</y>
-      <width>541</width>
-      <height>161</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">.QTextBrowser
-{
-background-color: rgb(76, 76, 76);
-border: 0;
-}</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="OpenProject">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>520</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="whatsThis">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Compile shader&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">.QPushButton
-{
-background-color: rgb(56, 56, 56);
-text-color: rgb(255, 255, 255);
-border: 0;
-color:  rgb(255, 255, 255);
-font-family: Consolas, serif;
-}
-
-QPushButton:hover {
-    background-color: rgb(66, 66, 66);
-}</string>
-    </property>
-    <property name="text">
-     <string>Open Project</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="SaveProject">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>520</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="whatsThis">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Compile shader&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">.QPushButton
-{
-background-color: rgb(56, 56, 56);
-text-color: rgb(255, 255, 255);
-border: 0;
-color:  rgb(255, 255, 255);
-font-family: Consolas, serif;
-}
-
-QPushButton:hover {
-    background-color: rgb(66, 66, 66);
-}</string>
-    </property>
-    <property name="text">
-     <string>Save Project</string>
-    </property>
-   </widget>
-   <zorder>textBrowser_2</zorder>
-   <zorder>textBrowser</zorder>
-   <zorder>gridLayoutWidget</zorder>
-   <zorder>gridLayoutWidget_2</zorder>
-   <zorder>gridLayoutWidget_3</zorder>
-   <zorder>textEdit</zorder>
-   <zorder>compileButton</zorder>
-   <zorder>addShader</zorder>
-   <zorder>horizontalLayoutWidget</zorder>
-   <zorder>OpenProject</zorder>
-   <zorder>SaveProject</zorder>
+        </property>
+        <property name="text">
+         <string>Compile</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
