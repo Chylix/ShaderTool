@@ -5,17 +5,10 @@
 #include <qshortcut.h>
 #include <qguiapplication.h>
 #include <qscreen.h>
-
-void D3DRenderWidget::ForceResize()
-{
-	//temp workaround 
-	auto size = this->size();
-	size.setHeight(size.height() + 1);
-	size.setWidth(size.width() + 1);
-	this->resize(size);
-}
+#include <qlayout.h>
 
 D3DRenderWidget::D3DRenderWidget(QWidget* parent)
+	: m_pLayout(nullptr)
 {
 	triebWerk::SEngineConfiguration config;
 
@@ -59,15 +52,15 @@ void D3DRenderWidget::ChangeFullscreen()
 	if (m_InFullscreen == true)
 	{
 		m_InFullscreen = false;
-		this->setParent(m_pParent);
+		this->m_pLayout->addWidget(this);
 		this->resize(m_Size);
 		this->showNormal();
 		this->unsetCursor();
+
 	}
 	else
 	{
 		m_InFullscreen = true;
-		m_pParent = this->parentWidget();
 		m_Size = this->size();
 		this->setParent(0);
 		this->showFullScreen();

@@ -19,6 +19,8 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 
 	setWindowTitle(m_WindowName);
 
+	auto a = m_MainUi.viewportLayout;
+
 	SetupCodeEditor();
 
 	m_pDefaultScene = new CDefaultScene();
@@ -33,6 +35,10 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 	CConsole::Instance().Initialize(m_MainUi.textEdit);
 	m_ProjectManager.Initialize(m_MainUi.OpenProject, m_MainUi.SaveProject);
 	
+	m_SceneManager.Initialize(&m_MainUi);
+
+	m_MainUi.viewport->SetViewLayout(m_MainUi.viewportLayout);
+
 	//What ever this needs to be moved
 	m_ProjectManager.RegisterSerializer(&m_ShaderManager, "3BBA1716-3F89-49F1-B23D-724039F3A9C8");
 }
@@ -53,8 +59,6 @@ void CShaderToolMain::SetupCodeEditor()
 
 void CShaderToolMain::OnCompileClicked()
 {
-	m_MainUi.viewport->ForceResize();
-
 	std::vector<SShaderCode>* shaders = m_ShaderManager.GetShaders();
 
 	std::vector<triebWerk::CMaterial*> materials;

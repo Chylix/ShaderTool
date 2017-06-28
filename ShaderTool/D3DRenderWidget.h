@@ -7,12 +7,13 @@ class D3DRenderWidget : public QWidget {
 
 public slots:
 	void ChangeFullscreen();
-	void ForceResize();
 
 public:
 	D3DRenderWidget(QWidget* parent = NULL);
 	virtual ~D3DRenderWidget();
 	virtual QPaintEngine* paintEngine() const { return NULL; }
+
+	void SetViewLayout(QLayout* pLayout) { m_pLayout = pLayout; }
 
 protected:
 	virtual void resizeEvent(QResizeEvent* evt);
@@ -20,7 +21,7 @@ protected:
 	virtual void focusOutEvent(QFocusEvent* event);
 private:
 	bool m_InFullscreen;
-	QWidget* m_pParent;
+	QLayout* m_pLayout;
 	QSize m_Size;
 
 };

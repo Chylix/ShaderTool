@@ -6,6 +6,7 @@
 #include <CEngine.h>
 #include "ShaderCreator.h"
 #include "ProjectManager.h"
+#include "SceneManager.h"
 
 class CSyntaxHighlighter;
 class CodeEditor;
@@ -31,6 +32,7 @@ private:
 	CDefaultScene* m_pDefaultScene;
 	CShaderCreator m_ShaderCreator;
 	CShaderManager m_ShaderManager;
+	CSceneManager m_SceneManager;
 	CProjectManager m_ProjectManager;
 
 private:
