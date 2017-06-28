@@ -5,8 +5,10 @@ CSyntaxHighlighter::CSyntaxHighlighter(QTextDocument* parent)
 {
 	HighlightingRule rule;
 
-	keywordFormat.setForeground(Qt::darkYellow);
-	//keywordFormat.setFontWeight(QFont::Bold);
+	auto e1 = QColor(144, 120, 51);
+
+	keywordFormat.setForeground(e1);
+	keywordFormat.setFontWeight(QFont::Bold);
 	QStringList keywordPatterns;
 	keywordPatterns
 		// ------Types------
@@ -89,8 +91,10 @@ CSyntaxHighlighter::CSyntaxHighlighter(QTextDocument* parent)
 	rule.format = quotationFormat;
 	highlightingRules.append(rule);
 
+	auto e = QColor(108, 153, 187);
+
 	functionFormat.setFontItalic(true);
-	functionFormat.setForeground(Qt::darkCyan);
+	functionFormat.setForeground(e);
 	rule.pattern = QRegExp("\\b[A-Za-z0-9_]+(?=\\()");
 	rule.format = functionFormat;
 	highlightingRules.append(rule);

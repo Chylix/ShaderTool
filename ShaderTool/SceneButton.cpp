@@ -13,18 +13,19 @@ void CSceneButton::Init(const size_t shaderSlot, CSceneManager* pParent)
 	m_Slot = shaderSlot;
 	m_pParent = pParent;
 
+	this->setMaximumHeight(40);
 	this->setCursor(Qt::ArrowCursor);
 	this->setAlignment(Qt::AlignHCenter);
 	this->setStyleSheet(
-		".CShaderManangerButton\n"
+		".CSceneButton\n"
 		"{\n"
 		"background-color: rgb(56, 56, 56);\n"
 		"text-color: rgb(255, 255, 255);\n"
 		"border: 0;\n"
 		"color:  rgb(255, 255, 255);\n"
-		"font-family: Consolas, serif;\n"
+		"font-family: Courier, serif;\n"
 		"}\n"
-		"CShaderManangerButton:hover {\n"
+		"CSceneButton:hover {\n"
 		"    background-color: rgb(66, 66, 66);\n"
 		"}"
 	);
@@ -42,15 +43,15 @@ void CSceneButton::SetAsActive(bool state)
 		state)
 	{
 		this->setStyleSheet(
-			".CShaderManangerButton\n"
+			".CSceneButton\n"
 			"{\n"
 			"background-color: rgb(56, 56, 56);\n"
 			"text-color: rgb(255, 255, 255);\n"
 			"border: 0;\n"
 			"color:  rgb(255, 255, 255);\n"
-			"font-family: Consolas, serif;\n"
+			"font-family: Courier, serif;\n"
 			"}\n"
-			"CShaderManangerButton:hover {\n"
+			"CSceneButton:hover {\n"
 			"    background-color: rgb(66, 66, 66);\n"
 			"}"
 		);
@@ -58,15 +59,15 @@ void CSceneButton::SetAsActive(bool state)
 	else
 	{
 		this->setStyleSheet(
-			".CShaderManangerButton\n"
+			".CSceneButton\n"
 			"{\n"
 			"background-color: rgb(76, 76, 76);\n"
 			"text-color: rgb(255, 255, 255);\n"
 			"border: 0;\n"
 			"color:  rgb(255, 255, 255);\n"
-			"font-family: Consolas, serif;\n"
+			"font-family: Courier, serif;\n"
 			"}\n"
-			"CShaderManangerButton:hover {\n"
+			"CSceneButton:hover {\n"
 			"    background-color: rgb(66, 66, 66);\n"
 			"}"
 		);

@@ -19,6 +19,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTextEdit>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "codeeditor.h"
 #include "ctexturepainter.h"
@@ -39,7 +40,10 @@ public:
     QGridLayout *resourceLyout;
     QHBoxLayout *shaderLayout;
     QPushButton *addShader;
-    QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *scene;
+    QPushButton *addScene;
+    QHBoxLayout *project;
     QPushButton *SaveProject;
     QPushButton *OpenProject;
     QHBoxLayout *console;
@@ -50,7 +54,7 @@ public:
     {
         if (ShaderToolMain->objectName().isEmpty())
             ShaderToolMain->setObjectName(QStringLiteral("ShaderToolMain"));
-        ShaderToolMain->resize(1107, 795);
+        ShaderToolMain->resize(1107, 811);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -92,12 +96,13 @@ public:
         gridLayout->addWidget(resourceViewer, 5, 1, 1, 1);
 
         viewportLayout = new QGridLayout();
-        viewportLayout->setSpacing(6);
+        viewportLayout->setSpacing(0);
         viewportLayout->setObjectName(QStringLiteral("viewportLayout"));
+        viewportLayout->setSizeConstraint(QLayout::SetFixedSize);
         viewport = new D3DRenderWidget(centralWidget);
         viewport->setObjectName(QStringLiteral("viewport"));
         viewport->setEnabled(true);
-        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy2.setHorizontalStretch(60);
         sizePolicy2.setVerticalStretch(60);
         sizePolicy2.setHeightForWidth(viewport->sizePolicy().hasHeightForWidth());
@@ -112,6 +117,7 @@ public:
         codelayout = new QGridLayout();
         codelayout->setSpacing(6);
         codelayout->setObjectName(QStringLiteral("codelayout"));
+        codelayout->setSizeConstraint(QLayout::SetDefaultConstraint);
         plainTextEdit = new CodeEditor(centralWidget);
         plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
         sizePolicy1.setHeightForWidth(plainTextEdit->sizePolicy().hasHeightForWidth());
@@ -146,13 +152,16 @@ public:
         sizePolicy.setHeightForWidth(addShader->sizePolicy().hasHeightForWidth());
         addShader->setSizePolicy(sizePolicy);
         addShader->setMinimumSize(QSize(40, 40));
+        QFont font;
+        font.setFamily(QStringLiteral("Courier,serif"));
+        addShader->setFont(font);
         addShader->setStyleSheet(QLatin1String(".QPushButton\n"
 "{\n"
 "background-color: rgb(56, 56, 56);\n"
 "text-color: rgb(255, 255, 255);\n"
 "border: 0;\n"
 "color:  rgb(255, 255, 255);\n"
-"font-family: Consolas, serif;\n"
+"font-family: Courier, serif;\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
@@ -164,9 +173,38 @@ public:
 
         gridLayout->addLayout(shaderLayout, 0, 1, 1, 2);
 
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(0);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(0);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        scene = new QHBoxLayout();
+        scene->setSpacing(0);
+        scene->setObjectName(QStringLiteral("scene"));
+        addScene = new QPushButton(centralWidget);
+        addScene->setObjectName(QStringLiteral("addScene"));
+        sizePolicy.setHeightForWidth(addScene->sizePolicy().hasHeightForWidth());
+        addScene->setSizePolicy(sizePolicy);
+        addScene->setMinimumSize(QSize(40, 40));
+        addScene->setStyleSheet(QLatin1String(".QPushButton\n"
+"{\n"
+"background-color: rgb(56, 56, 56);\n"
+"text-color: rgb(255, 255, 255);\n"
+"border: 0;\n"
+"color:  rgb(255, 255, 255);\n"
+"font-family: Courier, serif;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background-color: rgb(66, 66, 66);\n"
+"}"));
+
+        scene->addWidget(addScene);
+
+
+        verticalLayout->addLayout(scene);
+
+        project = new QHBoxLayout();
+        project->setSpacing(0);
+        project->setObjectName(QStringLiteral("project"));
         SaveProject = new QPushButton(centralWidget);
         SaveProject->setObjectName(QStringLiteral("SaveProject"));
         sizePolicy1.setHeightForWidth(SaveProject->sizePolicy().hasHeightForWidth());
@@ -177,14 +215,14 @@ public:
 "text-color: rgb(255, 255, 255);\n"
 "border: 0;\n"
 "color:  rgb(255, 255, 255);\n"
-"font-family: Consolas, serif;\n"
+"font-family: Courier, serif;\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
 "    background-color: rgb(66, 66, 66);\n"
 "}"));
 
-        horizontalLayout->addWidget(SaveProject);
+        project->addWidget(SaveProject);
 
         OpenProject = new QPushButton(centralWidget);
         OpenProject->setObjectName(QStringLiteral("OpenProject"));
@@ -196,17 +234,20 @@ public:
 "text-color: rgb(255, 255, 255);\n"
 "border: 0;\n"
 "color:  rgb(255, 255, 255);\n"
-"font-family: Consolas, serif;\n"
+"font-family: Courier, serif;\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
 "    background-color: rgb(66, 66, 66);\n"
 "}"));
 
-        horizontalLayout->addWidget(OpenProject);
+        project->addWidget(OpenProject);
 
 
-        gridLayout->addLayout(horizontalLayout, 5, 0, 1, 1);
+        verticalLayout->addLayout(project);
+
+
+        gridLayout->addLayout(verticalLayout, 5, 0, 1, 1);
 
         console = new QHBoxLayout();
         console->setSpacing(0);
@@ -235,13 +276,14 @@ public:
         sizePolicy.setHeightForWidth(compileButton->sizePolicy().hasHeightForWidth());
         compileButton->setSizePolicy(sizePolicy);
         compileButton->setMinimumSize(QSize(55, 40));
+        compileButton->setFont(font);
         compileButton->setStyleSheet(QLatin1String(".QPushButton\n"
 "{\n"
 "background-color: rgb(56, 56, 56);\n"
 "text-color: rgb(255, 255, 255);\n"
 "border: 0;\n"
 "color:  rgb(255, 255, 255);\n"
-"font-family: Consolas, serif;\n"
+"font-family: Courier, serif;\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
@@ -264,6 +306,7 @@ public:
     {
         ShaderToolMain->setWindowTitle(QApplication::translate("ShaderToolMain", "CShaderToolMain", Q_NULLPTR));
         addShader->setText(QApplication::translate("ShaderToolMain", "+", Q_NULLPTR));
+        addScene->setText(QApplication::translate("ShaderToolMain", "+", Q_NULLPTR));
         SaveProject->setText(QApplication::translate("ShaderToolMain", "Save Project", Q_NULLPTR));
         OpenProject->setText(QApplication::translate("ShaderToolMain", "Open Project", Q_NULLPTR));
 #ifndef QT_NO_WHATSTHIS

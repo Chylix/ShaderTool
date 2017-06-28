@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1107</width>
-    <height>795</height>
+    <height>811</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -74,13 +74,19 @@ border: 0;
     </item>
     <item row="0" column="0" rowspan="5">
      <layout class="QGridLayout" name="viewportLayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetFixedSize</enum>
+      </property>
+      <property name="spacing">
+       <number>0</number>
+      </property>
       <item row="1" column="0">
        <widget class="D3DRenderWidget" name="viewport" native="true">
         <property name="enabled">
          <bool>true</bool>
         </property>
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
           <horstretch>60</horstretch>
           <verstretch>60</verstretch>
          </sizepolicy>
@@ -97,6 +103,9 @@ border: 0;
     </item>
     <item row="2" column="1" colspan="2">
      <layout class="QGridLayout" name="codelayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
       <item row="0" column="0">
        <widget class="CodeEditor" name="plainTextEdit">
         <property name="sizePolicy">
@@ -156,6 +165,11 @@ border: 0;
           <height>40</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Courier,serif</family>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">.QPushButton
 {
@@ -163,7 +177,7 @@ background-color: rgb(56, 56, 56);
 text-color: rgb(255, 255, 255);
 border: 0;
 color:  rgb(255, 255, 255);
-font-family: Consolas, serif;
+font-family: Courier, serif;
 }
 
 QPushButton:hover {
@@ -178,63 +192,110 @@ QPushButton:hover {
      </layout>
     </item>
     <item row="5" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout">
       <property name="spacing">
        <number>0</number>
       </property>
       <item>
-       <widget class="QPushButton" name="SaveProject">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+       <layout class="QHBoxLayout" name="scene">
+        <property name="spacing">
+         <number>0</number>
         </property>
-        <property name="styleSheet">
-         <string notr="true">.QPushButton
+        <item>
+         <widget class="QPushButton" name="addScene">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>40</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">.QPushButton
 {
 background-color: rgb(56, 56, 56);
 text-color: rgb(255, 255, 255);
 border: 0;
 color:  rgb(255, 255, 255);
-font-family: Consolas, serif;
+font-family: Courier, serif;
 }
 
 QPushButton:hover {
     background-color: rgb(66, 66, 66);
 }</string>
-        </property>
-        <property name="text">
-         <string>Save Project</string>
-        </property>
-       </widget>
+          </property>
+          <property name="text">
+           <string>+</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="OpenProject">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+       <layout class="QHBoxLayout" name="project">
+        <property name="spacing">
+         <number>0</number>
         </property>
-        <property name="styleSheet">
-         <string notr="true">.QPushButton
+        <item>
+         <widget class="QPushButton" name="SaveProject">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">.QPushButton
 {
 background-color: rgb(56, 56, 56);
 text-color: rgb(255, 255, 255);
 border: 0;
 color:  rgb(255, 255, 255);
-font-family: Consolas, serif;
+font-family: Courier, serif;
 }
 
 QPushButton:hover {
     background-color: rgb(66, 66, 66);
 }</string>
-        </property>
-        <property name="text">
-         <string>Open Project</string>
-        </property>
-       </widget>
+          </property>
+          <property name="text">
+           <string>Save Project</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="OpenProject">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">.QPushButton
+{
+background-color: rgb(56, 56, 56);
+text-color: rgb(255, 255, 255);
+border: 0;
+color:  rgb(255, 255, 255);
+font-family: Courier, serif;
+}
+
+QPushButton:hover {
+    background-color: rgb(66, 66, 66);
+}</string>
+          </property>
+          <property name="text">
+           <string>Open Project</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>
@@ -292,6 +353,11 @@ border: 0;
           <height>40</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Courier,serif</family>
+         </font>
+        </property>
         <property name="whatsThis">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Compile shader&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
@@ -302,7 +368,7 @@ background-color: rgb(56, 56, 56);
 text-color: rgb(255, 255, 255);
 border: 0;
 color:  rgb(255, 255, 255);
-font-family: Consolas, serif;
+font-family: Courier, serif;
 }
 
 QPushButton:hover {

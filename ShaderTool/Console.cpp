@@ -22,7 +22,7 @@ void CConsole::Initialize(QTextEdit * widget)
 
 	//TODO: move this to the editor
 	QFont font;
-	font.setFamily("Consolas");
+	font.setFamily("Courier");
 	font.setFixedPitch(true);
 	font.setPointSize(10);
 
@@ -49,3 +49,4 @@ void CConsole::PrintText(const char * pText, EPrintType type)
 
 	m_pConsoleWidget->setText(pText);
 }
+ 

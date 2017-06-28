@@ -16,7 +16,7 @@ CodeEditor::CodeEditor(QWidget *parent)
 
 	const int tabStop = 2;  // 4 characters
 
-	m_Font.setFamily("Consolas");
+	m_Font.setFamily("Courier");
 	m_Font.setFixedPitch(true);
 	m_Font.setPointSize(9);
 	this->setFont(m_Font);
