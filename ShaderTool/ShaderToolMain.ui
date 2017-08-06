@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1107</width>
-    <height>811</height>
+    <width>1376</width>
+    <height>754</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -56,153 +56,317 @@
     <property name="spacing">
      <number>0</number>
     </property>
-    <item row="5" column="1">
-     <widget class="CTexturePainter" name="resourceViewer" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
+    <item row="0" column="0">
+     <widget class="QSplitter" name="splitter_8">
       <property name="styleSheet">
-       <string notr="true">.QLineEdit, .QPlainTextEdit
-{
-border: 0;
+       <string notr="true">QSplitter::handle {
+    background: rgb(56, 56, 56);
 }</string>
       </property>
-     </widget>
-    </item>
-    <item row="0" column="0" rowspan="5">
-     <layout class="QGridLayout" name="viewportLayout">
-      <property name="sizeConstraint">
-       <enum>QLayout::SetFixedSize</enum>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
-      <property name="spacing">
-       <number>0</number>
+      <property name="handleWidth">
+       <number>1</number>
       </property>
-      <item row="1" column="0">
-       <widget class="D3DRenderWidget" name="viewport" native="true">
+      <widget class="QSplitter" name="splitter">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <widget class="QWidget" name="gridLayoutWidget">
+        <layout class="QGridLayout" name="ViewportLayout">
+         <item row="0" column="0">
+          <widget class="D3DRenderWidget" name="Viewport" native="true"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QSplitter" name="splitter_6">
+        <property name="styleSheet">
+         <string notr="true">QSplitter::handle {
+    background: rgb(56, 56, 56);
+}</string>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <widget class="QWidget" name="horizontalLayoutWidget_2">
+         <layout class="QHBoxLayout" name="SceneLayout">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetMaximumSize</enum>
+          </property>
+          <item>
+           <widget class="QPushButton" name="AddSceneButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>3020000</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">			.QPushButton
+			{
+			background-color: rgb(56, 56, 56);
+			text-color: rgb(255, 255, 255);
+			border: 0;
+			color:  rgb(255, 255, 255);
+			font-family: Courier, serif;
+			}
+			QPushButton:hover {
+			   background-color: rgb(66, 66, 66);
+		}</string>
+            </property>
+            <property name="text">
+             <string>+</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QSplitter" name="splitter_5">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QSplitter::handle {
+    background: rgb(56, 56, 56);
+}</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <widget class="QPushButton" name="SaveProjectButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="baseSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">			.QPushButton
+			{
+			background-color: rgb(56, 56, 56);
+			text-color: rgb(255, 255, 255);
+			border: 0;
+			color:  rgb(255, 255, 255);
+			font-family: Courier, serif;
+			}
+			QPushButton:hover {
+			   background-color: rgb(66, 66, 66);
+		}</string>
+          </property>
+          <property name="text">
+           <string>Save Project</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="LoadProjectButton">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">			.QPushButton
+			{
+			background-color: rgb(56, 56, 56);
+			text-color: rgb(255, 255, 255);
+			border: 0;
+			color:  rgb(255, 255, 255);
+			font-family: Courier, serif;
+			}
+			QPushButton:hover {
+			   background-color: rgb(66, 66, 66);
+		}</string>
+          </property>
+          <property name="text">
+           <string>Open Project</string>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QSplitter" name="splitter_4">
+       <property name="styleSheet">
+        <string notr="true">QSplitter::handle {
+    background: rgb(56, 56, 56);
+}</string>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <widget class="QSplitter" name="splitter_3">
         <property name="enabled">
          <bool>true</bool>
         </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>60</horstretch>
-          <verstretch>60</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>600</width>
-          <height>600</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="2" column="1" colspan="2">
-     <layout class="QGridLayout" name="codelayout">
-      <property name="sizeConstraint">
-       <enum>QLayout::SetDefaultConstraint</enum>
-      </property>
-      <item row="0" column="0">
-       <widget class="CodeEditor" name="plainTextEdit">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>500</width>
-          <height>400</height>
-         </size>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::ClickFocus</enum>
-        </property>
         <property name="styleSheet">
-         <string notr="true">.QLineEdit, .QPlainTextEdit
-{
-background-color: rgb(76, 76, 76);
-border: 0;
+         <string notr="true">QSplitter::handle {
+    background: rgb(56, 56, 56);
 }</string>
         </property>
-        <property name="tabChangesFocus">
-         <bool>false</bool>
+        <property name="lineWidth">
+         <number>1</number>
         </property>
-        <property name="tabStopWidth">
-         <number>20</number>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
         </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="7" column="1" colspan="2">
-     <layout class="QGridLayout" name="resourceLyout"/>
-    </item>
-    <item row="0" column="1" colspan="2">
-     <layout class="QHBoxLayout" name="shaderLayout">
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <property name="sizeConstraint">
-       <enum>QLayout::SetNoConstraint</enum>
-      </property>
-      <item alignment="Qt::AlignRight">
-       <widget class="QPushButton" name="addShader">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>40</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>Courier,serif</family>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">.QPushButton
+        <widget class="QSplitter" name="splitter_2">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QSplitter::handle {
+    background: rgb(56, 56, 56);
+}</string>
+         </property>
+         <property name="lineWidth">
+          <number>0</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="handleWidth">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="horizontalLayoutWidget">
+          <layout class="QHBoxLayout" name="ShaderLayout">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="sizeConstraint">
+            <enum>QLayout::SetDefaultConstraint</enum>
+           </property>
+           <item>
+            <widget class="QPushButton" name="AddShaderButton">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">			.QPushButton
+			{
+			background-color: rgb(56, 56, 56);
+			text-color: rgb(255, 255, 255);
+			border: 0;
+			color:  rgb(255, 255, 255);
+			font-family: Courier, serif;
+			}
+			QPushButton:hover {
+			   background-color: rgb(66, 66, 66);
+		}</string>
+             </property>
+             <property name="text">
+              <string>+</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="gridLayoutWidget_2">
+          <layout class="QGridLayout" name="gridLayout_3">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="CCodeEditorE" name="CodeEditor">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QSplitter" name="splitter_7">
+         <property name="styleSheet">
+          <string notr="true">QSplitter::handle {
+    background: rgb(66, 66, 66);
+}</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <widget class="QTextEdit" name="Console">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>15845456</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">.QTextEdit
 {
-background-color: rgb(56, 56, 56);
+background-color: rgb(66, 66, 66);
 text-color: rgb(255, 255, 255);
 border: 0;
 color:  rgb(255, 255, 255);
 font-family: Courier, serif;
 }
-
-QPushButton:hover {
-    background-color: rgb(66, 66, 66);
-}</string>
-        </property>
-        <property name="text">
-         <string>+</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="5" column="0">
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <item>
-       <layout class="QHBoxLayout" name="scene">
-        <property name="spacing">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QPushButton" name="addScene">
+</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="CompileButton">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -211,176 +375,38 @@ QPushButton:hover {
           </property>
           <property name="minimumSize">
            <size>
-            <width>40</width>
-            <height>40</height>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>70</width>
+            <height>50</height>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">.QPushButton
-{
-background-color: rgb(56, 56, 56);
-text-color: rgb(255, 255, 255);
-border: 0;
-color:  rgb(255, 255, 255);
-font-family: Courier, serif;
-}
-
-QPushButton:hover {
-    background-color: rgb(66, 66, 66);
-}</string>
+           <string notr="true">			.QPushButton
+			{
+			background-color: rgb(66, 66, 66);
+			text-color: rgb(255, 255, 255);
+			border: 0;
+			color:  rgb(255, 255, 255);
+			font-family: Courier, serif;
+			}
+			QPushButton:hover {
+			   background-color: rgb(76, 76, 76);
+		}</string>
           </property>
           <property name="text">
-           <string>+</string>
+           <string>Compile</string>
           </property>
          </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="project">
-        <property name="spacing">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QPushButton" name="SaveProject">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">.QPushButton
-{
-background-color: rgb(56, 56, 56);
-text-color: rgb(255, 255, 255);
-border: 0;
-color:  rgb(255, 255, 255);
-font-family: Courier, serif;
-}
-
-QPushButton:hover {
-    background-color: rgb(66, 66, 66);
-}</string>
-          </property>
-          <property name="text">
-           <string>Save Project</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="OpenProject">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">.QPushButton
-{
-background-color: rgb(56, 56, 56);
-text-color: rgb(255, 255, 255);
-border: 0;
-color:  rgb(255, 255, 255);
-font-family: Courier, serif;
-}
-
-QPushButton:hover {
-    background-color: rgb(66, 66, 66);
-}</string>
-          </property>
-          <property name="text">
-           <string>Open Project</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </item>
-    <item row="3" column="1">
-     <layout class="QHBoxLayout" name="console">
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <item>
-       <widget class="QTextEdit" name="textEdit">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">.QTextEdit
-{
-background-color: rgb(46, 46, 46);
-border: 0;
-}</string>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
+        </widget>
        </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="compileButton">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>55</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>Courier,serif</family>
-         </font>
-        </property>
-        <property name="whatsThis">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Compile shader&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">.QPushButton
-{
-background-color: rgb(56, 56, 56);
-text-color: rgb(255, 255, 255);
-border: 0;
-color:  rgb(255, 255, 255);
-font-family: Courier, serif;
-}
-
-QPushButton:hover {
-    background-color: rgb(66, 66, 66);
-}</string>
-        </property>
-        <property name="text">
-         <string>Compile</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+       <widget class="CTexturePainter" name="ResourceViewport" native="true"/>
+      </widget>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -390,19 +416,19 @@ QPushButton:hover {
   <customwidget>
    <class>D3DRenderWidget</class>
    <extends>QWidget</extends>
-   <header>d3drenderwidget.h</header>
+   <header location="global">d3drenderwidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>CodeEditor</class>
-   <extends>QPlainTextEdit</extends>
-   <header>codeeditor.h</header>
   </customwidget>
   <customwidget>
    <class>CTexturePainter</class>
    <extends>QWidget</extends>
-   <header>ctexturepainter.h</header>
+   <header location="global">ctexturepainter.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CCodeEditorE</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">codeeditor.h</header>
   </customwidget>
  </customwidgets>
  <resources>

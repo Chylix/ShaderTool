@@ -1,9 +1,9 @@
-#include "CodeEditor.h"
+#include "codeeditor.h"
 #include "LineNumberArea.h"
 #include <QPainter>
 #include <QTextBlock>
 
-CodeEditor::CodeEditor(QWidget *parent) 
+CCodeEditorE::CCodeEditorE(QWidget *parent) 
 	: QPlainTextEdit(parent) 
 	, m_ErrorLine(-1)
 	, m_CurrentShaderSlot(0)
@@ -13,6 +13,8 @@ CodeEditor::CodeEditor(QWidget *parent)
 	connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
 	connect(this, SIGNAL(updateRequest(QRect, int)), this, SLOT(updateLineNumberArea(QRect, int)));
 	connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+
+	this->setFrameStyle(QFrame::NoFrame);
 
 	const int tabStop = 2;  // 4 characters
 
@@ -34,7 +36,7 @@ CodeEditor::CodeEditor(QWidget *parent)
 	highlightCurrentLine();
 }
 
-int CodeEditor::lineNumberAreaWidth()
+int CCodeEditorE::lineNumberAreaWidth()
 {
 	int digits = 1;
 	int max = qMax(1, blockCount());
@@ -48,7 +50,7 @@ int CodeEditor::lineNumberAreaWidth()
 	return space;
 }
 
-void CodeEditor::SetText(QString text)
+void CCodeEditorE::SetText(QString text)
 {
 	QTextCharFormat fmt;
 	fmt.setForeground(QBrush(QColor(255, 255, 255)));
@@ -58,24 +60,24 @@ void CodeEditor::SetText(QString text)
 	this->textCursor().insertText(text);
 }
 
-void CodeEditor::SetErrorLine(int line)
+void CCodeEditorE::SetErrorLine(int line)
 {
 	m_ErrorLine = line;
 	repaint();
 }
 
-void CodeEditor::RemoveErrorLine()
+void CCodeEditorE::RemoveErrorLine()
 {
 	m_ErrorLine = -1;
 	repaint();
 }
 
-void CodeEditor::updateLineNumberAreaWidth(int /* newBlockCount */)
+void CCodeEditorE::updateLineNumberAreaWidth(int /* newBlockCount */)
 {
 	setViewportMargins(lineNumberAreaWidth(), 0, 0, 0);
 }
 
-void CodeEditor::resizeEvent(QResizeEvent *e)
+void CCodeEditorE::resizeEvent(QResizeEvent *e)
 {
 	QPlainTextEdit::resizeEvent(e);
 
@@ -83,7 +85,7 @@ void CodeEditor::resizeEvent(QResizeEvent *e)
 	lineNumberArea->setGeometry(QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
 }
 
-void CodeEditor::highlightCurrentLine()
+void CCodeEditorE::highlightCurrentLine()
 {
 	QList<QTextEdit::ExtraSelection> extraSelections;
 
@@ -100,7 +102,7 @@ void CodeEditor::highlightCurrentLine()
 	setExtraSelections(extraSelections);
 }
 
-void CodeEditor::updateLineNumberArea(const QRect &rect, int dy)
+void CCodeEditorE::updateLineNumberArea(const QRect &rect, int dy)
 {
 	if (dy)
 		lineNumberArea->scroll(0, dy);
@@ -112,7 +114,7 @@ void CodeEditor::updateLineNumberArea(const QRect &rect, int dy)
 }
 
 
-void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
+void CCodeEditorE::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
 	QTextCharFormat fmt;
 	fmt.setForeground(QBrush(QColor(255, 255, 255)));

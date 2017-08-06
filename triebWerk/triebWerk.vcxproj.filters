@@ -85,20 +85,11 @@
     <Filter Include="Quelldateien\Resource\Resources\Texture">
       <UniqueIdentifier>{cd2f12d8-ea9e-4038-a36f-c589f3510dec}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\Physic">
-      <UniqueIdentifier>{c883ff63-5aae-45b1-8dcf-f9a980ca995f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Quelldateien\Physic">
       <UniqueIdentifier>{0bc4fdb1-4f01-4134-8e3a-b950eaf0d9ce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\Physic\Collider">
-      <UniqueIdentifier>{803dfabb-078e-4140-8aa6-f3a77e241729}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Quelldateien\Physic\Collider">
       <UniqueIdentifier>{e193d3fb-05f6-4234-86a1-458abadab8c8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headerdateien\Physic\Body">
-      <UniqueIdentifier>{cbbec432-cdd1-4e3c-8727-f32986fe4c6f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headerdateien\Graphics">
       <UniqueIdentifier>{83ce876f-fe94-40c7-ba1a-0ede0490fde9}</UniqueIdentifier>
@@ -138,9 +129,6 @@
     </Filter>
     <Filter Include="Quelldateien\Physic\Collision">
       <UniqueIdentifier>{06fb4cf8-86fd-4e6e-a4f4-238128d01c85}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headerdateien\Physic\Collision">
-      <UniqueIdentifier>{23143f8f-7516-4d1c-9f5b-f5ecb76ae71b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Quelldateien\Rendering\Camera">
       <UniqueIdentifier>{b73bc194-1d6e-4977-b065-f33735511e4c}</UniqueIdentifier>
@@ -246,6 +234,18 @@
     </Filter>
     <Filter Include="Quelldateien\Physic\Input\Gamepad">
       <UniqueIdentifier>{0fd22b9c-39dd-44c3-bb83-edd3c08094b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Input\Physic">
+      <UniqueIdentifier>{c883ff63-5aae-45b1-8dcf-f9a980ca995f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Input\Physic\Collider">
+      <UniqueIdentifier>{803dfabb-078e-4140-8aa6-f3a77e241729}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Input\Physic\Body">
+      <UniqueIdentifier>{cbbec432-cdd1-4e3c-8727-f32986fe4c6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Input\Physic\Collision">
+      <UniqueIdentifier>{23143f8f-7516-4d1c-9f5b-f5ecb76ae71b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -576,16 +576,16 @@
       <Filter>Headerdateien\World\Entity</Filter>
     </ClInclude>
     <ClInclude Include="include\CPhysicEntity.h">
-      <Filter>Headerdateien\Physic</Filter>
+      <Filter>Headerdateien\Input\Physic</Filter>
     </ClInclude>
     <ClInclude Include="include\CPhysicWorld.h">
-      <Filter>Headerdateien\Physic</Filter>
+      <Filter>Headerdateien\Input\Physic</Filter>
     </ClInclude>
     <ClInclude Include="include\ECollider.h">
-      <Filter>Headerdateien\Physic\Collider</Filter>
+      <Filter>Headerdateien\Input\Physic\Collider</Filter>
     </ClInclude>
     <ClInclude Include="include\CBody.h">
-      <Filter>Headerdateien\Physic\Body</Filter>
+      <Filter>Headerdateien\Input\Physic\Body</Filter>
     </ClInclude>
     <ClInclude Include="include\CGraphics.h">
       <Filter>Headerdateien\Graphics</Filter>
@@ -606,19 +606,19 @@
       <Filter>Headerdateien\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="include\CAABBCollider.h">
-      <Filter>Headerdateien\Physic\Collider</Filter>
+      <Filter>Headerdateien\Input\Physic\Collider</Filter>
     </ClInclude>
     <ClInclude Include="include\ICollider.h">
-      <Filter>Headerdateien\Physic\Collider</Filter>
+      <Filter>Headerdateien\Input\Physic\Collider</Filter>
     </ClInclude>
     <ClInclude Include="include\CCollision.h">
-      <Filter>Headerdateien\Physic\Collision</Filter>
+      <Filter>Headerdateien\Input\Physic\Collision</Filter>
     </ClInclude>
     <ClInclude Include="include\CCamera.h">
       <Filter>Headerdateien\Rendering\Camera</Filter>
     </ClInclude>
     <ClInclude Include="include\CCollisionEvent.h">
-      <Filter>Headerdateien\Physic\Collision</Filter>
+      <Filter>Headerdateien\Input\Physic\Collision</Filter>
     </ClInclude>
     <ClInclude Include="include\CConstantBuffer.h">
       <Filter>Headerdateien\Rendering\Material\ConstantBuffer</Filter>
@@ -633,10 +633,10 @@
       <Filter>Headerdateien\Debug</Filter>
     </ClInclude>
     <ClInclude Include="include\ECollisionState.h">
-      <Filter>Headerdateien\Physic\Collision</Filter>
+      <Filter>Headerdateien\Input\Physic\Collision</Filter>
     </ClInclude>
     <ClInclude Include="include\CSphereCollider.h">
-      <Filter>Headerdateien\Physic\Collider</Filter>
+      <Filter>Headerdateien\Input\Physic\Collider</Filter>
     </ClInclude>
     <ClInclude Include="include\CHLSLParser.h">
       <Filter>Headerdateien\Resource\Parser</Filter>
@@ -657,7 +657,7 @@
       <Filter>Headerdateien\Resource\Resources\TilesetMap\Layers\Object</Filter>
     </ClInclude>
     <ClInclude Include="include\COBBCollider.h">
-      <Filter>Headerdateien\Physic\Collider</Filter>
+      <Filter>Headerdateien\Input\Physic\Collider</Filter>
     </ClInclude>
     <ClInclude Include="include\CID.h">
       <Filter>Headerdateien\World\Entity</Filter>

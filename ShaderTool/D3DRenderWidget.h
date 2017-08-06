@@ -1,7 +1,8 @@
 #pragma once
 #include <qwidget.h>
 
-class D3DRenderWidget : public QWidget {
+class D3DRenderWidget : public QWidget 
+{
 	Q_OBJECT
 		Q_DISABLE_COPY(D3DRenderWidget)
 

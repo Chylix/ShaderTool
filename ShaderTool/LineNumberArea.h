@@ -5,7 +5,7 @@
 class LineNumberArea : public QWidget
 {
 public:
-	LineNumberArea(CodeEditor *editor) : QWidget(editor) {
+	LineNumberArea(CCodeEditorE *editor) : QWidget(editor) {
 		codeEditor = editor;
 	}
 
@@ -19,5 +19,5 @@ protected:
 	}
 
 private:
-	CodeEditor *codeEditor;
+	CCodeEditorE *codeEditor;
 };

@@ -23,5 +23,5 @@ private:
 	void Change();
 
 private:
-	const int m_MaximumButtonSize = 40;
+	const int m_MaximumButtonSize = 30;
 };

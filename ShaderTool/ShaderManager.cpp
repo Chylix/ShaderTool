@@ -19,20 +19,23 @@ void CShaderManager::OnAddShaderClick()
 }
 
 
-void CShaderManager::Initialize(CodeEditor * pCodeEditor, Ui_ShaderToolMain* pShaderTool)
+void CShaderManager::Initialize(CCodeEditorE * pCodeEditor, Ui_ShaderToolMain* pShaderTool)
 {
 	m_pCodeEditorHandle = pCodeEditor;
-	connect(pShaderTool->addShader, SIGNAL(clicked()), this, SLOT(OnAddShaderClick()));
+	connect(pShaderTool->AddShaderButton, SIGNAL(clicked()), this, SLOT(OnAddShaderClick()));
 
-	m_pLayout = pShaderTool->shaderLayout;
+	m_pLayout = pShaderTool->ShaderLayout;
 
-	m_pLayout->setMargin(0);
-	m_pLayout->setContentsMargins(QMargins(0, 0, 0, 0));
-	m_pLayout->setSpacing(0);
+	//m_pLayout->setMargin(0);
+	//m_pLayout->setContentsMargins(QMargins(0, 0, 0, 0));
+	//m_pLayout->setSpacing(0);
+	//m_pLayout->setStretch(0, 1);
 
 	//Add the default shader.
 	OnAddShaderClick();
 	m_Shaders[m_CurrentWorkingSlot].code = m_DefaultShaderCode;
+
+	m_pLayout->setSizeConstraint(QLayout::SizeConstraint::SetMaximumSize);
 
 	//Set the default shader.
 	m_pCodeEditorHandle->SetText(m_Shaders[0].code);

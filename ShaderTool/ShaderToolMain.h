@@ -9,7 +9,7 @@
 #include "SceneManager.h"
 
 class CSyntaxHighlighter;
-class CodeEditor;
+class CCodeEditorE;
 
 class CShaderToolMain : public QMainWindow
 {
@@ -17,7 +17,7 @@ class CShaderToolMain : public QMainWindow
 
 public:
 	CShaderToolMain(QWidget *parent = Q_NULLPTR);
-	const QString m_WindowName = "bauWerk";
+	const QString m_WindowName = "ShaderTool";
 
 protected:
 
@@ -27,7 +27,7 @@ public slots:
 
 private:
 	Ui::ShaderToolMain m_MainUi;
-	CodeEditor* m_CodeEditor;
+	CCodeEditorE* m_CodeEditor;
 	CSyntaxHighlighter* m_SyntaxHighlighter;
 	CDefaultScene* m_pDefaultScene;
 	CShaderCreator m_ShaderCreator;

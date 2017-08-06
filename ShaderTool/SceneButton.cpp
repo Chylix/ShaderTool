@@ -13,7 +13,7 @@ void CSceneButton::Init(const size_t shaderSlot, CSceneManager* pParent)
 	m_Slot = shaderSlot;
 	m_pParent = pParent;
 
-	this->setMaximumHeight(40);
+	this->setMaximumHeight(30);
 	this->setCursor(Qt::ArrowCursor);
 	this->setAlignment(Qt::AlignHCenter);
 	this->setStyleSheet(
@@ -29,7 +29,6 @@ void CSceneButton::Init(const size_t shaderSlot, CSceneManager* pParent)
 		"    background-color: rgb(66, 66, 66);\n"
 		"}"
 	);
-	this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 
 void CSceneButton::UpdateSlot(size_t newSlot)

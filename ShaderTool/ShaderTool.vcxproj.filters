@@ -95,12 +95,6 @@
     <ClCompile Include="LineNumberArea.cpp">
       <Filter>CodeEditor</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_CodeEditor.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_CodeEditor.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="CTexturePainter.cpp">
       <Filter>ResourceManager</Filter>
     </ClCompile>
@@ -158,6 +152,18 @@
     <ClCompile Include="GeneratedFiles\Release\moc_SceneButton.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SceneManager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SceneManager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CodeEditor.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CodeEditor.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ShaderToolMain.ui">
@@ -193,6 +199,9 @@
     <CustomBuild Include="SceneButton.h">
       <Filter>SceneManager</Filter>
     </CustomBuild>
+    <CustomBuild Include="SceneManager.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_ShaderToolMain.h">
@@ -215,9 +224,6 @@
     </ClInclude>
     <ClInclude Include="ProjectFileReader.h">
       <Filter>ProjectManager</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>SceneManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

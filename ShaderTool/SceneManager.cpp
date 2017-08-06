@@ -18,9 +18,9 @@ void CSceneManager::OnAddSceneClick()
 
 void CSceneManager::Initialize(Ui_ShaderToolMain* pShaderTool)
 {
-	m_pSceneLayout = pShaderTool->scene;
+	m_pSceneLayout = pShaderTool->SceneLayout;
 
-	connect(pShaderTool->addScene, SIGNAL(clicked()), this, SLOT(OnAddSceneClick()));
+	connect(pShaderTool->AddSceneButton, SIGNAL(clicked()), this, SLOT(OnAddSceneClick()));
 
 	//Add the default scene
 	OnAddSceneClick();

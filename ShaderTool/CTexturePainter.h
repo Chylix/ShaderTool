@@ -3,6 +3,7 @@
 #include <QPaintEvent>
 #include <QPixmap>
 #include <QPainter>
+#include <qplaintextedit.h>
 
 class QPainter;
 

@@ -1,12 +1,12 @@
 #pragma once
 #include <qplaintextedit.h>
 
-class CodeEditor : public QPlainTextEdit
+class CCodeEditorE : public QPlainTextEdit
 {
 	Q_OBJECT
 
 public:
-	CodeEditor(QWidget *parent = 0);
+	CCodeEditorE(QWidget *parent = 0);
 
 	void lineNumberAreaPaintEvent(QPaintEvent *event);
 	int lineNumberAreaWidth();
@@ -27,7 +27,7 @@ private:
 	QWidget *lineNumberArea;
 	int m_CurrentShaderSlot;
 	std::vector<QString> m_Shaders;
-	const QColor m_BackgroundColor = QColor(76, 76, 76);
+	const QColor m_BackgroundColor = QColor(56, 56, 56);
 	const QColor m_FontColor = Qt::white;
 	const QColor m_SelectedLineColor = QColor(73, 73, 73);
 	int m_ErrorLine;

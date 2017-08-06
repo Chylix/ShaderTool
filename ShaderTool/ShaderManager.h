@@ -4,7 +4,7 @@
 #include "ui_ShaderToolMain.h"
 #include "ISerializer.h"
 
-class CodeEditor;
+//class CodeEditor;
 class CShaderManangerButton;
 
 struct SShaderCode
@@ -24,7 +24,7 @@ public:
 	CShaderManager();
 	~CShaderManager();
 
-	void Initialize(CodeEditor* pCodeEditor, Ui_ShaderToolMain* pShaderTool);
+	void Initialize(CCodeEditorE* pCodeEditor, Ui_ShaderToolMain* pShaderTool);
 	void ChangeActiveEditorShaderTo(size_t slot);
 	void RemoveShader(size_t slot);
 	std::vector<SShaderCode>* GetShaders();
@@ -57,7 +57,7 @@ private:
 		"}";
 
 private:
-	CodeEditor* m_pCodeEditorHandle;
+	CCodeEditorE* m_pCodeEditorHandle;
 	QHBoxLayout* m_pLayout;
 	std::vector<SShaderCode> m_Shaders;
 	std::vector<CShaderManangerButton*> m_Buttons;

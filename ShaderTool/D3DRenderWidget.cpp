@@ -39,6 +39,8 @@ D3DRenderWidget::D3DRenderWidget(QWidget* parent)
 
 	m_InFullscreen = false;
 
+	m_pLayout = this->layout();
+
 	QShortcut *shortcut = new QShortcut(QKeySequence("Ctrl+Return"), this);
 	QObject::connect(shortcut, SIGNAL(activated()), this, SLOT(ChangeFullscreen()));
 }
@@ -86,6 +88,7 @@ void D3DRenderWidget::resizeEvent(QResizeEvent* evt)
 	{
 		twViewport->Resize(a.width(), a.height());
 	}
+
 
 }
 

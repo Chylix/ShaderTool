@@ -1,11 +1,13 @@
 #include "ShaderToolMain.h"
 #include "SyntaxHighlighter.h"
 #include "D3DRenderWidget.h"
+#include "CodeEditor.h"
 #include "Console.h"
 #include <QLayout.h>
 #include <CEngine.h>
 #include <qlayout.h>
 #include <qshortcut.h>
+#include <qsplitter.h>
 
 
 CShaderToolMain::CShaderToolMain(QWidget *parent)
@@ -19,8 +21,6 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 
 	setWindowTitle(m_WindowName);
 
-	auto a = m_MainUi.viewportLayout;
-
 	SetupCodeEditor();
 
 	m_pDefaultScene = new CDefaultScene();
@@ -28,16 +28,16 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 	twSceneManager->AddScene(m_pDefaultScene, "Default");
 	twSceneManager->SetActiveScene("Default");
 
-	connect(m_MainUi.compileButton, SIGNAL(clicked()), this, SLOT(OnCompileClicked()));
+	connect(m_MainUi.CompileButton, SIGNAL(clicked()), this, SLOT(OnCompileClicked()));
 	QShortcut *shortcut = new QShortcut(QKeySequence("Ctrl+S"), this);
 	QObject::connect(shortcut, SIGNAL(activated()), this, SLOT(OnCompileClicked()));
 
-	CConsole::Instance().Initialize(m_MainUi.textEdit);
-	m_ProjectManager.Initialize(m_MainUi.OpenProject, m_MainUi.SaveProject);
+	CConsole::Instance().Initialize(m_MainUi.Console);
+	m_ProjectManager.Initialize(m_MainUi.LoadProjectButton, m_MainUi.SaveProjectButton);
 	
 	m_SceneManager.Initialize(&m_MainUi);
 
-	m_MainUi.viewport->SetViewLayout(m_MainUi.viewportLayout);
+	m_MainUi.Viewport->SetViewLayout(m_MainUi.ViewportLayout);
 
 	//What ever this needs to be moved
 	m_ProjectManager.RegisterSerializer(&m_ShaderManager, "3BBA1716-3F89-49F1-B23D-724039F3A9C8");
@@ -45,12 +45,12 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 
 void CShaderToolMain::OnFullscreen()
 {
-	m_MainUi.viewport->ChangeFullscreen();
+	m_MainUi.Viewport->ChangeFullscreen();
 }
 
 void CShaderToolMain::SetupCodeEditor()
 {
-	m_CodeEditor = m_MainUi.plainTextEdit;
+	m_CodeEditor = m_MainUi.CodeEditor;
 
 	m_SyntaxHighlighter = new CSyntaxHighlighter(m_CodeEditor->document());
 
