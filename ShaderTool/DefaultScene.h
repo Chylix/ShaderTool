@@ -20,6 +20,7 @@ public:
 	void RemoveLoadedTextures(const size_t slot);
 	void UpdateUsedTextures(int slot, std::vector<int> usedSlot);
 	void ClearUsedTextures();
+	void ClearLoadedTextures();
 
 	void Start() final;
 	void Update() final;

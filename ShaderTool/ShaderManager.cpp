@@ -14,8 +14,11 @@ CShaderManager::~CShaderManager()
 
 void CShaderManager::OnAddShaderClick()
 {
-	AddShader();
-	AddButton();
+	if (m_IsActive == true)
+	{
+		AddShader();
+		AddButton();
+	}
 }
 
 
@@ -25,11 +28,6 @@ void CShaderManager::Initialize(CCodeEditorE * pCodeEditor, Ui_ShaderToolMain* p
 	connect(pShaderTool->AddShaderButton, SIGNAL(clicked()), this, SLOT(OnAddShaderClick()));
 
 	m_pLayout = pShaderTool->ShaderLayout;
-
-	//m_pLayout->setMargin(0);
-	//m_pLayout->setContentsMargins(QMargins(0, 0, 0, 0));
-	//m_pLayout->setSpacing(0);
-	//m_pLayout->setStretch(0, 1);
 
 	//Add the default shader.
 	OnAddShaderClick();
@@ -45,19 +43,18 @@ void CShaderManager::Initialize(CCodeEditorE * pCodeEditor, Ui_ShaderToolMain* p
 void CShaderManager::ChangeActiveEditorShaderTo(size_t slot)
 {
 	// If you want to change to a slot which doesn't exist or we already are working in this slot.
-	if (slot > (m_Shaders.size() - 1) || slot == m_CurrentWorkingSlot)
+	if ((slot > (m_Shaders.size() - 1) || slot == m_CurrentWorkingSlot) && m_IsActive)
 		return;
 
-	ChangeActiveButton(slot);
-
-	// Change to the slot and save the current one.
-	if (m_CurrentWorkingSlot != slot)
+	if (m_IsActive)
 	{
+		ChangeActiveButton(slot);
+		
 		m_Shaders[m_CurrentWorkingSlot].code = m_pCodeEditorHandle->toPlainText();
-
-		m_pCodeEditorHandle->SetText(m_Shaders[slot].code);
-		m_CurrentWorkingSlot = slot;
 	}
+
+	m_pCodeEditorHandle->SetText(m_Shaders[slot].code);
+	m_CurrentWorkingSlot = slot;
 }
 
 void CShaderManager::RemoveShader(size_t slot)
@@ -102,7 +99,48 @@ void CShaderManager::AddShader(QString code)
 	m_Shaders.push_back(shader);
 }
 
-void CShaderManager::AddButton()
+void CShaderManager::SetActive()
+{
+	if (m_IsActive == true)
+		return;
+
+	for (size_t i = 0; i < m_Shaders.size(); ++i)
+	{
+		AddButton(i);
+		ChangeActiveEditorShaderTo(i);
+	}
+
+	//TODO: Rember which shader was active before
+	// Set the last shader to active after switching sceen
+	for (size_t i = 0; i < m_Buttons.size(); ++i)
+	{
+		m_Buttons[i]->SetAsActive(false);
+	}
+
+	m_CurrentWorkingSlot = m_Buttons.size()-1;
+	m_Buttons[m_CurrentWorkingSlot]->SetAsActive(true);
+
+	m_IsActive = true;
+}
+
+void CShaderManager::SetDisable()
+{
+	if (m_IsActive == false)
+		return;
+
+	for (CShaderManangerButton* button : m_Buttons)
+	{
+		m_pLayout->removeWidget(button);
+		delete button;
+	}
+
+	m_Buttons.clear();
+
+	m_IsActive = false;
+}
+
+
+void CShaderManager::AddButton(size_t connectToShader)
 {
 	QString a = QString::number(static_cast<int>(m_Shaders.size()));
 
@@ -114,24 +152,29 @@ void CShaderManager::AddButton()
 
 	m_Buttons.push_back(btn1);
 
-	int a2 = m_Shaders.size() - 1;
-	btn1->Init(a2, this);
+	size_t slot = connectToShader;
+
+	if(connectToShader == UNDEFINED_CONNECT_SLOT)
+		slot = m_Shaders.size() - 1;
+
+	btn1->Init(slot, this);
 }
 
 const char * CShaderManager::SaveData()
 {
-	for (size_t i = 0; i < m_Shaders.size(); i++)
-	{
-		buffer.append(m_Shaders[i].code.toStdString());
-		buffer.append("\n~\n");
-	}
+	//for (size_t i = 0; i < m_Shaders.size(); i++)
+	//{
+	//	buffer.append(m_Shaders[i].code.toStdString());
+	//	buffer.append("\n~\n");
+	//}
 
-	return buffer.c_str();
+	//return buffer.c_str();
+	return nullptr;
 }
 
 void CShaderManager::LoadData(const char * pData)
 {
-	Reset();
+	/*Reset();
 
 	std::string data = pData;
 
@@ -164,11 +207,7 @@ void CShaderManager::LoadData(const char * pData)
 		iterator = q + 1;
 
 		iter++;
-	}
-
-
-
-
+	}*/
 }
 
 void CShaderManager::ChangeActiveButton(int slot)

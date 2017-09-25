@@ -1,4 +1,5 @@
 #include "SceneButton.h"
+#include "SceneManager.h"
 
 void CSceneButton::mousePressEvent(QMouseEvent *e)
 {
@@ -77,10 +78,10 @@ void CSceneButton::SetAsActive(bool state)
 
 void CSceneButton::Remove()
 {
-	//m_pParent->RemoveShader(m_Slot);
+	m_pParent->RemoveScene(m_Slot);
 }
 
 void CSceneButton::Change()
 {
-	//m_pParent->ChangeActiveEditorShaderTo(m_Slot);
+	m_pParent->ChangeActiveSceneTo(m_Slot);
 }

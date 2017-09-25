@@ -1,11 +1,14 @@
 #pragma once
 #include <qstring.h>
 #include <vector>
+#include <limits>
 #include "ui_ShaderToolMain.h"
 #include "ISerializer.h"
 
 //class CodeEditor;
 class CShaderManangerButton;
+
+#define UNDEFINED_CONNECT_SLOT 473748
 
 struct SShaderCode
 {
@@ -29,7 +32,11 @@ public:
 	void RemoveShader(size_t slot);
 	std::vector<SShaderCode>* GetShaders();
 	void AddShader(QString code = QString());
-	void AddButton();
+	void AddButton(size_t connectToSlot = UNDEFINED_CONNECT_SLOT);
+
+
+	void SetActive();
+	void SetDisable();
 
 	//ISerializer
 	const char* SaveData() final;
@@ -62,4 +69,5 @@ private:
 	std::vector<SShaderCode> m_Shaders;
 	std::vector<CShaderManangerButton*> m_Buttons;
 	size_t m_CurrentWorkingSlot;
+	bool m_IsActive = true;
 };

@@ -22,6 +22,7 @@ public:
 public:
 	CTexturePainter(QWidget *parent = 0);
 	std::vector<SShaderTexture>& GetLoadedTexture();
+	void SetTextures(std::vector<CTexturePainter::SShaderTexture>& textures);
 
 protected:
 	void paintEvent(QPaintEvent* e);

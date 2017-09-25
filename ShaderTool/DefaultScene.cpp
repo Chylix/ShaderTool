@@ -53,6 +53,11 @@ void CDefaultScene::UpdateUsedTextures(int slot, std::vector<int> usedSlot)
 	m_UsedTextures.push_back(t);
 }
 
+void CDefaultScene::ClearLoadedTextures()
+{
+	m_LoadedTextures.clear();
+}
+
 void CDefaultScene::ClearUsedTextures()
 {
 	m_UsedTextures.clear();

@@ -15,32 +15,30 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 	, m_CodeEditor(nullptr)
 {
 	m_MainUi.setupUi(this);
-
 	m_MainUi.centralWidget->layout()->setSpacing(0);
 	m_MainUi.centralWidget->layout()->setMargin(0);
 
 	setWindowTitle(m_WindowName);
 
-	SetupCodeEditor();
-
-	m_pDefaultScene = new CDefaultScene();
-
-	twSceneManager->AddScene(m_pDefaultScene, "Default");
-	twSceneManager->SetActiveScene("Default");
-
 	connect(m_MainUi.CompileButton, SIGNAL(clicked()), this, SLOT(OnCompileClicked()));
+
 	QShortcut *shortcut = new QShortcut(QKeySequence("Ctrl+S"), this);
 	QObject::connect(shortcut, SIGNAL(activated()), this, SLOT(OnCompileClicked()));
 
+	SetupTWScene();
+
 	CConsole::Instance().Initialize(m_MainUi.Console);
+
 	m_ProjectManager.Initialize(m_MainUi.LoadProjectButton, m_MainUi.SaveProjectButton);
 	
-	m_SceneManager.Initialize(&m_MainUi);
+	m_SceneManager.Initialize(&m_MainUi, m_MainUi.CodeEditor, m_MainUi.ResourceViewport);
 
 	m_MainUi.Viewport->SetViewLayout(m_MainUi.ViewportLayout);
 
-	//What ever this needs to be moved
-	m_ProjectManager.RegisterSerializer(&m_ShaderManager, "3BBA1716-3F89-49F1-B23D-724039F3A9C8");
+	SetupCodeEditor();
+
+	//TODO: Move this to the scene manager
+	//m_ProjectManager.RegisterSerializer(m_SceneManager.GetActiveScene()->m_pShaderManager, "3BBA1716-3F89-49F1-B23D-724039F3A9C8");
 }
 
 void CShaderToolMain::OnFullscreen()
@@ -53,13 +51,18 @@ void CShaderToolMain::SetupCodeEditor()
 	m_CodeEditor = m_MainUi.CodeEditor;
 
 	m_SyntaxHighlighter = new CSyntaxHighlighter(m_CodeEditor->document());
+}
 
-	m_ShaderManager.Initialize(m_CodeEditor, &m_MainUi);
+void CShaderToolMain::SetupTWScene()
+{
+	m_pDefaultScene = new CDefaultScene();
+	twSceneManager->AddScene(m_pDefaultScene, "Default");
+	twSceneManager->SetActiveScene("Default");
 }
 
 void CShaderToolMain::OnCompileClicked()
 {
-	std::vector<SShaderCode>* shaders = m_ShaderManager.GetShaders();
+	std::vector<SShaderCode>* shaders = m_SceneManager.GetActiveScene()->m_pShaderManager->GetShaders();
 
 	std::vector<triebWerk::CMaterial*> materials;
 
@@ -73,10 +76,6 @@ void CShaderToolMain::OnCompileClicked()
 	m_pDefaultScene->UpdateMaterial(&materials);
 
 	auto errors = twResourceManager->GetShaderGenerator()->GetLatestErrorMessages();
-	
-	//TODO: fixed this double none error problem
-	//only a workaround
-	//errors.ErrorMessages.erase(errors.ErrorMessages.begin());
 
 	m_CodeEditor->RemoveErrorLine();
 

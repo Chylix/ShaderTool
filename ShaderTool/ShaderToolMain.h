@@ -31,10 +31,10 @@ private:
 	CSyntaxHighlighter* m_SyntaxHighlighter;
 	CDefaultScene* m_pDefaultScene;
 	CShaderCreator m_ShaderCreator;
-	CShaderManager m_ShaderManager;
 	CSceneManager m_SceneManager;
 	CProjectManager m_ProjectManager;
 
 private:
 	void SetupCodeEditor();
+	void SetupTWScene();
 };
