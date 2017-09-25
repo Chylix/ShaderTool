@@ -134,7 +134,7 @@ void CTexturePainter::mousePressEvent(QMouseEvent * event)
 size_t CTexturePainter::FindTextureIndexFromPosition(QPoint pos)
 {
 	for (size_t i = 0; i < m_Pictures.size(); i++)
-	{ 
+	{
 		if (m_Pictures[i].rect.contains(pos))
 		{
 			return i;
@@ -215,4 +215,21 @@ bool CTexturePainter::CheckFilesIfSupported(const QDropEvent* event)
 	}
 
 	return true;
+}
+
+void CTexturePainter::SetTextures(std::vector<CTexturePainter::SShaderTexture>& textures)
+{
+	CConsole::Instance().PrintText(std::to_string(textures.size()).c_str(), CConsole::EPrintType::Warning);
+	m_Pictures.clear();
+	m_Pictures = textures;
+
+	static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->ClearLoadedTextures();
+
+	for (auto& texture : m_Pictures)
+	{
+		static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->UpdateLoadedTextures(texture.name.toStdString().c_str());
+	}
+
+	// Retrigger painting to draw the new/updated textures.
+	this->repaint();
 }
