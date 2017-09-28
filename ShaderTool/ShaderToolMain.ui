@@ -41,23 +41,11 @@
 </string>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <property name="leftMargin">
-     <number>0</number>
-    </property>
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
-    <property name="spacing">
-     <number>0</number>
-    </property>
     <item row="0" column="0">
-     <widget class="QSplitter" name="splitter_8">
+     <widget class="QSplitter" name="splitter_10">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="styleSheet">
        <string notr="true">QSplitter::handle {
     background: rgb(56, 56, 56);
@@ -69,47 +57,148 @@
       <property name="handleWidth">
        <number>1</number>
       </property>
-      <widget class="QSplitter" name="splitter">
+      <widget class="QSplitter" name="splitter_9">
+       <property name="styleSheet">
+        <string notr="true">QSplitter::handle {
+    background: rgb(56, 56, 56);
+}</string>
+       </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
+       </property>
+       <property name="handleWidth">
+        <number>1</number>
        </property>
        <widget class="QWidget" name="gridLayoutWidget">
         <layout class="QGridLayout" name="ViewportLayout">
          <item row="0" column="0">
-          <widget class="D3DRenderWidget" name="Viewport" native="true"/>
+          <widget class="D3DRenderWidget" name="Viewport" native="true">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>200</width>
+             <height>500</height>
+            </size>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
-       <widget class="QSplitter" name="splitter_6">
+       <widget class="QSplitter" name="splitter_8">
         <property name="styleSheet">
          <string notr="true">QSplitter::handle {
-    background: rgb(56, 56, 56);
+    background: rgb(50, 50, 50);
 }</string>
         </property>
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
-        <widget class="QWidget" name="horizontalLayoutWidget_2">
-         <layout class="QHBoxLayout" name="SceneLayout">
-          <property name="sizeConstraint">
-           <enum>QLayout::SetMaximumSize</enum>
+        <property name="handleWidth">
+         <number>1</number>
+        </property>
+        <widget class="QSplitter" name="splitter_6">
+         <property name="styleSheet">
+          <string notr="true">QSplitter::handle {
+    background: rgb(50, 50, 50);
+}</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="handleWidth">
+          <number>1</number>
+         </property>
+         <widget class="QSplitter" name="splitter">
+          <property name="styleSheet">
+           <string notr="true">QSplitter::handle {
+    background: rgb(50, 50, 50);
+}</string>
           </property>
-          <item>
-           <widget class="QPushButton" name="AddSceneButton">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="handleWidth">
+           <number>1</number>
+          </property>
+          <widget class="QWidget" name="horizontalLayoutWidget_3">
+           <layout class="QHBoxLayout" name="TimelineLayout">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetMaximumSize</enum>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>3020000</width>
-              <height>30</height>
-             </size>
+            <item>
+             <widget class="QSlider" name="Timeline">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Maximum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>20</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">.QSlider
+{
+background-color: rgb(56, 56, 56);
+text-color: rgb(255, 255, 255);
+border: 0;
+color:  rgb(255, 255, 255);
+font-family: Courier, serif;
+}</string>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="tickInterval">
+               <number>0</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="horizontalLayoutWidget_2">
+           <layout class="QHBoxLayout" name="SceneLayout">
+            <property name="spacing">
+             <number>0</number>
             </property>
-            <property name="styleSheet">
-             <string notr="true">			.QPushButton
+            <property name="sizeConstraint">
+             <enum>QLayout::SetMaximumSize</enum>
+            </property>
+           </layout>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="horizontalLayoutWidget_4">
+          <layout class="QHBoxLayout" name="SceneTimeLayout">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <property name="sizeConstraint">
+            <enum>QLayout::SetMaximumSize</enum>
+           </property>
+           <item>
+            <widget class="QPushButton" name="AddSceneButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>3020000</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">			.QPushButton
 			{
 			background-color: rgb(56, 56, 56);
 			text-color: rgb(255, 255, 255);
@@ -120,13 +209,169 @@
 			QPushButton:hover {
 			   background-color: rgb(66, 66, 66);
 		}</string>
-            </property>
-            <property name="text">
-             <string>+</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+             </property>
+             <property name="text">
+              <string>+</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="DurationText">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>70</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">.QLineEdit
+{
+background-color: rgb(56, 56, 56);
+text-color: rgb(255, 255, 255);
+border: 0;
+color:  rgb(255, 255, 255);
+font-family: Courier, serif;
+}
+</string>
+             </property>
+             <property name="text">
+              <string>Duration</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDoubleSpinBox" name="DurationEdit">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>70</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">.QDoubleSpinBox
+{
+background-color: rgb(56, 56, 56);
+text-color: rgb(255, 255, 255);
+border: 0;
+color:  rgb(255, 255, 255);
+font-family: Courier, serif;
+}
+</string>
+             </property>
+             <property name="value">
+              <double>1.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="OrderText">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>50</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">.QLineEdit
+{
+background-color: rgb(56, 56, 56);
+text-color: rgb(255, 255, 255);
+border: 0;
+color:  rgb(255, 255, 255);
+font-family: Courier, serif;
+}
+</string>
+             </property>
+             <property name="text">
+              <string>Order</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSpinBox" name="OrderEdit">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>70</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">.QSpinBox
+{
+background-color: rgb(56, 56, 56);
+text-color: rgb(255, 255, 255);
+border: 0;
+color:  rgb(255, 255, 255);
+font-family: Courier, serif;
+}
+</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="PlayButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>50</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">			.QPushButton
+			{
+			background-color: rgb(56, 56, 56);
+			text-color: rgb(255, 255, 255);
+			border: 0;
+			color:  rgb(255, 255, 255);
+			font-family: Courier, serif;
+			}
+			QPushButton:hover {
+			   background-color: rgb(66, 66, 66);
+		}</string>
+             </property>
+             <property name="text">
+              <string>Play</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </widget>
         <widget class="QSplitter" name="splitter_5">
          <property name="enabled">
@@ -134,11 +379,14 @@
          </property>
          <property name="styleSheet">
           <string notr="true">QSplitter::handle {
-    background: rgb(56, 56, 56);
+    background: rgb(50, 50, 50);
 }</string>
          </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="handleWidth">
+          <number>1</number>
          </property>
          <widget class="QPushButton" name="SaveProjectButton">
           <property name="sizePolicy">
@@ -218,11 +466,14 @@
       <widget class="QSplitter" name="splitter_4">
        <property name="styleSheet">
         <string notr="true">QSplitter::handle {
-    background: rgb(56, 56, 56);
+    background: rgb(50, 50, 50);
 }</string>
        </property>
        <property name="orientation">
         <enum>Qt::Vertical</enum>
+       </property>
+       <property name="handleWidth">
+        <number>1</number>
        </property>
        <widget class="QSplitter" name="splitter_3">
         <property name="enabled">
@@ -230,7 +481,7 @@
         </property>
         <property name="styleSheet">
          <string notr="true">QSplitter::handle {
-    background: rgb(56, 56, 56);
+    background: rgb(50, 50, 50);
 }</string>
         </property>
         <property name="lineWidth">
@@ -238,6 +489,9 @@
         </property>
         <property name="orientation">
          <enum>Qt::Vertical</enum>
+        </property>
+        <property name="handleWidth">
+         <number>1</number>
         </property>
         <widget class="QSplitter" name="splitter_2">
          <property name="enabled">
@@ -251,7 +505,7 @@
          </property>
          <property name="styleSheet">
           <string notr="true">QSplitter::handle {
-    background: rgb(56, 56, 56);
+    background: rgb(50, 50, 50);
 }</string>
          </property>
          <property name="lineWidth">
@@ -261,7 +515,7 @@
           <enum>Qt::Vertical</enum>
          </property>
          <property name="handleWidth">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="horizontalLayoutWidget">
           <layout class="QHBoxLayout" name="ShaderLayout">
@@ -277,21 +531,21 @@
               <bool>true</bool>
              </property>
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+              <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
              <property name="minimumSize">
               <size>
-               <width>0</width>
-               <height>0</height>
+               <width>30</width>
+               <height>30</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
                <width>30</width>
-               <height>30</height>
+               <height>5235235</height>
               </size>
              </property>
              <property name="styleSheet">
@@ -335,11 +589,14 @@
         <widget class="QSplitter" name="splitter_7">
          <property name="styleSheet">
           <string notr="true">QSplitter::handle {
-    background: rgb(66, 66, 66);
+    background: rgb(50, 50, 50);
 }</string>
          </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="handleWidth">
+          <number>1</number>
          </property>
          <widget class="QTextEdit" name="Console">
           <property name="sizePolicy">

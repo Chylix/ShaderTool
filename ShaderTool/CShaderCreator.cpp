@@ -70,11 +70,11 @@ void CShaderCreator::GetUsedTexture(std::string & a_String, int slot)
 	size_t iter = 1;
 	size_t pos = 0;
 
-	std::vector<int> slots;
+	std::vector<int> uslots;
 
 	size_t usesBackbuffer = a_String.find(": BACKBUFFER");
 	if (usesBackbuffer != std::string::npos)
-		slots.push_back(1);
+		uslots.push_back(1);
 
 	while (pos != std::string::npos)
 	{
@@ -88,8 +88,8 @@ void CShaderCreator::GetUsedTexture(std::string & a_String, int slot)
 		std::string a = a_String.substr(pos, pos2 - (pos));
 		iter += pos2 + a.size();
 
-		slots.push_back(stoi(a));
+		uslots.push_back(stoi(a));
 	}
 
-	static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->UpdateUsedTextures(slot, slots);
+	static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->UpdateUsedTextures(slot, uslots);
 }

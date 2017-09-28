@@ -31,9 +31,13 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 
 	m_ProjectManager.Initialize(m_MainUi.LoadProjectButton, m_MainUi.SaveProjectButton);
 	
-	m_SceneManager.Initialize(&m_MainUi, m_MainUi.CodeEditor, m_MainUi.ResourceViewport);
+	m_SceneManager.Initialize(&m_MainUi, m_MainUi.CodeEditor, m_MainUi.ResourceViewport, m_MainUi.DurationEdit ,m_MainUi.OrderEdit);
 
 	m_MainUi.Viewport->SetViewLayout(m_MainUi.ViewportLayout);
+
+	//m_Timeline.Initialize(m_MainUi.Timeline, m_MainUi.PlayButton);
+
+	m_Timeline.Initialize(&m_SceneManager, m_MainUi.Timeline, m_MainUi.PlayButton);
 
 	SetupCodeEditor();
 
@@ -58,6 +62,7 @@ void CShaderToolMain::SetupTWScene()
 	m_pDefaultScene = new CDefaultScene();
 	twSceneManager->AddScene(m_pDefaultScene, "Default");
 	twSceneManager->SetActiveScene("Default");
+	m_pDefaultScene->SetTimeline(&m_Timeline);
 }
 
 void CShaderToolMain::OnCompileClicked()

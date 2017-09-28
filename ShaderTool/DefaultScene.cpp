@@ -11,6 +11,11 @@ CDefaultScene::~CDefaultScene()
 
 }
 
+void CDefaultScene::SetTimeline(CTimeline * pTimeline)
+{
+	m_pTimeline = pTimeline;
+}
+
 void CDefaultScene::UpdateMaterial(std::vector<triebWerk::CMaterial*>* pMaterials)
 {
 	size_t r = pMaterials->size();
@@ -103,7 +108,7 @@ void CDefaultScene::Start()
 
 void CDefaultScene::Update()
 {
-	float time = twTime->GetTimeSinceStartup();
+	float time = m_pTimeline->UpdateTime(twTime->GetDeltaTime(), twTime->GetTimeSinceStartup());
 
 	float res[2];
 	

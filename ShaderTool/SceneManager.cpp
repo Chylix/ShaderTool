@@ -2,6 +2,8 @@
 #include "SceneButton.h"
 #include "ShaderManager.h"
 
+
+
 CSceneManager::CSceneManager()
 {
 
@@ -9,6 +11,45 @@ CSceneManager::CSceneManager()
 CSceneManager::~CSceneManager()
 {
 
+}
+
+void clearLayout(QLayout *layout)
+{
+QLayoutItem *item;
+while ((item = layout->takeAt(0))) {
+	if (item->layout()) {
+		clearLayout(item->layout());
+		delete item->layout();
+	}
+	if (item->widget()) {
+		//delete item->widget();
+	}
+	delete item;
+}
+}
+
+void CSceneManager::OnOrderChanged(int newVal)
+{
+	// Ignore invalid input
+	if (newVal == m_CurrentActiveScene || newVal > m_Scenes.size()-1 || newVal < 0)
+		return;
+
+	std::swap(m_Scenes[m_CurrentActiveScene], m_Scenes[newVal]);
+
+	clearLayout(m_pSceneLayout);
+	//m_pSceneLayout->removeWidget(m_Buttons[m_CurrentActiveScene]);
+	//m_pSceneLayout->insertWidget(newVal, m_Buttons[m_CurrentActiveScene]);
+
+	std::swap(m_Buttons[m_CurrentActiveScene], m_Buttons[newVal]);
+
+	for (auto* button : m_Buttons)
+	{
+		m_pSceneLayout->addWidget(button);
+	}
+
+	UpdateOrder();
+
+	m_CurrentActiveScene = newVal;
 }
 
 void CSceneManager::OnAddSceneClick()
@@ -19,16 +60,29 @@ void CSceneManager::OnAddSceneClick()
 
 	AddScene();
 	AddButton();
+
+	NotifyListeners();
 }
 
-void CSceneManager::Initialize(Ui_ShaderToolMain* pShaderTool, CCodeEditorE* pCodeEditor, CTexturePainter* pTexturePainter)
+void CSceneManager::OnDurationChanged(double newVal)
+{
+	SafeTimeValues();
+}
+
+void CSceneManager::Initialize(Ui_ShaderToolMain* pShaderTool, CCodeEditorE* pCodeEditor, CTexturePainter* pTexturePainter, QDoubleSpinBox* pDuration, QSpinBox* pOrder)
 {
 	m_pMainUI = pShaderTool;
 	m_pSceneLayout = pShaderTool->SceneLayout;
 	m_pCodeEditorHandle = pCodeEditor;
 	m_pTexturePainterHandle = pTexturePainter;
+	m_pDurationEdit = pDuration;
+	m_pOrderEdit = pOrder;
 
 	connect(pShaderTool->AddSceneButton, SIGNAL(clicked()), this, SLOT(OnAddSceneClick()));
+	connect(pShaderTool->OrderEdit, SIGNAL(valueChanged(int)), this, SLOT(OnOrderChanged(int)));
+	connect(pShaderTool->DurationEdit, SIGNAL(valueChanged(double)), this, SLOT(OnDurationChanged(double)));
+
+	m_CurrentActiveScene = 0;
 
 	//Add the default scene
 	OnAddSceneClick();
@@ -43,6 +97,8 @@ void CSceneManager::ChangeActiveSceneTo(const size_t slot)
 	auto textures = m_pTexturePainterHandle->GetLoadedTexture();
 	m_Scenes[m_CurrentActiveScene]->m_TextureNames = textures;
 
+	SafeTimeValues();
+
 	m_Buttons[m_CurrentActiveScene]->SetAsActive(false);
 	m_Buttons[slot]->SetAsActive(true);
 
@@ -50,6 +106,8 @@ void CSceneManager::ChangeActiveSceneTo(const size_t slot)
 	m_Scenes[slot]->m_pShaderManager->SetActive();
 
 	m_CurrentActiveScene = slot;
+
+	ChangeTimeValuesToScene(slot);
 
 	// Set the textures of the new scene
 	m_pTexturePainterHandle->SetTextures(m_Scenes[m_CurrentActiveScene]->m_TextureNames);
@@ -104,13 +162,70 @@ void CSceneManager::RemoveScene(const size_t slot)
 
 	m_Scenes.erase(m_Scenes.begin() + slot);
 
+	UpdateOrder();
+
+	NotifyListeners();
+}
+
+void CSceneManager::SafeTimeValues()
+{
+	if((float)m_pDurationEdit->value() != m_Scenes[m_CurrentActiveScene]->m_DurationTime)
+	{
+		m_Scenes[m_CurrentActiveScene]->m_DurationTime = (float)m_pDurationEdit->value();
+
+		NotifyListeners();
+	}
+
+	m_Scenes[m_CurrentActiveScene]->m_SceneOrder = (size_t)m_pOrderEdit->value();
+}
+	
+void CSceneManager::UpdateOrder()
+{
 	for (size_t i = 0; i < m_Buttons.size(); ++i)
 		m_Buttons[i]->UpdateSlot(i);
+
+	for (size_t i = 0; i < m_Scenes.size(); ++i)
+		m_Scenes[i]->m_SceneOrder = i;
+}
+
+void CSceneManager::NotifyListeners()
+{
+	for (size_t i = 0; i < m_Listeners.size(); i++)
+	{
+		m_Listeners[i]->SceneChanged();
+	}
+}
+
+void CSceneManager::RegisterListener(SSceneListener * pListener)
+{
+	m_Listeners.push_back(pListener);
+}
+
+void CSceneManager::UnregisterListener(SSceneListener * pListener)
+{
+	for (size_t i = 0; i < m_Listeners.size(); i++)
+	{
+		if (m_Listeners[i] == pListener)
+		{
+			m_Listeners.erase(m_Listeners.begin() + i);
+		}
+	}
+}
+
+void CSceneManager::ChangeTimeValuesToScene(size_t slot)
+{
+	m_pDurationEdit->setValue((double)m_Scenes[slot]->m_DurationTime);
+	m_pOrderEdit->setValue((double)m_Scenes[slot]->m_SceneOrder);
 }
 
 CScene* CSceneManager::GetActiveScene() const
 {
 	return m_Scenes[m_CurrentActiveScene];
+}
+
+std::vector<CScene*>& CSceneManager::GetAllScenesInOrder()
+{
+	return m_Scenes;
 }
 
 const char* CSceneManager::SaveData()

@@ -7,6 +7,7 @@
 #include "ShaderCreator.h"
 #include "ProjectManager.h"
 #include "SceneManager.h"
+#include "Timeline.h"
 
 class CSyntaxHighlighter;
 class CCodeEditorE;
@@ -33,6 +34,7 @@ private:
 	CShaderCreator m_ShaderCreator;
 	CSceneManager m_SceneManager;
 	CProjectManager m_ProjectManager;
+	CTimeline m_Timeline;
 
 private:
 	void SetupCodeEditor();
