@@ -16,8 +16,12 @@ CTimeline::~CTimeline()
 
 void CTimeline::OnPlay()
 {
+	Reset();
+
 	CConsole::Instance().PrintText("Timeline: Start playing", CConsole::EPrintType::Text);
 	m_IsPlaying = true;
+
+	m_pAudioWidget->PlayAudio();
 
 	// Force to start from the first scene
 	m_pSceneManager->ChangeActiveSceneTo(0);
@@ -29,6 +33,37 @@ void CTimeline::OnPlay()
 		float time = scene->m_DurationTime;
 		m_SceneTimes.push(time);
 	}
+}
+
+void CTimeline::OnPlayScene()
+{
+	m_IsPlaying = true;
+
+	float time = m_pSceneManager->GetActiveScene()->m_DurationTime;
+	m_SceneTimes.push(time);
+
+	auto scenes = m_pSceneManager->GetAllScenesInOrder();
+
+	float seconds = 0;
+
+	for (size_t i = 0; i < scenes.size(); ++i)
+	{
+		if (i == m_pSceneManager->GetActiveScene()->m_SceneOrder)
+			break;
+
+		seconds += scenes[i]->m_DurationTime;
+	}
+
+	m_Time = seconds;
+
+	int milli = SECONDS_TO_MILLISECONDS(seconds);
+
+	m_pAudioWidget->PlayAudioAtPosition(milli);
+
+	std::string message = "Timeline: Start playing Scene";
+	message.append(std::to_string(m_pSceneManager->GetActiveScene()->m_SceneOrder));
+
+	CConsole::Instance().PrintText(message.c_str(), CConsole::EPrintType::Text);
 }
 
 void CTimeline::OnTimelineEdit(int a)
@@ -65,14 +100,18 @@ void CTimeline::OnFinishedEdit()
 	Reset();
 }
 
-void CTimeline::Initialize(CSceneManager* pSceneManager, QSlider* pSlider, QPushButton* pPlayButton)
+void CTimeline::Initialize(CSceneManager* pSceneManager, QSlider* pSlider, QPushButton* pPlayButton, CAudioWidget* pAudioPlayer)
 {
 	m_pPlayButton = pPlayButton;
 	m_pTimeline = pSlider;
 	m_pSceneManager = pSceneManager;
-	connect(pPlayButton, SIGNAL(clicked()), this, SLOT(OnPlay()));
+	m_pAudioWidget = pAudioPlayer;
+
+	connect(pPlayButton, SIGNAL(released()), this, SLOT(OnPlay()));
 	connect(pSlider, SIGNAL(sliderMoved(int)), this, SLOT(OnTimelineEdit(int)));
 	connect(pSlider, SIGNAL(sliderReleased()), this, SLOT(OnFinishedEdit()));
+	connect(pSlider, SIGNAL(doubleClicked()), this, SLOT(OnPlayScene()));
+
 
 	pSceneManager->RegisterListener(this);
 
@@ -88,6 +127,8 @@ void CTimeline::Reset()
 	m_SceneTimes.swap(empty);
 	m_IsPlaying = false;
 	m_IsEditing = false;
+
+	m_pAudioWidget->StopAudio();
 }
 
 void CTimeline::SceneChanged()
@@ -126,7 +167,7 @@ float CTimeline::UpdateTime(float deltaTime, float timeSinceStartUp)
 
 		CConsole::Instance().PrintText(a.c_str(), CConsole::EPrintType::Text);
 
-		if (m_PassedTime > m_SceneTimes.front())
+		if (m_SceneTimes.size() != 0 && m_PassedTime > m_SceneTimes.front())
 		{
 			size_t slot = m_pSceneManager->GetActiveScene()->m_SceneOrder + 1;
 			m_pSceneManager->ChangeActiveSceneTo(slot);

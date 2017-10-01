@@ -34,13 +34,14 @@ public:
 	void AddShader(QString code = QString());
 	void AddButton(size_t connectToSlot = UNDEFINED_CONNECT_SLOT);
 
+	void Release();
 
 	void SetActive();
 	void SetDisable();
 
 	//ISerializer
 	const char* SaveData() final;
-	void LoadData(const char* pData) final;
+	void LoadData(CSerializerChunk* pData) final;
 	std::string buffer;
 	//~ISerializer
 

@@ -128,7 +128,6 @@ void CTexturePainter::mousePressEvent(QMouseEvent * event)
 		//Maybe do something here
 	}break;
 	}
-	int a = 0;
 }
 
 size_t CTexturePainter::FindTextureIndexFromPosition(QPoint pos)

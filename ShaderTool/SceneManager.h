@@ -4,8 +4,8 @@
 #include "ui_ShaderToolMain.h"
 #include "ISerializer.h"
 #include <qspinbox.h>
+#include "ShaderManager.h"
 
-class CShaderManager;
 class CSceneButton;
 class CCodeEditorE;
 class CTexturePainter;
@@ -36,7 +36,10 @@ struct CScene
 	void Release()
 	{
 		if (m_pShaderManager)
+		{
+			m_pShaderManager->Release();
 			delete m_pShaderManager;
+		}
 	}
 };
 
@@ -77,7 +80,7 @@ public:
 	//TODO: Implement ISerializer functions.
 	//ISerializer
 	const char* SaveData() final;
-	void LoadData(const char* pData) final;
+	void LoadData(CSerializerChunk* pData) final;
 	std::string buffer;
 	//~ISerializer
 

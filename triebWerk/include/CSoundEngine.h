@@ -36,6 +36,7 @@ namespace triebWerk
 		bool Initialize(CResourceManager* a_pResourceManager, const float a_MasterVolume, const float a_BGMVolume, const float a_SFXVolume);
 		void PlayBGM(CSound* a_pBGM, bool a_OverrideSameBGM, bool a_ShouldLoop);
 		void PlaySFX(CSound* a_pSFX);
+		void PlayAtPosition(CSound* a_pSound, unsigned int millisecond);
 		void StopAllSounds();
 		void PauseBGM();
 		void ContinueBGM();

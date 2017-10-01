@@ -3,6 +3,7 @@
 #include <qfiledialog.h>
 #include <CFileWriter.h>
 #include <ProjectFileReader.h>
+#include "SerializerChunk.h"
 #include <Console.h>
 
 void CProjectManager::RegisterSerializer(ISerializer * pSerializer, const char* guid)
@@ -40,7 +41,10 @@ void CProjectManager::OnOpenProject()
 	
 	for (size_t i = 0; i < m_Serializer.size(); i++)
 	{
-		m_Serializer[i].serializer->LoadData(reader.GetSerializerChunk(m_Serializer[i].string.c_str()).c_str());
+		CSerializerChunk chunk(reader.GetSerializerChunk(m_Serializer[i].string.c_str()).c_str());
+		m_Serializer[i].serializer->LoadData(&chunk);
+
+		int a = 0;
 	}
 
 	CConsole::Instance().PrintText("Project successfully loaded", CConsole::EPrintType::Success);

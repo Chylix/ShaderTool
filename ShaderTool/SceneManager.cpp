@@ -1,8 +1,8 @@
 #include "SceneManager.h"
 #include "SceneButton.h"
 #include "ShaderManager.h"
-
-
+#include "SerializerChunk.h"
+#include <string>  
 
 CSceneManager::CSceneManager()
 {
@@ -175,8 +175,6 @@ void CSceneManager::SafeTimeValues()
 
 		NotifyListeners();
 	}
-
-	m_Scenes[m_CurrentActiveScene]->m_SceneOrder = (size_t)m_pOrderEdit->value();
 }
 	
 void CSceneManager::UpdateOrder()
@@ -230,9 +228,60 @@ std::vector<CScene*>& CSceneManager::GetAllScenesInOrder()
 
 const char* CSceneManager::SaveData()
 {
-	return nullptr;
+	for (auto* scene : m_Scenes)
+	{
+		buffer.append("-- Scene --\n");
+		buffer.append(scene->m_SceneName);
+		buffer.append("\n");
+		buffer.append(std::to_string(scene->m_DurationTime));
+		buffer.append("\n");
+		buffer.append(scene->m_pShaderManager->SaveData());
+		buffer.append("----\n");
+	}
+
+	return buffer.c_str();
 }
 
-void CSceneManager::LoadData(const char * pData)
+void CSceneManager::LoadData(CSerializerChunk* pData)
 {
+	size_t slot = m_CurrentActiveScene;
+	size_t iter = 0;
+	size_t iterSceneEnd = 0;
+
+	bool breakS = false;
+
+	for (size_t i = 0; breakS == false; i++)
+	{
+		if (pData->IsChunkEnd())
+			break;
+
+		if (iter > 0)
+		{
+			OnAddSceneClick();
+		}
+
+		size_t sceneEnd = pData->GetChunk().find("----", iterSceneEnd);
+		auto a = pData->GetLine();
+		m_Scenes[slot]->m_SceneName = pData->GetLine();
+		m_Scenes[slot]->m_DurationTime = std::stof(pData->GetLine());
+		auto a3 = pData->GetLine();
+
+		std::string sceneString = pData->GetChunk().substr(iterSceneEnd, sceneEnd - iterSceneEnd).c_str();
+
+		CSerializerChunk d(sceneString.c_str());
+
+		m_Scenes[slot]->m_pShaderManager->LoadData(&d);
+
+		while (pData->GetLine() != "----")
+		{
+		}
+
+		iterSceneEnd += sceneEnd + 4;
+		iter++;
+		slot++;
+	}
+
+
 }
+
+

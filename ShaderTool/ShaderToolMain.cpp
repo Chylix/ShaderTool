@@ -37,12 +37,12 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 
 	//m_Timeline.Initialize(m_MainUi.Timeline, m_MainUi.PlayButton);
 
-	m_Timeline.Initialize(&m_SceneManager, m_MainUi.Timeline, m_MainUi.PlayButton);
+	m_Timeline.Initialize(&m_SceneManager, m_MainUi.Timeline, m_MainUi.PlayButton, m_MainUi.widget);
 
 	SetupCodeEditor();
 
 	//TODO: Move this to the scene manager
-	//m_ProjectManager.RegisterSerializer(m_SceneManager.GetActiveScene()->m_pShaderManager, "3BBA1716-3F89-49F1-B23D-724039F3A9C8");
+	m_ProjectManager.RegisterSerializer(&m_SceneManager, "3BBA1716-3F89-49F1-B23D-724039F3A9C8");
 }
 
 void CShaderToolMain::OnFullscreen()

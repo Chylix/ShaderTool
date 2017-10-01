@@ -5,6 +5,8 @@
 #include <qobject.h>
 #include "SceneManager.h"
 
+class CAudioWidget;
+
 class CTimeline : public QObject, public SSceneListener
 {
 	Q_OBJECT
@@ -13,7 +15,7 @@ public:
 	CTimeline();
 	~CTimeline();
 
-	void Initialize(CSceneManager* pSceneManager, QSlider* timeline, QPushButton* button);
+	void Initialize(CSceneManager* pSceneManager, QSlider* timeline, QPushButton* button, CAudioWidget* pAudioPlayer);
 	float UpdateTime(float deltaTime, float timeSinceStartUp);
 
 	virtual void SceneChanged() final;
@@ -22,6 +24,7 @@ public:
 
 public slots:
 	void OnPlay();
+	void OnPlayScene();
 	void OnTimelineEdit(int);
 	void OnFinishedEdit();
 
@@ -29,7 +32,8 @@ private:
 	QSlider* m_pTimeline;
 	QPushButton* m_pPlayButton;
 	CSceneManager* m_pSceneManager;
-	
+	CAudioWidget* m_pAudioWidget;
+
 	std::queue<float> m_SceneTimes;
 
 	bool m_IsEditing = false;

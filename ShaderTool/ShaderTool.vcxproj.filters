@@ -56,6 +56,9 @@
     <Filter Include="Timeline">
       <UniqueIdentifier>{8514698c-b8b5-4c21-87ac-9bdec78c12a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{ce846c2e-ed71-4bcd-af41-340bd7066716}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\Debug\moc_ShaderToolMain.cpp">
@@ -176,6 +179,18 @@
     <ClCompile Include="GeneratedFiles\Release\moc_Timeline.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="AudioWidget.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_AudioWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_AudioWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SerializerChunk.cpp">
+      <Filter>ProjectManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ShaderToolMain.ui">
@@ -217,6 +232,9 @@
     <CustomBuild Include="Timeline.h">
       <Filter>Timeline</Filter>
     </CustomBuild>
+    <CustomBuild Include="AudioWidget.h">
+      <Filter>Audio</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_ShaderToolMain.h">
@@ -238,6 +256,9 @@
       <Filter>ProjectManager</Filter>
     </ClInclude>
     <ClInclude Include="ProjectFileReader.h">
+      <Filter>ProjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SerializerChunk.h">
       <Filter>ProjectManager</Filter>
     </ClInclude>
   </ItemGroup>

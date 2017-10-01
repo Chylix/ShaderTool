@@ -1,6 +1,7 @@
 #include "ShaderManager.h"
 #include "CodeEditor.h"
 #include "ShaderManagerButton.h"
+#include "SerializerChunk.h"
 
 CShaderManager::CShaderManager()
 	: m_pCodeEditorHandle(nullptr)
@@ -160,39 +161,46 @@ void CShaderManager::AddButton(size_t connectToShader)
 	btn1->Init(slot, this);
 }
 
-const char * CShaderManager::SaveData()
+void CShaderManager::Release()
 {
-	//for (size_t i = 0; i < m_Shaders.size(); i++)
-	//{
-	//	buffer.append(m_Shaders[i].code.toStdString());
-	//	buffer.append("\n~\n");
-	//}
-
-	//return buffer.c_str();
-	return nullptr;
+	this->disconnect();
 }
 
-void CShaderManager::LoadData(const char * pData)
+const char * CShaderManager::SaveData()
 {
-	/*Reset();
+	for (size_t i = 0; i < m_Shaders.size(); i++)
+	{
+		buffer.append("~|~\n");
+		buffer.append(m_Shaders[i].code.toStdString());
+		buffer.append("\n~|~\n");
+	}
 
-	std::string data = pData;
+	return buffer.c_str();
+}
 
-	size_t q = 0;
+void CShaderManager::LoadData(CSerializerChunk* pData)
+{
+	Reset();
+
+	std::string data = pData->GetChunk();
+
+	size_t start = 0;
 	size_t iterator = 0;
 	size_t iter = 0;
 
-	while (q != std::string::npos)
+	while (start != std::string::npos)
 	{
 		SShaderCode shader;
-		q = data.find("~", iterator);
-
-		if (q == std::string::npos)
+		start = data.find("~|~", iterator);
+		if (start == std::string::npos)
 			break;
+
+		iterator = start + 3;
+		size_t end = data.find("~|~", iterator);
 
 		if (iter == 0)
 		{
-			m_Shaders[iter].code = QString(data.substr(iterator, q - 1).c_str());
+			m_Shaders[iter].code = QString(data.substr(iterator, end - iterator).c_str());
 			m_Shaders[iter].slot = m_Shaders.size();
 			m_pCodeEditorHandle->SetText(m_Shaders[0].code);
 			m_CurrentWorkingSlot = 0;
@@ -200,14 +208,14 @@ void CShaderManager::LoadData(const char * pData)
 		}
 		else
 		{
-			AddShader(QString(data.substr(iterator, q - iterator - 1).c_str()));
+			AddShader(QString(data.substr(iterator, end - iterator - 1).c_str()));
 			AddButton();
 		}
 
-		iterator = q + 1;
+		iterator = end + 3;
 
 		iter++;
-	}*/
+	}
 }
 
 void CShaderManager::ChangeActiveButton(int slot)

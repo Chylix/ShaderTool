@@ -124,6 +124,20 @@ void triebWerk::CSoundEngine::PlaySFX(CSound * a_pSFX)
 	m_pDevice->play2D(a_pSFX->m_pSoundSource);
 }
 
+void triebWerk::CSoundEngine::PlayAtPosition(CSound * a_pSound, unsigned int millisecond)
+{
+	if (a_pSound == nullptr)
+	{
+		DebugLogfile.LogfText(CDebugLogfile::ELogType::Warning, false, "Warning: Tried to play a nullptr music resource!");
+		return;
+	}
+
+	m_CurrentBackgroundMusic = m_pDevice->play2D(a_pSound->m_pSoundSource, false, false, true);
+
+	if(m_CurrentBackgroundMusic != nullptr)
+		m_CurrentBackgroundMusic->setPlayPosition(millisecond);
+}
+
 void triebWerk::CSoundEngine::StopAllSounds()
 {
 	m_pDevice->stopAllSounds();
