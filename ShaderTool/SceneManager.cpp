@@ -78,9 +78,9 @@ void CSceneManager::Initialize(Ui_ShaderToolMain* pShaderTool, CCodeEditorE* pCo
 	m_pDurationEdit = pDuration;
 	m_pOrderEdit = pOrder;
 
-	connect(pShaderTool->AddSceneButton, SIGNAL(clicked()), this, SLOT(OnAddSceneClick()));
-	connect(pShaderTool->OrderEdit, SIGNAL(valueChanged(int)), this, SLOT(OnOrderChanged(int)));
-	connect(pShaderTool->DurationEdit, SIGNAL(valueChanged(double)), this, SLOT(OnDurationChanged(double)));
+	connect(pShaderTool->AddScene, SIGNAL(clicked()), this, SLOT(OnAddSceneClick()));
+	//connect(pShaderTool->OrderEdit, SIGNAL(valueChanged(int)), this, SLOT(OnOrderChanged(int)));
+	//connect(pShaderTool->DurationEdit, SIGNAL(valueChanged(double)), this, SLOT(OnDurationChanged(double)));
 
 	m_CurrentActiveScene = 0;
 
@@ -169,12 +169,12 @@ void CSceneManager::RemoveScene(const size_t slot)
 
 void CSceneManager::SafeTimeValues()
 {
-	if((float)m_pDurationEdit->value() != m_Scenes[m_CurrentActiveScene]->m_DurationTime)
-	{
-		m_Scenes[m_CurrentActiveScene]->m_DurationTime = (float)m_pDurationEdit->value();
+	//if((float)m_pDurationEdit->value() != m_Scenes[m_CurrentActiveScene]->m_DurationTime)
+	//{
+	//	m_Scenes[m_CurrentActiveScene]->m_DurationTime = (float)m_pDurationEdit->value();
 
-		NotifyListeners();
-	}
+	//	NotifyListeners();
+	//}
 }
 	
 void CSceneManager::UpdateOrder()
@@ -212,8 +212,8 @@ void CSceneManager::UnregisterListener(SSceneListener * pListener)
 
 void CSceneManager::ChangeTimeValuesToScene(size_t slot)
 {
-	m_pDurationEdit->setValue((double)m_Scenes[slot]->m_DurationTime);
-	m_pOrderEdit->setValue((double)m_Scenes[slot]->m_SceneOrder);
+	//m_pDurationEdit->setValue((double)m_Scenes[slot]->m_DurationTime);
+	//m_pOrderEdit->setValue((double)m_Scenes[slot]->m_SceneOrder);
 }
 
 CScene* CSceneManager::GetActiveScene() const

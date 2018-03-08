@@ -13,15 +13,12 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QSlider>
-#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
@@ -29,6 +26,7 @@
 #include <codeeditor.h>
 #include <ctexturepainter.h>
 #include <d3drenderwidget.h>
+#include <timelinewidget.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -37,32 +35,30 @@ class Ui_ShaderToolMain
 public:
     QWidget *centralWidget;
     QGridLayout *gridLayout;
-    QSplitter *splitter_11;
     QSplitter *splitter_10;
+    QSplitter *splitter_9;
+    QWidget *verticalLayoutWidget;
+    QHBoxLayout *horizontalLayout;
+    QPushButton *LoadProjectButton;
+    QPushButton *SaveProjectButton;
+    QSplitter *splitter_8;
     QWidget *gridLayoutWidget;
     QGridLayout *ViewportLayout;
     D3DRenderWidget *Viewport;
-    QSplitter *splitter_9;
-    QSplitter *splitter_8;
     QSplitter *splitter_6;
+    QSplitter *splitter_5;
+    QWidget *gridLayoutWidget_3;
+    QGridLayout *TimelineActions;
+    QLineEdit *Time;
+    QPushButton *AddScene;
+    QPushButton *Pause;
+    QPushButton *Play;
+    QPushButton *Stop;
     QSplitter *splitter;
-    CAudioWidget *widget;
-    QWidget *horizontalLayoutWidget_3;
-    QHBoxLayout *TimelineLayout;
-    QSlider *Timeline;
+    CTimelineWidget *Timeline;
     QWidget *horizontalLayoutWidget_2;
     QHBoxLayout *SceneLayout;
-    QWidget *horizontalLayoutWidget_4;
-    QHBoxLayout *SceneTimeLayout;
-    QPushButton *AddSceneButton;
-    QLineEdit *DurationText;
-    QDoubleSpinBox *DurationEdit;
-    QLineEdit *OrderText;
-    QSpinBox *OrderEdit;
-    QPushButton *PlayButton;
-    QSplitter *splitter_5;
-    QPushButton *SaveProjectButton;
-    QPushButton *LoadProjectButton;
+    CAudioWidget *AudioWidget;
     QSplitter *splitter_4;
     QSplitter *splitter_3;
     QSplitter *splitter_2;
@@ -81,7 +77,7 @@ public:
     {
         if (ShaderToolMain->objectName().isEmpty())
             ShaderToolMain->setObjectName(QStringLiteral("ShaderToolMain"));
-        ShaderToolMain->resize(1376, 754);
+        ShaderToolMain->resize(1376, 1169);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -107,272 +103,34 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        splitter_11 = new QSplitter(centralWidget);
-        splitter_11->setObjectName(QStringLiteral("splitter_11"));
-        splitter_11->setStyleSheet(QLatin1String("QSplitter::handle {\n"
-"    background: rgb(50, 50, 50);\n"
-"}"));
-        splitter_11->setOrientation(Qt::Horizontal);
-        splitter_11->setHandleWidth(1);
-        splitter_10 = new QSplitter(splitter_11);
+        splitter_10 = new QSplitter(centralWidget);
         splitter_10->setObjectName(QStringLiteral("splitter_10"));
         splitter_10->setStyleSheet(QLatin1String("QSplitter::handle {\n"
-"    background: rgb(50, 50, 50);\n"
+"    background: rgb(40, 40, 40);\n"
 "}"));
-        splitter_10->setOrientation(Qt::Vertical);
+        splitter_10->setOrientation(Qt::Horizontal);
         splitter_10->setHandleWidth(1);
-        gridLayoutWidget = new QWidget(splitter_10);
-        gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        ViewportLayout = new QGridLayout(gridLayoutWidget);
-        ViewportLayout->setSpacing(6);
-        ViewportLayout->setContentsMargins(11, 11, 11, 11);
-        ViewportLayout->setObjectName(QStringLiteral("ViewportLayout"));
-        ViewportLayout->setContentsMargins(0, 0, 0, 0);
-        Viewport = new D3DRenderWidget(gridLayoutWidget);
-        Viewport->setObjectName(QStringLiteral("Viewport"));
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Minimum);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(Viewport->sizePolicy().hasHeightForWidth());
-        Viewport->setSizePolicy(sizePolicy1);
-        Viewport->setMinimumSize(QSize(200, 500));
-
-        ViewportLayout->addWidget(Viewport, 0, 0, 1, 1);
-
-        splitter_10->addWidget(gridLayoutWidget);
         splitter_9 = new QSplitter(splitter_10);
         splitter_9->setObjectName(QStringLiteral("splitter_9"));
         splitter_9->setStyleSheet(QLatin1String("QSplitter::handle {\n"
-"    background: rgb(50, 50, 50);\n"
+"    background: rgb(40, 40, 40);\n"
 "}"));
         splitter_9->setOrientation(Qt::Vertical);
         splitter_9->setHandleWidth(1);
-        splitter_8 = new QSplitter(splitter_9);
-        splitter_8->setObjectName(QStringLiteral("splitter_8"));
-        splitter_8->setStyleSheet(QLatin1String("QSplitter::handle {\n"
-"    background: rgb(50, 50, 50);\n"
-"}"));
-        splitter_8->setOrientation(Qt::Vertical);
-        splitter_8->setHandleWidth(1);
-        splitter_6 = new QSplitter(splitter_8);
-        splitter_6->setObjectName(QStringLiteral("splitter_6"));
-        splitter_6->setStyleSheet(QLatin1String("QSplitter::handle {\n"
-"    background: rgb(50, 50, 50);\n"
-"}"));
-        splitter_6->setOrientation(Qt::Vertical);
-        splitter_6->setHandleWidth(1);
-        splitter = new QSplitter(splitter_6);
-        splitter->setObjectName(QStringLiteral("splitter"));
-        splitter->setStyleSheet(QLatin1String("QSplitter::handle {\n"
-"    background: rgb(50, 50, 50);\n"
-"}"));
-        splitter->setOrientation(Qt::Vertical);
-        splitter->setHandleWidth(1);
-        widget = new CAudioWidget(splitter);
-        widget->setObjectName(QStringLiteral("widget"));
-        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Minimum);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
-        widget->setSizePolicy(sizePolicy2);
-        widget->setMinimumSize(QSize(0, 20));
-        splitter->addWidget(widget);
-        horizontalLayoutWidget_3 = new QWidget(splitter);
-        horizontalLayoutWidget_3->setObjectName(QStringLiteral("horizontalLayoutWidget_3"));
-        TimelineLayout = new QHBoxLayout(horizontalLayoutWidget_3);
-        TimelineLayout->setSpacing(6);
-        TimelineLayout->setContentsMargins(11, 11, 11, 11);
-        TimelineLayout->setObjectName(QStringLiteral("TimelineLayout"));
-        TimelineLayout->setSizeConstraint(QLayout::SetMaximumSize);
-        TimelineLayout->setContentsMargins(0, 0, 0, 0);
-        Timeline = new QSlider(horizontalLayoutWidget_3);
-        Timeline->setObjectName(QStringLiteral("Timeline"));
-        QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Maximum);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(Timeline->sizePolicy().hasHeightForWidth());
-        Timeline->setSizePolicy(sizePolicy3);
-        Timeline->setMaximumSize(QSize(16777215, 20));
-        Timeline->setStyleSheet(QLatin1String(".QSlider\n"
-"{\n"
-"background-color: rgb(56, 56, 56);\n"
-"text-color: rgb(255, 255, 255);\n"
-"border: 0;\n"
-"color:  rgb(255, 255, 255);\n"
-"font-family: Courier, serif;\n"
-"}"));
-        Timeline->setOrientation(Qt::Horizontal);
-        Timeline->setTickInterval(0);
-
-        TimelineLayout->addWidget(Timeline);
-
-        splitter->addWidget(horizontalLayoutWidget_3);
-        splitter_6->addWidget(splitter);
-        horizontalLayoutWidget_2 = new QWidget(splitter_6);
-        horizontalLayoutWidget_2->setObjectName(QStringLiteral("horizontalLayoutWidget_2"));
-        SceneLayout = new QHBoxLayout(horizontalLayoutWidget_2);
-        SceneLayout->setSpacing(0);
-        SceneLayout->setContentsMargins(11, 11, 11, 11);
-        SceneLayout->setObjectName(QStringLiteral("SceneLayout"));
-        SceneLayout->setSizeConstraint(QLayout::SetMaximumSize);
-        SceneLayout->setContentsMargins(0, 0, 0, 0);
-        splitter_6->addWidget(horizontalLayoutWidget_2);
-        splitter_8->addWidget(splitter_6);
-        horizontalLayoutWidget_4 = new QWidget(splitter_8);
-        horizontalLayoutWidget_4->setObjectName(QStringLiteral("horizontalLayoutWidget_4"));
-        SceneTimeLayout = new QHBoxLayout(horizontalLayoutWidget_4);
-        SceneTimeLayout->setSpacing(0);
-        SceneTimeLayout->setContentsMargins(11, 11, 11, 11);
-        SceneTimeLayout->setObjectName(QStringLiteral("SceneTimeLayout"));
-        SceneTimeLayout->setSizeConstraint(QLayout::SetMaximumSize);
-        SceneTimeLayout->setContentsMargins(0, 0, 0, 0);
-        AddSceneButton = new QPushButton(horizontalLayoutWidget_4);
-        AddSceneButton->setObjectName(QStringLiteral("AddSceneButton"));
-        QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Preferred);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(AddSceneButton->sizePolicy().hasHeightForWidth());
-        AddSceneButton->setSizePolicy(sizePolicy4);
-        AddSceneButton->setMaximumSize(QSize(3020000, 30));
-        AddSceneButton->setStyleSheet(QLatin1String("			.QPushButton\n"
-"			{\n"
-"			background-color: rgb(56, 56, 56);\n"
-"			text-color: rgb(255, 255, 255);\n"
-"			border: 0;\n"
-"			color:  rgb(255, 255, 255);\n"
-"			font-family: Courier, serif;\n"
-"			}\n"
-"			QPushButton:hover {\n"
-"			   background-color: rgb(66, 66, 66);\n"
-"		}"));
-
-        SceneTimeLayout->addWidget(AddSceneButton);
-
-        DurationText = new QLineEdit(horizontalLayoutWidget_4);
-        DurationText->setObjectName(QStringLiteral("DurationText"));
-        DurationText->setEnabled(false);
-        QSizePolicy sizePolicy5(QSizePolicy::Maximum, QSizePolicy::Maximum);
-        sizePolicy5.setHorizontalStretch(0);
-        sizePolicy5.setVerticalStretch(0);
-        sizePolicy5.setHeightForWidth(DurationText->sizePolicy().hasHeightForWidth());
-        DurationText->setSizePolicy(sizePolicy5);
-        DurationText->setMaximumSize(QSize(70, 30));
-        DurationText->setStyleSheet(QLatin1String(".QLineEdit\n"
-"{\n"
-"background-color: rgb(56, 56, 56);\n"
-"text-color: rgb(255, 255, 255);\n"
-"border: 0;\n"
-"color:  rgb(255, 255, 255);\n"
-"font-family: Courier, serif;\n"
-"}\n"
-""));
-
-        SceneTimeLayout->addWidget(DurationText);
-
-        DurationEdit = new QDoubleSpinBox(horizontalLayoutWidget_4);
-        DurationEdit->setObjectName(QStringLiteral("DurationEdit"));
-        sizePolicy5.setHeightForWidth(DurationEdit->sizePolicy().hasHeightForWidth());
-        DurationEdit->setSizePolicy(sizePolicy5);
-        DurationEdit->setMaximumSize(QSize(70, 30));
-        DurationEdit->setStyleSheet(QLatin1String(".QDoubleSpinBox\n"
-"{\n"
-"background-color: rgb(56, 56, 56);\n"
-"text-color: rgb(255, 255, 255);\n"
-"border: 0;\n"
-"color:  rgb(255, 255, 255);\n"
-"font-family: Courier, serif;\n"
-"}\n"
-""));
-        DurationEdit->setValue(1);
-
-        SceneTimeLayout->addWidget(DurationEdit);
-
-        OrderText = new QLineEdit(horizontalLayoutWidget_4);
-        OrderText->setObjectName(QStringLiteral("OrderText"));
-        OrderText->setEnabled(false);
-        sizePolicy5.setHeightForWidth(OrderText->sizePolicy().hasHeightForWidth());
-        OrderText->setSizePolicy(sizePolicy5);
-        OrderText->setMaximumSize(QSize(50, 30));
-        OrderText->setStyleSheet(QLatin1String(".QLineEdit\n"
-"{\n"
-"background-color: rgb(56, 56, 56);\n"
-"text-color: rgb(255, 255, 255);\n"
-"border: 0;\n"
-"color:  rgb(255, 255, 255);\n"
-"font-family: Courier, serif;\n"
-"}\n"
-""));
-
-        SceneTimeLayout->addWidget(OrderText);
-
-        OrderEdit = new QSpinBox(horizontalLayoutWidget_4);
-        OrderEdit->setObjectName(QStringLiteral("OrderEdit"));
-        sizePolicy5.setHeightForWidth(OrderEdit->sizePolicy().hasHeightForWidth());
-        OrderEdit->setSizePolicy(sizePolicy5);
-        OrderEdit->setMaximumSize(QSize(70, 30));
-        OrderEdit->setStyleSheet(QLatin1String(".QSpinBox\n"
-"{\n"
-"background-color: rgb(56, 56, 56);\n"
-"text-color: rgb(255, 255, 255);\n"
-"border: 0;\n"
-"color:  rgb(255, 255, 255);\n"
-"font-family: Courier, serif;\n"
-"}\n"
-""));
-
-        SceneTimeLayout->addWidget(OrderEdit);
-
-        PlayButton = new QPushButton(horizontalLayoutWidget_4);
-        PlayButton->setObjectName(QStringLiteral("PlayButton"));
-        sizePolicy5.setHeightForWidth(PlayButton->sizePolicy().hasHeightForWidth());
-        PlayButton->setSizePolicy(sizePolicy5);
-        PlayButton->setMaximumSize(QSize(50, 30));
-        PlayButton->setStyleSheet(QLatin1String("			.QPushButton\n"
-"			{\n"
-"			background-color: rgb(56, 56, 56);\n"
-"			text-color: rgb(255, 255, 255);\n"
-"			border: 0;\n"
-"			color:  rgb(255, 255, 255);\n"
-"			font-family: Courier, serif;\n"
-"			}\n"
-"			QPushButton:hover {\n"
-"			   background-color: rgb(66, 66, 66);\n"
-"		}"));
-
-        SceneTimeLayout->addWidget(PlayButton);
-
-        splitter_8->addWidget(horizontalLayoutWidget_4);
-        splitter_9->addWidget(splitter_8);
-        splitter_5 = new QSplitter(splitter_9);
-        splitter_5->setObjectName(QStringLiteral("splitter_5"));
-        splitter_5->setEnabled(true);
-        splitter_5->setStyleSheet(QLatin1String("QSplitter::handle {\n"
-"    background: rgb(50, 50, 50);\n"
-"}"));
-        splitter_5->setOrientation(Qt::Horizontal);
-        splitter_5->setHandleWidth(1);
-        SaveProjectButton = new QPushButton(splitter_5);
-        SaveProjectButton->setObjectName(QStringLiteral("SaveProjectButton"));
-        sizePolicy3.setHeightForWidth(SaveProjectButton->sizePolicy().hasHeightForWidth());
-        SaveProjectButton->setSizePolicy(sizePolicy3);
-        SaveProjectButton->setMaximumSize(QSize(16777215, 50));
-        SaveProjectButton->setBaseSize(QSize(0, 0));
-        SaveProjectButton->setStyleSheet(QLatin1String("			.QPushButton\n"
-"			{\n"
-"			background-color: rgb(56, 56, 56);\n"
-"			text-color: rgb(255, 255, 255);\n"
-"			border: 0;\n"
-"			color:  rgb(255, 255, 255);\n"
-"			font-family: Courier, serif;\n"
-"			}\n"
-"			QPushButton:hover {\n"
-"			   background-color: rgb(66, 66, 66);\n"
-"		}"));
-        splitter_5->addWidget(SaveProjectButton);
-        LoadProjectButton = new QPushButton(splitter_5);
+        verticalLayoutWidget = new QWidget(splitter_9);
+        verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
+        horizontalLayout = new QHBoxLayout(verticalLayoutWidget);
+        horizontalLayout->setSpacing(0);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        LoadProjectButton = new QPushButton(verticalLayoutWidget);
         LoadProjectButton->setObjectName(QStringLiteral("LoadProjectButton"));
-        sizePolicy3.setHeightForWidth(LoadProjectButton->sizePolicy().hasHeightForWidth());
-        LoadProjectButton->setSizePolicy(sizePolicy3);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Maximum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(LoadProjectButton->sizePolicy().hasHeightForWidth());
+        LoadProjectButton->setSizePolicy(sizePolicy1);
         LoadProjectButton->setMinimumSize(QSize(0, 0));
         LoadProjectButton->setMaximumSize(QSize(16777215, 50));
         LoadProjectButton->setStyleSheet(QLatin1String("			.QPushButton\n"
@@ -386,11 +144,209 @@ public:
 "			QPushButton:hover {\n"
 "			   background-color: rgb(66, 66, 66);\n"
 "		}"));
-        splitter_5->addWidget(LoadProjectButton);
-        splitter_9->addWidget(splitter_5);
+
+        horizontalLayout->addWidget(LoadProjectButton);
+
+        SaveProjectButton = new QPushButton(verticalLayoutWidget);
+        SaveProjectButton->setObjectName(QStringLiteral("SaveProjectButton"));
+        sizePolicy1.setHeightForWidth(SaveProjectButton->sizePolicy().hasHeightForWidth());
+        SaveProjectButton->setSizePolicy(sizePolicy1);
+        SaveProjectButton->setMaximumSize(QSize(16777215, 50));
+        SaveProjectButton->setBaseSize(QSize(0, 0));
+        SaveProjectButton->setStyleSheet(QLatin1String("			.QPushButton\n"
+"			{\n"
+"			background-color: rgb(56, 56, 56);\n"
+"			text-color: rgb(255, 255, 255);\n"
+"			border: 0;\n"
+"			color:  rgb(255, 255, 255);\n"
+"			font-family: Courier, serif;\n"
+"			}\n"
+"			QPushButton:hover {\n"
+"			   background-color: rgb(66, 66, 66);\n"
+"		}"));
+
+        horizontalLayout->addWidget(SaveProjectButton);
+
+        splitter_9->addWidget(verticalLayoutWidget);
+        splitter_8 = new QSplitter(splitter_9);
+        splitter_8->setObjectName(QStringLiteral("splitter_8"));
+        splitter_8->setStyleSheet(QLatin1String("QSplitter::handle {\n"
+"    background: rgb(40, 40, 40);\n"
+"}"));
+        splitter_8->setOrientation(Qt::Vertical);
+        splitter_8->setHandleWidth(1);
+        gridLayoutWidget = new QWidget(splitter_8);
+        gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
+        ViewportLayout = new QGridLayout(gridLayoutWidget);
+        ViewportLayout->setSpacing(6);
+        ViewportLayout->setContentsMargins(11, 11, 11, 11);
+        ViewportLayout->setObjectName(QStringLiteral("ViewportLayout"));
+        ViewportLayout->setContentsMargins(0, 0, 0, 0);
+        Viewport = new D3DRenderWidget(gridLayoutWidget);
+        Viewport->setObjectName(QStringLiteral("Viewport"));
+        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Minimum);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(Viewport->sizePolicy().hasHeightForWidth());
+        Viewport->setSizePolicy(sizePolicy2);
+        Viewport->setMinimumSize(QSize(200, 500));
+
+        ViewportLayout->addWidget(Viewport, 0, 0, 1, 1);
+
+        splitter_8->addWidget(gridLayoutWidget);
+        splitter_6 = new QSplitter(splitter_8);
+        splitter_6->setObjectName(QStringLiteral("splitter_6"));
+        splitter_6->setStyleSheet(QLatin1String("QSplitter::handle {\n"
+"    background: rgb(40, 40, 40);\n"
+"}"));
+        splitter_6->setOrientation(Qt::Vertical);
+        splitter_6->setHandleWidth(1);
+        splitter_5 = new QSplitter(splitter_6);
+        splitter_5->setObjectName(QStringLiteral("splitter_5"));
+        splitter_5->setStyleSheet(QLatin1String("QSplitter::handle {\n"
+"    background: rgb(40, 40, 40);\n"
+"}"));
+        splitter_5->setOrientation(Qt::Vertical);
+        splitter_5->setHandleWidth(1);
+        gridLayoutWidget_3 = new QWidget(splitter_5);
+        gridLayoutWidget_3->setObjectName(QStringLiteral("gridLayoutWidget_3"));
+        TimelineActions = new QGridLayout(gridLayoutWidget_3);
+        TimelineActions->setSpacing(0);
+        TimelineActions->setContentsMargins(11, 11, 11, 11);
+        TimelineActions->setObjectName(QStringLiteral("TimelineActions"));
+        TimelineActions->setContentsMargins(0, 0, 0, 0);
+        Time = new QLineEdit(gridLayoutWidget_3);
+        Time->setObjectName(QStringLiteral("Time"));
+        QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(Time->sizePolicy().hasHeightForWidth());
+        Time->setSizePolicy(sizePolicy3);
+        Time->setStyleSheet(QLatin1String("			.QLineEdit\n"
+"			{\n"
+"			background-color: rgb(56, 56, 56);\n"
+"			text-color: rgb(255, 255, 255);\n"
+"			border: 0;\n"
+"			color:  rgb(255, 255, 255);\n"
+"			font-family: Courier, serif;\n"
+"			}\n"
+"			QPushButton:hover {\n"
+"			   background-color: rgb(66, 66, 66);\n"
+"		}"));
+
+        TimelineActions->addWidget(Time, 0, 4, 1, 1);
+
+        AddScene = new QPushButton(gridLayoutWidget_3);
+        AddScene->setObjectName(QStringLiteral("AddScene"));
+        QSizePolicy sizePolicy4(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(AddScene->sizePolicy().hasHeightForWidth());
+        AddScene->setSizePolicy(sizePolicy4);
+        AddScene->setStyleSheet(QLatin1String("			.QPushButton\n"
+"			{\n"
+"			background-color: rgb(56, 56, 56);\n"
+"			text-color: rgb(255, 255, 255);\n"
+"			border: 0;\n"
+"			color:  rgb(255, 255, 255);\n"
+"			font-family: Courier, serif;\n"
+"			}\n"
+"			QPushButton:hover {\n"
+"			   background-color: rgb(66, 66, 66);\n"
+"		}"));
+
+        TimelineActions->addWidget(AddScene, 0, 0, 1, 1);
+
+        Pause = new QPushButton(gridLayoutWidget_3);
+        Pause->setObjectName(QStringLiteral("Pause"));
+        sizePolicy4.setHeightForWidth(Pause->sizePolicy().hasHeightForWidth());
+        Pause->setSizePolicy(sizePolicy4);
+        Pause->setStyleSheet(QLatin1String("			.QPushButton\n"
+"			{\n"
+"			background-color: rgb(56, 56, 56);\n"
+"			text-color: rgb(255, 255, 255);\n"
+"			border: 0;\n"
+"			color:  rgb(255, 255, 255);\n"
+"			font-family: Courier, serif;\n"
+"			}\n"
+"			QPushButton:hover {\n"
+"			   background-color: rgb(66, 66, 66);\n"
+"		}"));
+
+        TimelineActions->addWidget(Pause, 0, 2, 1, 1);
+
+        Play = new QPushButton(gridLayoutWidget_3);
+        Play->setObjectName(QStringLiteral("Play"));
+        sizePolicy4.setHeightForWidth(Play->sizePolicy().hasHeightForWidth());
+        Play->setSizePolicy(sizePolicy4);
+        Play->setStyleSheet(QLatin1String("			.QPushButton\n"
+"			{\n"
+"			background-color: rgb(56, 56, 56);\n"
+"			text-color: rgb(255, 255, 255);\n"
+"			border: 0;\n"
+"			color:  rgb(255, 255, 255);\n"
+"			font-family: Courier, serif;\n"
+"			}\n"
+"			QPushButton:hover {\n"
+"			   background-color: rgb(66, 66, 66);\n"
+"		}"));
+
+        TimelineActions->addWidget(Play, 0, 1, 1, 1);
+
+        Stop = new QPushButton(gridLayoutWidget_3);
+        Stop->setObjectName(QStringLiteral("Stop"));
+        sizePolicy4.setHeightForWidth(Stop->sizePolicy().hasHeightForWidth());
+        Stop->setSizePolicy(sizePolicy4);
+        Stop->setStyleSheet(QLatin1String("			.QPushButton\n"
+"			{\n"
+"			background-color: rgb(56, 56, 56);\n"
+"			text-color: rgb(255, 255, 255);\n"
+"			border: 0;\n"
+"			color:  rgb(255, 255, 255);\n"
+"			font-family: Courier, serif;\n"
+"			}\n"
+"			QPushButton:hover {\n"
+"			   background-color: rgb(66, 66, 66);\n"
+"		}"));
+
+        TimelineActions->addWidget(Stop, 0, 3, 1, 1);
+
+        splitter_5->addWidget(gridLayoutWidget_3);
+        splitter = new QSplitter(splitter_5);
+        splitter->setObjectName(QStringLiteral("splitter"));
+        splitter->setStyleSheet(QLatin1String("QSplitter::handle {\n"
+"    background: rgb(40, 40, 40);\n"
+"}"));
+        splitter->setOrientation(Qt::Vertical);
+        splitter->setHandleWidth(1);
+        Timeline = new CTimelineWidget(splitter);
+        Timeline->setObjectName(QStringLiteral("Timeline"));
+        Timeline->setMinimumSize(QSize(0, 100));
+        splitter->addWidget(Timeline);
+        horizontalLayoutWidget_2 = new QWidget(splitter);
+        horizontalLayoutWidget_2->setObjectName(QStringLiteral("horizontalLayoutWidget_2"));
+        SceneLayout = new QHBoxLayout(horizontalLayoutWidget_2);
+        SceneLayout->setSpacing(0);
+        SceneLayout->setContentsMargins(11, 11, 11, 11);
+        SceneLayout->setObjectName(QStringLiteral("SceneLayout"));
+        SceneLayout->setSizeConstraint(QLayout::SetMaximumSize);
+        SceneLayout->setContentsMargins(0, 0, 0, 0);
+        splitter->addWidget(horizontalLayoutWidget_2);
+        splitter_5->addWidget(splitter);
+        splitter_6->addWidget(splitter_5);
+        AudioWidget = new CAudioWidget(splitter_6);
+        AudioWidget->setObjectName(QStringLiteral("AudioWidget"));
+        QSizePolicy sizePolicy5(QSizePolicy::Preferred, QSizePolicy::Minimum);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(AudioWidget->sizePolicy().hasHeightForWidth());
+        AudioWidget->setSizePolicy(sizePolicy5);
+        AudioWidget->setMinimumSize(QSize(0, 20));
+        splitter_6->addWidget(AudioWidget);
+        splitter_8->addWidget(splitter_6);
+        splitter_9->addWidget(splitter_8);
         splitter_10->addWidget(splitter_9);
-        splitter_11->addWidget(splitter_10);
-        splitter_4 = new QSplitter(splitter_11);
+        splitter_4 = new QSplitter(splitter_10);
         splitter_4->setObjectName(QStringLiteral("splitter_4"));
         splitter_4->setStyleSheet(QLatin1String("QSplitter::handle {\n"
 "    background: rgb(50, 50, 50);\n"
@@ -409,11 +365,8 @@ public:
         splitter_2 = new QSplitter(splitter_3);
         splitter_2->setObjectName(QStringLiteral("splitter_2"));
         splitter_2->setEnabled(true);
-        QSizePolicy sizePolicy6(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy6.setHorizontalStretch(0);
-        sizePolicy6.setVerticalStretch(0);
-        sizePolicy6.setHeightForWidth(splitter_2->sizePolicy().hasHeightForWidth());
-        splitter_2->setSizePolicy(sizePolicy6);
+        sizePolicy4.setHeightForWidth(splitter_2->sizePolicy().hasHeightForWidth());
+        splitter_2->setSizePolicy(sizePolicy4);
         splitter_2->setStyleSheet(QLatin1String("QSplitter::handle {\n"
 "    background: rgb(50, 50, 50);\n"
 "}"));
@@ -431,8 +384,8 @@ public:
         AddShaderButton = new QPushButton(horizontalLayoutWidget);
         AddShaderButton->setObjectName(QStringLiteral("AddShaderButton"));
         AddShaderButton->setEnabled(true);
-        sizePolicy1.setHeightForWidth(AddShaderButton->sizePolicy().hasHeightForWidth());
-        AddShaderButton->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(AddShaderButton->sizePolicy().hasHeightForWidth());
+        AddShaderButton->setSizePolicy(sizePolicy2);
         AddShaderButton->setMinimumSize(QSize(30, 30));
         AddShaderButton->setMaximumSize(QSize(30, 5235235));
         AddShaderButton->setStyleSheet(QLatin1String("			.QPushButton\n"
@@ -491,8 +444,8 @@ public:
         CompileButton->setObjectName(QStringLiteral("CompileButton"));
         sizePolicy.setHeightForWidth(CompileButton->sizePolicy().hasHeightForWidth());
         CompileButton->setSizePolicy(sizePolicy);
-        CompileButton->setMinimumSize(QSize(0, 0));
-        CompileButton->setMaximumSize(QSize(70, 50));
+        CompileButton->setMinimumSize(QSize(70, 50));
+        CompileButton->setMaximumSize(QSize(70, 100));
         CompileButton->setStyleSheet(QLatin1String("			.QPushButton\n"
 "			{\n"
 "			background-color: rgb(66, 66, 66);\n"
@@ -510,9 +463,9 @@ public:
         ResourceViewport = new CTexturePainter(splitter_4);
         ResourceViewport->setObjectName(QStringLiteral("ResourceViewport"));
         splitter_4->addWidget(ResourceViewport);
-        splitter_11->addWidget(splitter_4);
+        splitter_10->addWidget(splitter_4);
 
-        gridLayout->addWidget(splitter_11, 0, 0, 1, 1);
+        gridLayout->addWidget(splitter_10, 0, 0, 1, 1);
 
         ShaderToolMain->setCentralWidget(centralWidget);
 
@@ -524,12 +477,13 @@ public:
     void retranslateUi(QMainWindow *ShaderToolMain)
     {
         ShaderToolMain->setWindowTitle(QApplication::translate("ShaderToolMain", "CShaderToolMain", Q_NULLPTR));
-        AddSceneButton->setText(QApplication::translate("ShaderToolMain", "+", Q_NULLPTR));
-        DurationText->setText(QApplication::translate("ShaderToolMain", "Duration", Q_NULLPTR));
-        OrderText->setText(QApplication::translate("ShaderToolMain", "Order", Q_NULLPTR));
-        PlayButton->setText(QApplication::translate("ShaderToolMain", "Play", Q_NULLPTR));
-        SaveProjectButton->setText(QApplication::translate("ShaderToolMain", "Save Project", Q_NULLPTR));
         LoadProjectButton->setText(QApplication::translate("ShaderToolMain", "Open Project", Q_NULLPTR));
+        SaveProjectButton->setText(QApplication::translate("ShaderToolMain", "Save Project", Q_NULLPTR));
+        Time->setText(QApplication::translate("ShaderToolMain", "00:00:00", Q_NULLPTR));
+        AddScene->setText(QApplication::translate("ShaderToolMain", "Add New Scene", Q_NULLPTR));
+        Pause->setText(QApplication::translate("ShaderToolMain", "Pause", Q_NULLPTR));
+        Play->setText(QApplication::translate("ShaderToolMain", "Play", Q_NULLPTR));
+        Stop->setText(QApplication::translate("ShaderToolMain", "Stop", Q_NULLPTR));
         AddShaderButton->setText(QApplication::translate("ShaderToolMain", "+", Q_NULLPTR));
         CompileButton->setText(QApplication::translate("ShaderToolMain", "Compile", Q_NULLPTR));
     } // retranslateUi

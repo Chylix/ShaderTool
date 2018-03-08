@@ -24,7 +24,7 @@ struct CScene
 		, m_pShaderManager(pShaderManager)
 		, m_DurationTime(1.0f)
 	{
-		m_DurationTime = 1.0f;
+		m_DurationTime = 10.0f;
 	}
 
 	std::string m_SceneName;

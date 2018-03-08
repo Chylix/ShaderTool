@@ -1,6 +1,11 @@
 #include "Timeline.h"
 #include "Console.h"
 #include "SceneManager.h"
+#include <sstream>
+#include <qpoint>
+#include <iomanip>
+
+#include <qgraphicsitem.h>
 
 #define SECONDS_TO_MILLISECONDS(sec) sec * 1000;
 #define MILLISCEONDS_TO_SECONDS(milli) milli / 1000;
@@ -16,15 +21,21 @@ CTimeline::~CTimeline()
 
 void CTimeline::OnPlay()
 {
-	Reset();
+	//Reset();
 
 	CConsole::Instance().PrintText("Timeline: Start playing", CConsole::EPrintType::Text);
 	m_IsPlaying = true;
+
+	m_IsStoped = false;
+	m_IsPaused = false;
+	m_IsEditing = false;
 
 	m_pAudioWidget->PlayAudio();
 
 	// Force to start from the first scene
 	m_pSceneManager->ChangeActiveSceneTo(0);
+
+	m_pTimeline->OnPlay();
 
 	auto scenes = m_pSceneManager->GetAllScenesInOrder();
 
@@ -33,6 +44,20 @@ void CTimeline::OnPlay()
 		float time = scene->m_DurationTime;
 		m_SceneTimes.push(time);
 	}
+}
+
+void CTimeline::OnPause()
+{
+	m_IsPaused = !m_IsPaused;
+}
+
+void CTimeline::OnStop()
+{
+	m_IsPaused = false;
+	m_IsEditing = false;
+	m_IsStoped = true;
+
+	Reset();
 }
 
 void CTimeline::OnPlayScene()
@@ -100,20 +125,84 @@ void CTimeline::OnFinishedEdit()
 	Reset();
 }
 
-void CTimeline::Initialize(CSceneManager* pSceneManager, CTimelineWidget* pSlider, QPushButton* pPlayButton, CAudioWidget* pAudioPlayer)
+QString CTimeline::ConvertTimeToDisplay(float time)
+{
+	float a, b;
+
+	a = modf(time, &b);
+
+	float pi = a;
+	std::stringstream stream;
+	stream << std::fixed << std::setprecision(2) << pi;
+	std::string s = stream.str();
+
+	s.erase(0, 2);
+
+	QString string(std::to_string((int)b).c_str());
+	if (string.size() == 1)
+		string.insert(0, "0");
+	string.append(":");
+	string.append(s.c_str());
+
+	return string;
+}
+
+QString GetTimeAsString(const float time)
+{
+	float a, b;
+
+	a = modf(time, &b);
+
+	float pi = a;
+	std::stringstream stream;
+	stream << std::fixed << std::setprecision(2) << pi;
+	std::string s = stream.str();
+
+	s.erase(0, 2);
+
+	QString string(std::to_string((int)b).c_str());
+	if (string.size() == 1)
+		string.insert(0, "0");
+	string.append(":");
+	string.append(s.c_str());
+
+	return string;
+}
+
+float SecondsToMinutes(const int seconds)
+{
+	int min = seconds / 60;
+	if (min < 1)
+		return seconds * 0.01f;
+	else
+	{
+		float e = seconds % 60;
+		float out = min;
+		out += e * 0.01f;
+		return out;
+	}
+}
+
+
+void CTimeline::Initialize(CSceneManager* pSceneManager, CTimelineWidget* pSlider, QPushButton* pPlayButton, CAudioWidget* pAudioPlayer, QPushButton* pPauseButton, QPushButton* pStopButton, QLineEdit* pTime)
 {
 	//m_pPlayButton = pPlayButton;
 	m_pTimeline = pSlider;
 	m_pSceneManager = pSceneManager;
 	m_pAudioWidget = pAudioPlayer;
+	m_pTimeDisplay = pTime;
 
 	connect(pPlayButton, SIGNAL(released()), this, SLOT(OnPlay()));
+	connect(pPauseButton, SIGNAL(released()), this, SLOT(OnPause()));
+	connect(pStopButton, SIGNAL(released()), this, SLOT(OnStop()));
+
 	//connect(pSlider, SIGNAL(sliderMoved(int)), this, SLOT(OnTimelineEdit(int)));
 	//connect(pSlider, SIGNAL(sliderReleased()), this, SLOT(OnFinishedEdit()));
 	//connect(pSlider, SIGNAL(doubleClicked()), this, SLOT(OnPlayScene()));
 
-
 	pSceneManager->RegisterListener(this);
+
+	m_pTimeline->SetTimeLine(this);
 
 	SceneChanged();
 }
@@ -126,7 +215,10 @@ void CTimeline::Reset()
 	std::queue<float> empty;
 	m_SceneTimes.swap(empty);
 	m_IsPlaying = false;
-	m_IsEditing = false;
+
+	m_pTimeline->OnStop();
+
+	m_pTimeline->SetCurrentTime(0);
 
 	m_pAudioWidget->StopAudio();
 }
@@ -150,11 +242,17 @@ float CTimeline::UpdateTime(float deltaTime, float timeSinceStartUp)
 {
 	m_pTimeline->repaint();
 
-	if (m_IsPlaying == false && m_IsEditing == false)
+	m_pTimeDisplay->setText(ConvertTimeToDisplay(SecondsToMinutes(m_Time)));
+
+	if (m_IsEditing == true)
 	{
-		return timeSinceStartUp;
+		return m_EditTime;
 	}
-	else if(m_IsPlaying)
+	else if (m_IsPaused)
+	{
+		return m_Time;
+	}
+	else if (m_IsPlaying)
 	{
 		m_Time += deltaTime;
 		m_PassedTime += deltaTime;
@@ -164,12 +262,12 @@ float CTimeline::UpdateTime(float deltaTime, float timeSinceStartUp)
 		//m_pTimeline->setValue(time);
 
 		std::string a = std::to_string(m_Time);
-		a += " Scene:";
-		a += std::to_string(m_SceneTimes.size());
+		a += " Passed:";
+		a += std::to_string(m_PassedTime);
 
-		//m_pTimeline->SetCurrentTime(m_Time);
+		m_pTimeline->SetCurrentTime(m_Time);
 
-		//CConsole::Instance().PrintText(a.c_str(), CConsole::EPrintType::Text);
+		CConsole::Instance().PrintText(a.c_str(), CConsole::EPrintType::Text);
 
 		if (m_SceneTimes.size() != 0 && m_PassedTime > m_SceneTimes.front())
 		{
@@ -187,13 +285,39 @@ float CTimeline::UpdateTime(float deltaTime, float timeSinceStartUp)
 
 		return m_Time;
 	}
-	else if(m_IsEditing)
+	else if (m_IsPlaying == false && m_IsStoped == true)
 	{
-		auto millisec = (float)MILLISCEONDS_TO_SECONDS((float)m_EditTime);
-		std::string a = std::to_string(millisec);
-		CConsole::Instance().PrintText(a.c_str(), CConsole::EPrintType::Text);
-		return millisec;
+		return timeSinceStartUp;
 	}
+	
+
+	//else if(m_IsStoped)
+	//{
+	//	auto millisec = (float)MILLISCEONDS_TO_SECONDS((float)m_EditTime);
+	//	std::string a = std::to_string(millisec);
+	//	CConsole::Instance().PrintText(a.c_str(), CConsole::EPrintType::Text);
+	//	return millisec;
+	//}
 
 	return timeSinceStartUp;
+}
+
+void CTimeline::OnEdit(bool start, int time)
+{
+	if (m_IsStoped)
+	{
+		m_IsEditing = start;
+		m_EditTime = time;
+
+		if (start != false)
+		{
+			m_Time = time;
+			m_PassedTime = time;
+		}
+
+		std::string a = std::to_string(m_Time);
+		a += " Passed:";
+		a += std::to_string(m_PassedTime);
+		CConsole::Instance().PrintText(a.c_str(), CConsole::EPrintType::Text);
+	}
 }

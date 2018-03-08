@@ -9,7 +9,6 @@
 #include <qshortcut.h>
 #include <qsplitter.h>
 
-
 CShaderToolMain::CShaderToolMain(QWidget *parent)
 	: QMainWindow(parent)
 	, m_CodeEditor(nullptr)
@@ -31,13 +30,13 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 
 	m_ProjectManager.Initialize(m_MainUi.LoadProjectButton, m_MainUi.SaveProjectButton);
 	
-	m_SceneManager.Initialize(&m_MainUi, m_MainUi.CodeEditor, m_MainUi.ResourceViewport, m_MainUi.DurationEdit ,m_MainUi.OrderEdit);
+	m_SceneManager.Initialize(&m_MainUi, m_MainUi.CodeEditor, m_MainUi.ResourceViewport, nullptr , nullptr);
 
 	m_MainUi.Viewport->SetViewLayout(m_MainUi.ViewportLayout);
 
-	//m_Timeline.Initialize(m_MainUi.Timeline, m_MainUi.PlayButton);
-
-	m_Timeline.Initialize(&m_SceneManager, m_MainUi.Timeline, m_MainUi.PlayButton, m_MainUi.widget);
+	m_Timeline.Initialize(&m_SceneManager, m_MainUi.Timeline, 
+		m_MainUi.Play, m_MainUi.AudioWidget, 
+		m_MainUi.Pause, m_MainUi.Stop, m_MainUi.Time);
 
 	SetupCodeEditor();
 
@@ -52,7 +51,14 @@ void CShaderToolMain::OnFullscreen()
 
 void CShaderToolMain::SetupCodeEditor()
 {
-	m_CodeEditor = m_MainUi.CodeEditor;
+	m_CodeEditor = m_MainUi.CodeEditor; 
+
+	int aea;
+
+	std::function<void(void*)> a = [&aea](void* p)
+	{
+		aea = 0;
+	};
 
 	m_SyntaxHighlighter = new CSyntaxHighlighter(m_CodeEditor->document());
 }

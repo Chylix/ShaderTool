@@ -191,6 +191,15 @@
     <ClCompile Include="SerializerChunk.cpp">
       <Filter>ProjectManager</Filter>
     </ClCompile>
+    <ClCompile Include="TimelineWidget.cpp">
+      <Filter>Timeline</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TimelineWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TimelineWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ShaderToolMain.ui">
@@ -234,6 +243,9 @@
     </CustomBuild>
     <CustomBuild Include="AudioWidget.h">
       <Filter>Audio</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TimelineWidget.h">
+      <Filter>Timeline</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
