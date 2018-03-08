@@ -6,6 +6,7 @@
 #include "SceneManager.h"
 
 class CAudioWidget;
+class CTimelineWidget;
 
 class CTimeline : public QObject, public SSceneListener
 {
@@ -15,7 +16,7 @@ public:
 	CTimeline();
 	~CTimeline();
 
-	void Initialize(CSceneManager* pSceneManager, QSlider* timeline, QPushButton* button, CAudioWidget* pAudioPlayer);
+	void Initialize(CSceneManager* pSceneManager, CTimelineWidget* timeline, QPushButton* button, CAudioWidget* pAudioPlayer);
 	float UpdateTime(float deltaTime, float timeSinceStartUp);
 
 	virtual void SceneChanged() final;
@@ -29,7 +30,7 @@ public slots:
 	void OnFinishedEdit();
 
 private:
-	QSlider* m_pTimeline;
+	CTimelineWidget* m_pTimeline;
 	QPushButton* m_pPlayButton;
 	CSceneManager* m_pSceneManager;
 	CAudioWidget* m_pAudioWidget;
