@@ -64,6 +64,7 @@ CSyntaxHighlighter::CSyntaxHighlighter(QTextDocument* parent)
 		<< "\\bslots\\b"
 		<< "\\bstatic\\b"
 		<< "\\bstruct\\b"
+		<< "\\bbreak\\b"
 		<< "\\btemplate\\b"
 		<< "\\btypedef\\b"
 		<< "\\btypename\\b"
