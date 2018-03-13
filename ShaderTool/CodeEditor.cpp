@@ -63,12 +63,14 @@ void CCodeEditorE::SetText(QString text)
 void CCodeEditorE::SetErrorLine(int line)
 {
 	m_ErrorLine = line;
+	highlightErrorLine();
 	repaint();
 }
 
 void CCodeEditorE::RemoveErrorLine()
 {
 	m_ErrorLine = -1;
+	highlightCurrentLine();
 	repaint();
 }
 
@@ -87,14 +89,45 @@ void CCodeEditorE::resizeEvent(QResizeEvent *e)
 
 void CCodeEditorE::highlightCurrentLine()
 {
+	if (m_ErrorLine == -1)
+	{
+		QList<QTextEdit::ExtraSelection> extraSelections;
+
+		if (!isReadOnly()) {
+			QTextEdit::ExtraSelection selection;
+
+			selection.format.setBackground(m_SelectedLineColor);
+			selection.format.setProperty(QTextFormat::FullWidthSelection, true);
+			selection.cursor = textCursor();
+			selection.cursor.clearSelection();
+			extraSelections.append(selection);
+		}
+
+		setExtraSelections(extraSelections);
+	}
+}
+
+void CCodeEditorE::highlightErrorLine()
+{
 	QList<QTextEdit::ExtraSelection> extraSelections;
 
 	if (!isReadOnly()) {
 		QTextEdit::ExtraSelection selection;
 
-		selection.format.setBackground(m_SelectedLineColor);
+		QTextCursor a = textCursor();
+		
+		QTextBlock block = firstVisibleBlock();
+
+		for (size_t i = 0; i < m_ErrorLine-1; i++)
+		{
+			block = block.next();
+		}
+
+		a.setPosition(block.position());
+
+		selection.format.setBackground(QColor(140, 0, 0));
 		selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-		selection.cursor = textCursor();
+		selection.cursor = a;
 		selection.cursor.clearSelection();
 		extraSelections.append(selection);
 	}
@@ -112,7 +145,6 @@ void CCodeEditorE::updateLineNumberArea(const QRect &rect, int dy)
 	if (rect.contains(viewport()->rect()))
 		updateLineNumberAreaWidth(0);
 }
-
 
 void CCodeEditorE::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
