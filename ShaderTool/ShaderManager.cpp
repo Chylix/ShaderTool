@@ -168,6 +168,8 @@ void CShaderManager::Release()
 
 const char * CShaderManager::SaveData()
 {
+	buffer.clear();
+
 	for (size_t i = 0; i < m_Shaders.size(); i++)
 	{
 		buffer.append("~|~\n");

@@ -113,6 +113,8 @@ void CShaderToolMain::OnCompileClicked()
 	if (errors.ErrorMessages.size() == 0)
 	{
 		CConsole::Instance().PrintText("Compilation successful", CConsole::EPrintType::Success);
+
+		m_ProjectManager.OnAutoSave();
 	}
 	else
 	{

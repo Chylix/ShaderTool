@@ -18,7 +18,7 @@ bool triebWerk::CFileWriter::MakeFile(const char * a_pPath)
 
 	CreateDirectory(t.c_str(), NULL);
 
-	fopen_s(&m_pFile, a_pPath, "w");
+	fopen_s(&m_pFile, a_pPath, "w+");
 	if (m_pFile == nullptr)
 		return false;
 	else

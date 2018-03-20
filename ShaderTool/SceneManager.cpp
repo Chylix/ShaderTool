@@ -212,6 +212,8 @@ std::vector<CScene*>& CSceneManager::GetAllScenesInOrder()
 
 const char* CSceneManager::SaveData()
 {
+	buffer.clear();
+
 	for (auto* scene : m_Scenes)
 	{
 		buffer.append("-- Scene --\n");

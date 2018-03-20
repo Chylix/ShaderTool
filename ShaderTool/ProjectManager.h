@@ -22,6 +22,8 @@ public:
 	void Initialize(QPushButton* pOpen, QPushButton* pSave);
 	void RegisterSerializer(ISerializer* pSerializer, const char* guid);
 
+	void OnAutoSave();
+
 	void LoadProject(const char* projectPath);
 
 public:
@@ -30,10 +32,14 @@ public:
 
 private:
 	void FetchProjectInformation();
+	std::string GetAutoSaveFile();
+	QString GetAutoSavePath();
 
 private:
 	const QString m_FileType = "Project File (*.spf)";
+	const short m_AutoSaveNumber = 9;
 
+	short m_CurrentAutoSaveSlot = 0;
 	QPushButton* m_pOpenButton;
 	QPushButton* m_pSaveButton;
 	std::vector<SSerializer> m_Serializer;
