@@ -49,26 +49,42 @@ D3DRenderWidget::~D3DRenderWidget()
 {
 }
 
+void D3DRenderWidget::ForceFullscreen()
+{
+	m_ForcedFullscreen = true;
+
+	m_InFullscreen = true;
+	m_Size = this->size();
+	this->setParent(0);
+	this->showFullScreen();
+	this->setFocus();
+	this->setCursor(Qt::BlankCursor);
+}
+
 void D3DRenderWidget::ChangeFullscreen()
 {
-	if (m_InFullscreen == true)
+	if (!m_ForcedFullscreen)
 	{
-		m_InFullscreen = false;
-		this->m_pLayout->addWidget(this);
-		this->resize(m_Size);
-		this->showNormal();
-		this->unsetCursor();
+		if (m_InFullscreen == true)
+		{
+			m_InFullscreen = false;
+			this->m_pLayout->addWidget(this);
+			this->resize(m_Size);
+			this->showNormal();
+			this->unsetCursor();
 
+		}
+		else
+		{
+			m_InFullscreen = true;
+			m_Size = this->size();
+			this->setParent(0);
+			this->showFullScreen();
+			this->setFocus();
+			this->setCursor(Qt::BlankCursor);
+		}
 	}
-	else
-	{
-		m_InFullscreen = true;
-		m_Size = this->size();
-		this->setParent(0);
-		this->showFullScreen();
-		this->setFocus();
-		this->setCursor(Qt::BlankCursor);
-	}
+
 }
 
 void D3DRenderWidget::resizeEvent(QResizeEvent* evt)
@@ -88,8 +104,6 @@ void D3DRenderWidget::resizeEvent(QResizeEvent* evt)
 	{
 		twViewport->Resize(a.width(), a.height());
 	}
-
-
 }
 
 void D3DRenderWidget::paintEvent(QPaintEvent* evt)

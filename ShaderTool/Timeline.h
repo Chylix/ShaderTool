@@ -23,13 +23,14 @@ public:
 		QPushButton* pPauseButton,
 		QPushButton* pStopButton,
 		QLineEdit* pTime);
+
 	float UpdateTime(float deltaTime, float timeSinceStartUp);
-
 	void OnEdit(bool start, int time);
-
 	virtual void SceneChanged() final;
-
 	void Reset();
+	bool IsPlaying() const;
+
+	void OnTimelineMove(int time);
 
 public slots:
 	void OnPlay();

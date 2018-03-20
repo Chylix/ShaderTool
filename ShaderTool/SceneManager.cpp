@@ -2,6 +2,9 @@
 #include "SceneButton.h"
 #include "ShaderManager.h"
 #include "SerializerChunk.h"
+#include "Timeline.h"
+#include "TimelineWidget.h"
+#include "Scene.h"
 #include <string>  
 
 CSceneManager::CSceneManager()
@@ -10,42 +13,14 @@ CSceneManager::CSceneManager()
 }
 CSceneManager::~CSceneManager()
 {
-
-}
-
-void clearLayout(QLayout *layout)
-{
-QLayoutItem *item;
-while ((item = layout->takeAt(0))) {
-	if (item->layout()) {
-		clearLayout(item->layout());
-		delete item->layout();
-	}
-	if (item->widget()) {
-		//delete item->widget();
-	}
-	delete item;
-}
 }
 
 void CSceneManager::OnOrderChanged(int newVal)
 {
-	// Ignore invalid input
 	if (newVal == m_CurrentActiveScene || newVal > m_Scenes.size()-1 || newVal < 0)
 		return;
 
 	std::swap(m_Scenes[m_CurrentActiveScene], m_Scenes[newVal]);
-
-	clearLayout(m_pSceneLayout);
-	//m_pSceneLayout->removeWidget(m_Buttons[m_CurrentActiveScene]);
-	//m_pSceneLayout->insertWidget(newVal, m_Buttons[m_CurrentActiveScene]);
-
-	std::swap(m_Buttons[m_CurrentActiveScene], m_Buttons[newVal]);
-
-	for (auto* button : m_Buttons)
-	{
-		m_pSceneLayout->addWidget(button);
-	}
 
 	UpdateOrder();
 
@@ -59,8 +34,6 @@ void CSceneManager::OnAddSceneClick()
 		m_Scenes[m_CurrentActiveScene]->m_pShaderManager->SetDisable();
 
 	AddScene();
-	AddButton();
-
 	NotifyListeners();
 }
 
@@ -69,18 +42,17 @@ void CSceneManager::OnDurationChanged(double newVal)
 	SafeTimeValues();
 }
 
-void CSceneManager::Initialize(Ui_ShaderToolMain* pShaderTool, CCodeEditorE* pCodeEditor, CTexturePainter* pTexturePainter, QDoubleSpinBox* pDuration, QSpinBox* pOrder)
+void CSceneManager::Initialize(Ui_ShaderToolMain* pShaderTool, CCodeEditorE* pCodeEditor, CTexturePainter* pTexturePainter, CTimeline* pTimeline)
 {
 	m_pMainUI = pShaderTool;
-	m_pSceneLayout = pShaderTool->SceneLayout;
 	m_pCodeEditorHandle = pCodeEditor;
 	m_pTexturePainterHandle = pTexturePainter;
-	m_pDurationEdit = pDuration;
-	m_pOrderEdit = pOrder;
+	m_pSceneWidget = m_pMainUI->SceneWidget;
+	m_pTimeline = pTimeline;
+
+	m_pSceneWidget->Initialize(this);
 
 	connect(pShaderTool->AddScene, SIGNAL(clicked()), this, SLOT(OnAddSceneClick()));
-	//connect(pShaderTool->OrderEdit, SIGNAL(valueChanged(int)), this, SLOT(OnOrderChanged(int)));
-	//connect(pShaderTool->DurationEdit, SIGNAL(valueChanged(double)), this, SLOT(OnDurationChanged(double)));
 
 	m_CurrentActiveScene = 0;
 
@@ -99,9 +71,6 @@ void CSceneManager::ChangeActiveSceneTo(const size_t slot)
 
 	SafeTimeValues();
 
-	m_Buttons[m_CurrentActiveScene]->SetAsActive(false);
-	m_Buttons[slot]->SetAsActive(true);
-
 	m_Scenes[m_CurrentActiveScene]->m_pShaderManager->SetDisable();
 	m_Scenes[slot]->m_pShaderManager->SetActive();
 
@@ -115,47 +84,40 @@ void CSceneManager::ChangeActiveSceneTo(const size_t slot)
 	// TODO: Add event sytem to properly retrigger compilation
 	// Pretty bad hack to recompile the shaders ....
 	m_pMainUI->CompileButton->click();
+
+	m_pSceneWidget->SetActiveScene(slot);
 }
 
 void CSceneManager::AddScene()
 {
 	std::vector<CTexturePainter::SShaderTexture> a;
 	CScene* pScene = new CScene(std::to_string(m_Scenes.size()), m_Scenes.size(), std::vector<CTexturePainter::SShaderTexture>(), new CShaderManager());
+	pScene->m_SceneName = "Scene_";
+	pScene->m_SceneName += std::to_string(m_Scenes.size());
 	m_Scenes.push_back(pScene);
 	pScene->m_pShaderManager->Initialize(m_pCodeEditorHandle, m_pMainUI);
-}
 
-void CSceneManager::AddButton()
-{
-	QString a = QString::number(static_cast<int>(m_Scenes.size()));
+	m_pSceneWidget->AddScene(pScene);
 
-	CSceneButton* btn1 = new CSceneButton();
-	connect(btn1, SIGNAL(rightClicked()), this, SLOT(RemoveShader()));
-
-	btn1->setText("Scene_" + QString(a));
-	m_pSceneLayout->addWidget(btn1);
-
-	m_Buttons.push_back(btn1);
-
-	int a2 = m_Scenes.size() - 1;
-	btn1->Init(a2, this);
 	ChangeActiveSceneTo(m_Scenes.size() - 1);
 }
 
 void CSceneManager::RemoveScene(const size_t slot)
 {
 	// You can't delete the first scene, there has to be always atleast one scene
-	if (slot == 0)
+	if (slot == 0 || m_pTimeline->IsPlaying())
 		return;
 
 	// If we are going to delete the current scene fall back to the default one
 	if (m_CurrentActiveScene == slot)
 		ChangeActiveSceneTo(0);
 
-	m_pSceneLayout->removeWidget(m_Buttons[slot]);
-	delete m_Buttons[slot];
+	//m_pSceneLayout->removeWidget(m_Buttons[slot]);
+	//delete m_Buttons[slot];
 
-	m_Buttons.erase(m_Buttons.begin() + slot);
+	//m_Buttons.erase(m_Buttons.begin() + slot);
+
+	m_pSceneWidget->RemoveScene(slot);
 
 	// Clean up memory
 	m_Scenes[slot]->Release();
@@ -179,8 +141,8 @@ void CSceneManager::SafeTimeValues()
 	
 void CSceneManager::UpdateOrder()
 {
-	for (size_t i = 0; i < m_Buttons.size(); ++i)
-		m_Buttons[i]->UpdateSlot(i);
+	//for (size_t i = 0; i < m_Buttons.size(); ++i)
+	//	m_Buttons[i]->UpdateSlot(i);
 
 	for (size_t i = 0; i < m_Scenes.size(); ++i)
 		m_Scenes[i]->m_SceneOrder = i;
@@ -214,6 +176,28 @@ void CSceneManager::ChangeTimeValuesToScene(size_t slot)
 {
 	//m_pDurationEdit->setValue((double)m_Scenes[slot]->m_DurationTime);
 	//m_pOrderEdit->setValue((double)m_Scenes[slot]->m_SceneOrder);
+}
+
+void CSceneManager::ChangeSizeOrder(const size_t slot, const size_t changeToSlot)
+{
+	std::swap(m_Scenes.at(slot), m_Scenes.at(changeToSlot));
+
+	UpdateOrder();
+}
+
+void CSceneManager::OnTimelineMove(int time)
+{
+	m_pSceneWidget->OnTimelineMove(time);
+}
+
+void CSceneManager::UpdateSceneDuration(const size_t slot, const float newTime)
+{
+	m_Scenes[slot]->m_DurationTime = newTime;
+}
+
+bool CSceneManager::IsPlaying() const
+{
+	return m_pTimeline->IsPlaying();
 }
 
 CScene* CSceneManager::GetActiveScene() const

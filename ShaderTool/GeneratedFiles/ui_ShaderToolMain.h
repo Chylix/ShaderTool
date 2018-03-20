@@ -26,6 +26,7 @@
 #include <codeeditor.h>
 #include <ctexturepainter.h>
 #include <d3drenderwidget.h>
+#include <scenewidget.h>
 #include <timelinewidget.h>
 
 QT_BEGIN_NAMESPACE
@@ -56,8 +57,7 @@ public:
     QPushButton *Stop;
     QSplitter *splitter;
     CTimelineWidget *Timeline;
-    QWidget *horizontalLayoutWidget_2;
-    QHBoxLayout *SceneLayout;
+    CSceneWidget *SceneWidget;
     CAudioWidget *AudioWidget;
     QSplitter *splitter_4;
     QSplitter *splitter_3;
@@ -108,8 +108,9 @@ public:
         splitter_10->setStyleSheet(QLatin1String("QSplitter::handle {\n"
 "    background: rgb(40, 40, 40);\n"
 "}"));
+        splitter_10->setLineWidth(1);
         splitter_10->setOrientation(Qt::Horizontal);
-        splitter_10->setHandleWidth(1);
+        splitter_10->setHandleWidth(5);
         splitter_9 = new QSplitter(splitter_10);
         splitter_9->setObjectName(QStringLiteral("splitter_9"));
         splitter_9->setStyleSheet(QLatin1String("QSplitter::handle {\n"
@@ -123,6 +124,7 @@ public:
         horizontalLayout->setSpacing(0);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setSizeConstraint(QLayout::SetMaximumSize);
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
         LoadProjectButton = new QPushButton(verticalLayoutWidget);
         LoadProjectButton->setObjectName(QStringLiteral("LoadProjectButton"));
@@ -189,7 +191,7 @@ public:
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(Viewport->sizePolicy().hasHeightForWidth());
         Viewport->setSizePolicy(sizePolicy2);
-        Viewport->setMinimumSize(QSize(200, 500));
+        Viewport->setMinimumSize(QSize(200, 50));
 
         ViewportLayout->addWidget(Viewport, 0, 0, 1, 1);
 
@@ -322,16 +324,12 @@ public:
         Timeline = new CTimelineWidget(splitter);
         Timeline->setObjectName(QStringLiteral("Timeline"));
         Timeline->setMinimumSize(QSize(0, 100));
+        Timeline->setAutoFillBackground(true);
         splitter->addWidget(Timeline);
-        horizontalLayoutWidget_2 = new QWidget(splitter);
-        horizontalLayoutWidget_2->setObjectName(QStringLiteral("horizontalLayoutWidget_2"));
-        SceneLayout = new QHBoxLayout(horizontalLayoutWidget_2);
-        SceneLayout->setSpacing(0);
-        SceneLayout->setContentsMargins(11, 11, 11, 11);
-        SceneLayout->setObjectName(QStringLiteral("SceneLayout"));
-        SceneLayout->setSizeConstraint(QLayout::SetMaximumSize);
-        SceneLayout->setContentsMargins(0, 0, 0, 0);
-        splitter->addWidget(horizontalLayoutWidget_2);
+        SceneWidget = new CSceneWidget(splitter);
+        SceneWidget->setObjectName(QStringLiteral("SceneWidget"));
+        SceneWidget->setMinimumSize(QSize(200, 40));
+        splitter->addWidget(SceneWidget);
         splitter_5->addWidget(splitter);
         splitter_6->addWidget(splitter_5);
         AudioWidget = new CAudioWidget(splitter_6);
@@ -429,7 +427,7 @@ public:
         Console->setObjectName(QStringLiteral("Console"));
         sizePolicy.setHeightForWidth(Console->sizePolicy().hasHeightForWidth());
         Console->setSizePolicy(sizePolicy);
-        Console->setMaximumSize(QSize(15845456, 50));
+        Console->setMaximumSize(QSize(15845456, 70));
         Console->setStyleSheet(QLatin1String(".QTextEdit\n"
 "{\n"
 "background-color: rgb(66, 66, 66);\n"

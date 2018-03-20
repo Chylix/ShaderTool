@@ -49,7 +49,7 @@ void CTimelineWidget::mouseMoveEvent(QMouseEvent * event)
 		m_timeScrollMovePrevXPos = event->pos().x();
 		
 		m_timeScrollMoveOffset = std::min(m_timeScrollMoveOffset, 0);
-
+		m_pTimeline->OnTimelineMove(m_timeScrollMoveOffset);
 	}
 
 	if (m_isSettingTime)
@@ -72,7 +72,7 @@ void CTimelineWidget::mouseReleaseEvent(QMouseEvent * event)
 	}
 	else if (event->button() == SET_TIME_BUTTON)
 	{
-		//m_pTimeline->OnEdit(false, event->pos().x() / m_stepSize);
+		m_pTimeline->OnEdit(true, event->pos().x() / m_stepSize);
 		m_timeIndicatorPos = GetTimePosFromWidget(event->pos().x());
 		m_isSettingTime = false;
 	}

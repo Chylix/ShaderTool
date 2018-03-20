@@ -22,6 +22,8 @@ public:
 	void Initialize(QPushButton* pOpen, QPushButton* pSave);
 	void RegisterSerializer(ISerializer* pSerializer, const char* guid);
 
+	void LoadProject(const char* projectPath);
+
 public:
 	CProjectManager();
 	~CProjectManager();

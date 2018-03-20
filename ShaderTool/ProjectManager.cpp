@@ -15,6 +15,22 @@ void CProjectManager::RegisterSerializer(ISerializer * pSerializer, const char* 
 	m_Serializer.push_back(temp);
 }
 
+void CProjectManager::LoadProject(const char* projectPath)
+{
+	CProjectFileReader reader;
+	reader.LoadData(projectPath);
+
+	for (size_t i = 0; i < m_Serializer.size(); i++)
+	{
+		CSerializerChunk chunk(reader.GetSerializerChunk(m_Serializer[i].string.c_str()).c_str());
+		m_Serializer[i].serializer->LoadData(&chunk);
+
+		int a = 0;
+	}
+
+	//CConsole::Instance().PrintText("Project successfully loaded", CConsole::EPrintType::Success);
+}
+
 CProjectManager::CProjectManager()
 {
 }

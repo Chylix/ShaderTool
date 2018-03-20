@@ -48,11 +48,14 @@
     background: rgb(40, 40, 40);
 }</string>
       </property>
+      <property name="lineWidth">
+       <number>1</number>
+      </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
       <property name="handleWidth">
-       <number>1</number>
+       <number>5</number>
       </property>
       <widget class="QSplitter" name="splitter_9">
        <property name="styleSheet">
@@ -70,6 +73,9 @@
         <layout class="QHBoxLayout" name="horizontalLayout">
          <property name="spacing">
           <number>0</number>
+         </property>
+         <property name="sizeConstraint">
+          <enum>QLayout::SetMaximumSize</enum>
          </property>
          <item>
           <widget class="QPushButton" name="LoadProjectButton">
@@ -174,10 +180,9 @@
             <property name="minimumSize">
              <size>
               <width>200</width>
-              <height>500</height>
+              <height>50</height>
              </size>
             </property>
-            <zorder>CodeEditor</zorder>
            </widget>
           </item>
          </layout>
@@ -362,16 +367,17 @@
               <height>100</height>
              </size>
             </property>
+            <property name="autoFillBackground">
+             <bool>true</bool>
+            </property>
            </widget>
-           <widget class="QWidget" name="horizontalLayoutWidget_2">
-            <layout class="QHBoxLayout" name="SceneLayout">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <property name="sizeConstraint">
-              <enum>QLayout::SetMaximumSize</enum>
-             </property>
-            </layout>
+           <widget class="CSceneWidget" name="SceneWidget" native="true">
+            <property name="minimumSize">
+             <size>
+              <width>200</width>
+              <height>40</height>
+             </size>
+            </property>
            </widget>
           </widget>
          </widget>
@@ -537,7 +543,7 @@
           <property name="maximumSize">
            <size>
             <width>15845456</width>
-            <height>50</height>
+            <height>70</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -626,6 +632,12 @@ font-family: Courier, serif;
    <class>CTimelineWidget</class>
    <extends>QWidget</extends>
    <header location="global">timelinewidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CSceneWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">scenewidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

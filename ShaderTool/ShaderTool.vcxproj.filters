@@ -152,12 +152,6 @@
     <ClCompile Include="SceneButton.cpp">
       <Filter>SceneManager</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_SceneButton.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_SceneButton.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_SceneManager.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -198,6 +192,15 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_TimelineWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneWidget.cpp">
+      <Filter>SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SceneWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SceneWidget.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -247,6 +250,9 @@
     <CustomBuild Include="TimelineWidget.h">
       <Filter>Timeline</Filter>
     </CustomBuild>
+    <CustomBuild Include="SceneWidget.h">
+      <Filter>SceneManager</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_ShaderToolMain.h">
@@ -272,6 +278,9 @@
     </ClInclude>
     <ClInclude Include="SerializerChunk.h">
       <Filter>ProjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>SceneManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

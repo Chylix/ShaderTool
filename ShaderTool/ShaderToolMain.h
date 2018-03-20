@@ -21,10 +21,10 @@ public:
 	const QString m_WindowName = "Orbitor";
 
 protected:
+	virtual void paintEvent(QPaintEvent* evt) override;
 
 public slots:
 	void OnCompileClicked();
-	void OnFullscreen();
 
 private:
 	Ui::ShaderToolMain m_MainUi;

@@ -9,6 +9,8 @@
 #include <qshortcut.h>
 #include <qsplitter.h>
 
+//#define SHIP_DEMO
+
 CShaderToolMain::CShaderToolMain(QWidget *parent)
 	: QMainWindow(parent)
 	, m_CodeEditor(nullptr)
@@ -24,13 +26,16 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 	QShortcut *shortcut = new QShortcut(QKeySequence("Ctrl+S"), this);
 	QObject::connect(shortcut, SIGNAL(activated()), this, SLOT(OnCompileClicked()));
 
+	QShortcut *shortcu2t = new QShortcut(QKeySequence("Ctrl+A"), this);
+	QObject::connect(shortcu2t, SIGNAL(activated()), this, SLOT(OnFullscreen()));
+
 	SetupTWScene();
 
 	CConsole::Instance().Initialize(m_MainUi.Console);
 
 	m_ProjectManager.Initialize(m_MainUi.LoadProjectButton, m_MainUi.SaveProjectButton);
 	
-	m_SceneManager.Initialize(&m_MainUi, m_MainUi.CodeEditor, m_MainUi.ResourceViewport, nullptr , nullptr);
+	m_SceneManager.Initialize(&m_MainUi, m_MainUi.CodeEditor, m_MainUi.ResourceViewport, &m_Timeline);
 
 	m_MainUi.Viewport->SetViewLayout(m_MainUi.ViewportLayout);
 
@@ -42,11 +47,14 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 
 	//TODO: Move this to the scene manager
 	m_ProjectManager.RegisterSerializer(&m_SceneManager, "3BBA1716-3F89-49F1-B23D-724039F3A9C8");
-}
 
-void CShaderToolMain::OnFullscreen()
-{
-	m_MainUi.Viewport->ChangeFullscreen();
+#ifdef SHIP_DEMO
+	m_ProjectManager.LoadProject("save.spf");
+
+	m_MainUi.Viewport->ForceFullscreen();
+
+	m_Timeline.OnPlay();
+#endif
 }
 
 void CShaderToolMain::SetupCodeEditor()
@@ -69,6 +77,13 @@ void CShaderToolMain::SetupTWScene()
 	twSceneManager->AddScene(m_pDefaultScene, "Default");
 	twSceneManager->SetActiveScene("Default");
 	m_pDefaultScene->SetTimeline(&m_Timeline);
+}
+
+void CShaderToolMain::paintEvent(QPaintEvent* evt)
+{
+#ifdef SHIP_DEMO
+	hide();
+#endif // SHIP_DEMO
 }
 
 void CShaderToolMain::OnCompileClicked()
@@ -108,6 +123,6 @@ void CShaderToolMain::OnCompileClicked()
 			string.append("\n");
 		}
 	
-		CConsole::Instance().PrintText(string.c_str(), CConsole::EPrintType::Error);
+		CConsole::Instance().PrintShaderError(string.c_str());
 	}
 }

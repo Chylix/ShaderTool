@@ -91,33 +91,23 @@ void CTimeline::OnPlayScene()
 	CConsole::Instance().PrintText(message.c_str(), CConsole::EPrintType::Text);
 }
 
-void CTimeline::OnTimelineEdit(int a)
+void CTimeline::OnTimelineEdit(int time)
 {
-	//if (m_IsPlaying)
-	//{
-	//	Reset();
-	//	// Set the timeline to the actual time again
-	//	m_pTimeline->setValue(a);
-	//}
+	auto scenes = m_pSceneManager->GetAllScenesInOrder();
+	 
+	float delta = 0;
 
-	//m_IsEditing = true;
+	for (size_t i = 0; i < scenes.size(); ++i)
+	{
+		delta += scenes[i]->m_DurationTime;
 
-	//auto scenes = m_pSceneManager->GetAllScenesInOrder();
-	// 
-	//float delta = 0;
+		if (time <= delta)
+		{
+			m_pSceneManager->ChangeActiveSceneTo(i);
+			break;
+		}
+	}
 
-	//for (size_t i = 0; i < scenes.size(); ++i)
-	//{
-	//	delta += SECONDS_TO_MILLISECONDS(scenes[i]->m_DurationTime);
-
-	//	if (a <= delta)
-	//	{
-	//		m_pSceneManager->ChangeActiveSceneTo(i);
-	//		break;
-	//	}
-	//}
-
-	//m_EditTime = a;
 }
 
 void CTimeline::OnFinishedEdit()
@@ -223,6 +213,16 @@ void CTimeline::Reset()
 	m_pAudioWidget->StopAudio();
 }
 
+bool CTimeline::IsPlaying() const
+{
+	return !m_IsStoped;
+}
+
+void CTimeline::OnTimelineMove(int time)
+{
+	m_pSceneManager->OnTimelineMove(time);
+}
+
 void CTimeline::SceneChanged()
 {
 	auto scenes = m_pSceneManager->GetAllScenesInOrder();
@@ -308,6 +308,8 @@ void CTimeline::OnEdit(bool start, int time)
 	{
 		m_IsEditing = start;
 		m_EditTime = time;
+
+		OnTimelineEdit(time);
 
 		if (start != false)
 		{

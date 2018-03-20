@@ -16,12 +16,16 @@ public:
 
 	void SetViewLayout(QLayout* pLayout) { m_pLayout = pLayout; }
 
+public:
+	void ForceFullscreen();
+
 protected:
 	virtual void resizeEvent(QResizeEvent* evt);
 	virtual void paintEvent(QPaintEvent* evt);
 	virtual void focusOutEvent(QFocusEvent* event);
 private:
 	bool m_InFullscreen;
+	bool m_ForcedFullscreen;
 	QLayout* m_pLayout;
 	QSize m_Size;
 

@@ -9,6 +9,8 @@
 #define SCROLL_TIME_BUTTON Qt::RightButton
 #define SET_TIME_BUTTON Qt::LeftButton
 
+#define TIME_LINE_STEP_SIZE 6
+
 class CTimeline;
 
 class CTimelineWidget : public QWidget {
@@ -30,6 +32,8 @@ public:
 		m_IsPlaying = false;
 		m_timeIndicatorPos = 0;
 	}
+
+	const int m_stepSize = TIME_LINE_STEP_SIZE;
 
 protected:
 	//QWidget
@@ -84,7 +88,6 @@ private:
 	const QColor m_BackgroundColor = QColor(46, 46, 46);
 	int m_NumberOfTimeInterval = 15;
 
-	const int m_stepSize = 6;
 
 	const int m_NumberOfScaleLines = 12;
 

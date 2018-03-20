@@ -1,4 +1,6 @@
 #pragma once
+#include <sstream>
+#include <string.h>
 
 class QTextEdit;
 
@@ -21,7 +23,10 @@ public:
 	static CConsole& Instance();
 
 	void Initialize(QTextEdit* widget);
-	void PrintText(const char* pText, EPrintType);
+	void PrintText(const char* pText, EPrintType type = EPrintType::Text);
+	void PrintText(std::string text, EPrintType type = EPrintType::Text);
+
+	void PrintShaderError(const char* pError);
 
 private:
 	QTextEdit* m_pConsoleWidget;
