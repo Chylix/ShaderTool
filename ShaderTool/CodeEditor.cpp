@@ -2,6 +2,7 @@
 #include "LineNumberArea.h"
 #include <QPainter>
 #include <QTextBlock>
+#include "Console.h"
 
 CCodeEditorE::CCodeEditorE(QWidget *parent) 
 	: QPlainTextEdit(parent) 
@@ -19,8 +20,8 @@ CCodeEditorE::CCodeEditorE(QWidget *parent)
 	const int tabStop = 2;  // 4 characters
 
 	m_Font.setFamily("Courier");
-	m_Font.setFixedPitch(true);
-	m_Font.setPointSize(9);
+	//m_Font.setFixedPitch(true);
+	m_Font.setPointSize(m_FontSize);
 	this->setFont(m_Font);
 
 	QFontMetrics metrics(m_Font);
@@ -146,6 +147,47 @@ void CCodeEditorE::updateLineNumberArea(const QRect &rect, int dy)
 		updateLineNumberAreaWidth(0);
 }
 
+void CCodeEditorE::wheelEvent(QWheelEvent* event)
+{
+	if (m_IsZooming == false)
+		return;
+
+	m_FontSize += event->delta() / 120;
+
+	if (m_FontSize < m_MinFontSize)
+		m_FontSize = m_MinFontSize;
+	else if(m_FontSize > m_MaxFontSize)
+		m_FontSize = m_MaxFontSize;
+
+	m_Font.setFamily("Courier");
+	m_Font.setFixedPitch(true);
+	m_Font.setPointSize(m_FontSize);
+
+	CConsole::Instance().PrintText(std::to_string(m_FontSize));
+
+	this->setFont(m_Font);
+}
+
+void CCodeEditorE::keyPressEvent(QKeyEvent* pEvent)
+{
+	if(pEvent->key() == Qt::Key_Control)
+	{
+		m_IsZooming = true;
+	}
+
+	QPlainTextEdit::keyPressEvent(pEvent);
+}
+
+void CCodeEditorE::keyReleaseEvent(QKeyEvent* pEvent)
+{
+	if (pEvent->key() == Qt::Key_Control)
+	{
+		m_IsZooming = false;
+	}
+
+	QPlainTextEdit::keyReleaseEvent(pEvent);
+}
+
 void CCodeEditorE::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
 	QTextCharFormat fmt;
@@ -167,6 +209,7 @@ void CCodeEditorE::lineNumberAreaPaintEvent(QPaintEvent *event)
 				painter.setPen(QColor(125,0,0));
 			else
 				painter.setPen(m_FontColor);
+			painter.setFont(m_Font);
 			painter.drawText(0, top, lineNumberArea->width(), fontMetrics().height(),
 				Qt::AlignRight, number);
 		}
