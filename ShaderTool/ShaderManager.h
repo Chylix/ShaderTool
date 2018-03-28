@@ -39,6 +39,9 @@ public:
 	void SetActive();
 	void SetDisable();
 
+	void SetShaderError(int lineNumber, std::string errorMessage, int shaderSlot);
+	void ClearShaderError();
+
 	//ISerializer
 	const char* SaveData() final;
 	void LoadData(CSerializerChunk* pData) final;
@@ -71,4 +74,11 @@ private:
 	std::vector<CShaderManangerButton*> m_Buttons;
 	size_t m_CurrentWorkingSlot;
 	bool m_IsActive = true;
+
+	//Error handling
+	std::string  m_ErrorString;
+	int m_ErrorLine = 0;
+	int m_ErrorShaderSlot = 0;
+	bool m_ShaderFailed = false;
+	//~Error handling
 };

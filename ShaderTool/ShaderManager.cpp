@@ -2,6 +2,8 @@
 #include "CodeEditor.h"
 #include "ShaderManagerButton.h"
 #include "SerializerChunk.h"
+#include <qlayoutitem.h>
+#include "Console.h"
 
 CShaderManager::CShaderManager()
 	: m_pCodeEditorHandle(nullptr)
@@ -21,7 +23,6 @@ void CShaderManager::OnAddShaderClick()
 		AddButton();
 	}
 }
-
 
 void CShaderManager::Initialize(CCodeEditorE * pCodeEditor, Ui_ShaderToolMain* pShaderTool)
 {
@@ -47,10 +48,24 @@ void CShaderManager::ChangeActiveEditorShaderTo(size_t slot)
 	if ((slot > (m_Shaders.size() - 1) || slot == m_CurrentWorkingSlot) && m_IsActive)
 		return;
 
+
 	if (m_IsActive)
 	{
+
 		ChangeActiveButton(slot);
 		
+		// Check if this shader failed compilation
+		if (m_ShaderFailed && slot == m_ErrorShaderSlot)
+		{
+			m_pCodeEditorHandle->SetErrorLine(m_ErrorLine);
+			CConsole::Instance().PrintShaderError(m_ErrorString.c_str());
+		}
+		else
+		{
+			m_pCodeEditorHandle->RemoveErrorLine();
+			//CConsole::Instance().PrintText("Compilation successful", CConsole::EPrintType::Success);
+		}
+
 		m_Shaders[m_CurrentWorkingSlot].code = m_pCodeEditorHandle->toPlainText();
 	}
 
@@ -129,6 +144,8 @@ void CShaderManager::SetDisable()
 	if (m_IsActive == false)
 		return;
 
+	m_Shaders[m_CurrentWorkingSlot].code = m_pCodeEditorHandle->toPlainText();
+
 	for (CShaderManangerButton* button : m_Buttons)
 	{
 		m_pLayout->removeWidget(button);
@@ -140,6 +157,28 @@ void CShaderManager::SetDisable()
 	m_IsActive = false;
 }
 
+
+void CShaderManager::SetShaderError(int lineNumber, std::string errorMessage, int shaderSlot)
+{
+	m_ErrorString = errorMessage;
+	m_ErrorShaderSlot = shaderSlot;
+	m_ErrorLine = lineNumber;
+	m_ShaderFailed = true;
+
+	if (m_CurrentWorkingSlot == shaderSlot)
+	{
+		m_pCodeEditorHandle->SetErrorLine(m_ErrorLine);
+		CConsole::Instance().PrintShaderError(m_ErrorString.c_str());
+	}
+}
+
+void CShaderManager::ClearShaderError()
+{
+	m_ErrorString = "";
+	m_ErrorShaderSlot = 0;
+	m_ErrorLine = 0;
+	m_ShaderFailed = false;
+}
 
 void CShaderManager::AddButton(size_t connectToShader)
 {
@@ -202,15 +241,15 @@ void CShaderManager::LoadData(CSerializerChunk* pData)
 
 		if (iter == 0)
 		{
-			m_Shaders[iter].code = QString(data.substr(iterator, end - iterator).c_str());
+			std::string a = data.substr(iterator+2, end - iterator-4);
+			m_Shaders[iter].code = QString(a.c_str());
 			m_Shaders[iter].slot = m_Shaders.size();
-			m_pCodeEditorHandle->SetText(m_Shaders[0].code);
-			m_CurrentWorkingSlot = 0;
-			ChangeActiveButton(0);
+			m_pCodeEditorHandle->SetText(m_Shaders[iter].code);
+			m_CurrentWorkingSlot = iter;
 		}
 		else
 		{
-			AddShader(QString(data.substr(iterator, end - iterator - 1).c_str()));
+			AddShader(QString(data.substr(iterator+2, end - iterator - 4).c_str()));
 			AddButton();
 		}
 

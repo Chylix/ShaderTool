@@ -12,6 +12,8 @@
 class CSyntaxHighlighter;
 class CCodeEditorE;
 
+//#define SHIP_DEMO
+
 class CShaderToolMain : public QMainWindow
 {
 	Q_OBJECT
@@ -25,6 +27,7 @@ protected:
 
 public slots:
 	void OnCompileClicked();
+	void OnFullscreen();
 
 private:
 	Ui::ShaderToolMain m_MainUi;

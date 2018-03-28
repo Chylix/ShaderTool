@@ -20,7 +20,7 @@ void triebWerk::CSoundEngine::Update()
 {
 	m_pDevice->update();
 
-	if (m_IsFading)
+	if (m_IsFading && m_CurrentBackgroundMusic != nullptr)
 	{
 		float volume = m_CurrentBackgroundMusic->getVolume();
 
@@ -145,18 +145,31 @@ void triebWerk::CSoundEngine::StopAllSounds()
 
 void triebWerk::CSoundEngine::PauseBGM()
 {
-	m_CurrentBackgroundMusic->setIsPaused(true);
+	if (m_CurrentBackgroundMusic)
+	{
+		m_CurrentBackgroundMusic->setIsPaused(true);
+	}
 }
 
 void triebWerk::CSoundEngine::ContinueBGM()
 {
-	m_CurrentBackgroundMusic->setIsPaused(false);
+	if (m_CurrentBackgroundMusic)
+	{
+		m_CurrentBackgroundMusic->setIsPaused(false);
+	}
 }
 
 
 bool triebWerk::CSoundEngine::IsBGMFinished()
 {
-	return m_CurrentBackgroundMusic->isFinished();
+	if (m_CurrentBackgroundMusic)
+	{
+		return m_CurrentBackgroundMusic->isFinished();
+	}
+	else
+	{
+		return true;
+	}
 }
 
 void triebWerk::CSoundEngine::FadeOutBGM(float a_Speed, bool a_StartFromHighest)

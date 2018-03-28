@@ -1,4 +1,5 @@
 #include "DefaultScene.h"
+#include "Console.h"
 
 CDefaultScene::CDefaultScene()
 	: m_CurrentShaderCount(0)
@@ -20,9 +21,11 @@ void CDefaultScene::UpdateMaterial(std::vector<triebWerk::CMaterial*>* pMaterial
 {
 	size_t r = pMaterials->size();
 
+	m_pPostEffect->Clear();
+
 	do
 	{
-		m_pPostEffect->RemoveMaterial(r-1);
+		m_pPostEffect->RemoveMaterial(r - 1);
 		r--;
 	} while (r > 0);
 
@@ -51,6 +54,16 @@ void CDefaultScene::RemoveLoadedTextures(const size_t slot)
 
 void CDefaultScene::UpdateUsedTextures(int slot, std::vector<int> usedSlot)
 {
+	for (size_t i = 0; i < usedSlot.size(); ++i)
+	{
+		if (usedSlot[i] > m_LoadedTextures.size())
+		{
+			std::string error = "Texture slot " + std::to_string(usedSlot[i]) + " doesn't exist!";
+			CConsole::Instance().PrintText(error, CConsole::EPrintType::Warning);
+			usedSlot.erase(usedSlot.begin() + i);
+		}
+	}
+
 	SShaderTextureHolder t;
 	t.ShaderSlot = slot;
 	t.SlotUsed = usedSlot;
@@ -146,7 +159,10 @@ void CDefaultScene::Update()
 		for (size_t i = 0; i < holder.SlotUsed.size(); ++i)
 		{
 			int slot = holder.SlotUsed[i]-1;
-			currentMat->m_pPixelShader.SetTexture(i, twResourceManager->GetTexture2D(m_LoadedTextures[slot].c_str()));
+			if (slot < m_LoadedTextures.size())
+			{
+				currentMat->m_pPixelShader.SetTexture(i, twResourceManager->GetTexture2D(m_LoadedTextures[slot].c_str()));
+			}
 		}
 
 	}

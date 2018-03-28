@@ -27,7 +27,6 @@ class CSceneManager : public QObject, public ISerializer
 public slots:
 	void OnAddSceneClick();
 	void OnOrderChanged(int newVal);
-	void OnDurationChanged(double newVal);
 
 public:
 	CSceneManager();
@@ -39,9 +38,6 @@ public:
 	void ChangeActiveSceneTo(const size_t slot);
 	void AddScene();
 	void RemoveScene(const size_t slot);
-
-	void SafeTimeValues();
-	void ChangeTimeValuesToScene(size_t slot);
 
 	void ChangeSizeOrder(const size_t slot, const size_t changeToSlot);
 

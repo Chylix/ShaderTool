@@ -9,8 +9,6 @@
 #include <qshortcut.h>
 #include <qsplitter.h>
 
-//#define SHIP_DEMO
-
 CShaderToolMain::CShaderToolMain(QWidget *parent)
 	: QMainWindow(parent)
 	, m_CodeEditor(nullptr)
@@ -20,13 +18,12 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 	m_MainUi.centralWidget->layout()->setMargin(0);
 
 	setWindowTitle(m_WindowName);
-
 	connect(m_MainUi.CompileButton, SIGNAL(clicked()), this, SLOT(OnCompileClicked()));
 
 	QShortcut *shortcut = new QShortcut(QKeySequence("Ctrl+S"), this);
 	QObject::connect(shortcut, SIGNAL(activated()), this, SLOT(OnCompileClicked()));
 
-	QShortcut *shortcu2t = new QShortcut(QKeySequence("Ctrl+A"), this);
+	QShortcut *shortcu2t = new QShortcut(QKeySequence("Ctrl+T"), this);
 	QObject::connect(shortcu2t, SIGNAL(activated()), this, SLOT(OnFullscreen()));
 
 	SetupTWScene();
@@ -47,9 +44,10 @@ CShaderToolMain::CShaderToolMain(QWidget *parent)
 
 	//TODO: Move this to the scene manager
 	m_ProjectManager.RegisterSerializer(&m_SceneManager, "3BBA1716-3F89-49F1-B23D-724039F3A9C8");
+	m_ProjectManager.RegisterSerializer(m_MainUi.AudioWidget, "4C60E9F2-434D-4302-867D-973D684C37CE");
 
 #ifdef SHIP_DEMO
-	m_ProjectManager.LoadProject("save.spf");
+	m_ProjectManager.LoadProject("demo.spf");
 
 	m_MainUi.Viewport->ForceFullscreen();
 
@@ -94,9 +92,18 @@ void CShaderToolMain::OnCompileClicked()
 
 	static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->ClearUsedTextures();
 
+	int failedShaderSlot = -1;
+
 	for (size_t i = 0; i < shaders->size(); ++i)
 	{
-		materials.push_back(m_ShaderCreator.CreateShader(shaders->at(i).code.toStdString(), i));
+		auto* shader = m_ShaderCreator.CreateShader(shaders->at(i).code.toStdString(), i);
+
+		if (shader == nullptr)
+		{
+			failedShaderSlot = i;
+		}
+
+		materials.push_back(shader);
 	}
 
 	m_pDefaultScene->UpdateMaterial(&materials);
@@ -104,10 +111,18 @@ void CShaderToolMain::OnCompileClicked()
 	auto errors = twResourceManager->GetShaderGenerator()->GetLatestErrorMessages();
 
 	m_CodeEditor->RemoveErrorLine();
+	m_SceneManager.GetActiveScene()->m_pShaderManager->ClearShaderError();
+
+	int line = 1;
 
 	for (auto errorLine : errors.ErrorLines)
 	{
-		m_CodeEditor->SetErrorLine(errorLine - m_ShaderCreator.m_ShaderLineCount);
+		//m_CodeEditor->SetErrorLine(errorLine - m_ShaderCreator.m_ShaderLineCount);
+
+		line = errorLine - m_ShaderCreator.m_ShaderLineCount;
+
+		//CConsole::Instance().PrintShaderError(errorMessage.c_str());
+
 	}
 
 	if (errors.ErrorMessages.size() == 0)
@@ -118,13 +133,19 @@ void CShaderToolMain::OnCompileClicked()
 	}
 	else
 	{
-		std::string string;
+		std::string errorMessage;
 		for (auto error : errors.ErrorMessages)
 		{
-			string.append(error);
-			string.append("\n");
+			errorMessage.append(error);
+			errorMessage.append("\n");
 		}
-	
-		CConsole::Instance().PrintShaderError(string.c_str());
+
+		m_SceneManager.GetActiveScene()->m_pShaderManager->SetShaderError(line, errorMessage, failedShaderSlot);
+
 	}
+}
+
+void CShaderToolMain::OnFullscreen()
+{
+	m_MainUi.Viewport->ChangeFullscreen();
 }

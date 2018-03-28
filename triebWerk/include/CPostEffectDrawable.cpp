@@ -40,6 +40,16 @@ triebWerk::CMaterial* triebWerk::CPostEffectDrawable::GetMaterial(const int a_Sl
 	return m_Materials[a_Slot];
 }
 
+void triebWerk::CPostEffectDrawable::Clear()
+{
+	for (size_t i = 0; i < m_Materials.size(); ++i)
+	{
+		RemoveMaterial(i);
+	}
+
+	int a = 0;
+}
+
 triebWerk::CMaterial * triebWerk::CPostEffectDrawable::GetMaterial(const char * a_pNameOfMaterial) const
 {
 	for (size_t i = 0; i < m_Materials.size(); i++)

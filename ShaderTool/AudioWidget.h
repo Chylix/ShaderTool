@@ -4,10 +4,11 @@
 #include <QPixmap>
 #include <QPainter>
 #include <qplaintextedit.h>
+#include "ISerializer.h"
 
 class QPainter;
 
-class CAudioWidget : public QWidget {
+class CAudioWidget : public QWidget, public ISerializer {
 	Q_OBJECT
 
 public:
@@ -16,6 +17,10 @@ public:
 	void PlayAudio();
 	void PlayAudioAtPosition(int millisecond);
 	void StopAudio();
+	void PauseAudio(bool pause);
+
+	virtual const char* SaveData();
+	virtual void LoadData(CSerializerChunk* pData);
 
 protected:
 	void paintEvent(QPaintEvent* e);
@@ -29,4 +34,5 @@ private:
 
 private:
 	std::string m_AudioFile;
+	std::string m_buffer;
 };

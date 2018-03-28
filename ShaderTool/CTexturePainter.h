@@ -15,6 +15,7 @@ public:
 	{
 		QPixmap map;
 		QString name;
+		QString path;
 		QRect rect;
 	};
 
@@ -23,6 +24,7 @@ public:
 	CTexturePainter(QWidget *parent = 0);
 	std::vector<SShaderTexture>& GetLoadedTexture();
 	void SetTextures(std::vector<CTexturePainter::SShaderTexture>& textures);
+	void AddTextures(std::vector<std::string>& textures);
 
 protected:
 	void paintEvent(QPaintEvent* e);
@@ -45,4 +47,5 @@ private:
 	void ReplaceTexture(const QDropEvent* event, const size_t slot);
 	void AddTexture(const QDropEvent* event);
 	QString GetFileName(std::string& string);
+	std::string GetRelativePath(std::string path);
 };

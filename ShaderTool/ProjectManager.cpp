@@ -52,8 +52,6 @@ void CProjectManager::LoadProject(const char* projectPath)
 
 		int a = 0;
 	}
-
-	//CConsole::Instance().PrintText("Project successfully loaded", CConsole::EPrintType::Success);
 }
 
 CProjectManager::CProjectManager()
@@ -93,7 +91,7 @@ QString CProjectManager::GetAutoSavePath()
 void CProjectManager::OnOpenProject()
 {
 	QString fileName = QFileDialog::getOpenFileName(nullptr, tr("Open File"),
-		GetAutoSavePath(),
+		m_savePath,
 		m_FileType);
 
 	if (fileName.isEmpty())
@@ -118,6 +116,14 @@ void CProjectManager::OnSaveProject()
 	QString fileName = QFileDialog::getSaveFileName(nullptr, tr("Save File"),
 		GetAutoSavePath(),
 		m_FileType);
+
+	std::string fpath = fileName.toStdString();
+
+	int index = fpath.find_last_of("/")+1;
+
+	std::string pathSave = fpath.erase(index, fpath.size() - index);
+
+	m_savePath = pathSave.c_str();
 
 	if (fileName.isEmpty())
 		return;
@@ -145,6 +151,8 @@ void CProjectManager::Initialize(QPushButton* pOpen, QPushButton* pSave)
 {
 	m_pOpenButton = pOpen;
 	m_pSaveButton = pSave;
+
+	m_savePath = GetAutoSavePath();
 
 	connect(pOpen, SIGNAL(clicked()), this, SLOT(OnOpenProject()));
 	connect(pSave, SIGNAL(clicked()), this, SLOT(OnSaveProject()));

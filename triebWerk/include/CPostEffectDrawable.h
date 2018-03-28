@@ -28,6 +28,9 @@ namespace triebWerk
 		CMaterial* GetMaterial(const int a_Slot) const;
 		CMaterial* GetMaterial(const char* a_pNameOfMaterial) const;
 
+		// Clears all effects
+		void Clear();
+
 		//Remove the effect at the given slot
 		//Keep in mind that the list of effects will change and resizes
 		void RemoveMaterial(const int a_SlotToRemove);

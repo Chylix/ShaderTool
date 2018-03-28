@@ -29,12 +29,17 @@ public:
 	void RemoveScene(size_t slot);
 	void SetActiveScene(size_t slot);
 
+	void CalculateRects();
+
+	void Clear();
+
 	void OnTimelineMove(int time);
 
 protected:
 	//QWidget
 	virtual void focusOutEvent(QFocusEvent* event) override;
 	void paintEvent(QPaintEvent* pEvent);
+	void resizeEvent(QResizeEvent *event) override;
 	//virtual void dragEnterEvent(QDragEnterEvent* pEvent);
 	//virtual void dropEvent(QDropEvent* pEvent);
 	virtual void mousePressEvent(QMouseEvent* pEvent);
@@ -43,7 +48,6 @@ protected:
 	//virtual void mouseReleaseEvent(QMouseEvent* pEvent);
 	//~QWidget
 
-	void CalculateRects();
 	void ChangeSceneOrder(size_t slot, size_t changeToSlot);
 	void DrawTimeAjusters();
 	void AdjustScene(QPoint pos);

@@ -34,8 +34,11 @@ private:
 	triebWerk::CMaterial* m_pPostEffectMaterial2;
 	triebWerk::CMaterial* m_pMaterial;
 	triebWerk::CEntity* m_pEntity;
+	triebWerk::CEntity* m_pEntity1;
+
 	std::vector<std::string> m_LoadedTextures;
 	std::vector<SShaderTextureHolder> m_UsedTextures;
 	size_t m_CurrentShaderCount;
 	CTimeline* m_pTimeline;
+
 };

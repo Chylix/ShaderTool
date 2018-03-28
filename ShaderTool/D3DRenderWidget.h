@@ -23,9 +23,11 @@ protected:
 	virtual void resizeEvent(QResizeEvent* evt);
 	virtual void paintEvent(QPaintEvent* evt);
 	virtual void focusOutEvent(QFocusEvent* event);
+	virtual void keyPressEvent(QKeyEvent* event);
+
 private:
-	bool m_InFullscreen;
-	bool m_ForcedFullscreen;
+	bool m_InFullscreen = false;
+	bool m_ForcedFullscreen = false;
 	QLayout* m_pLayout;
 	QSize m_Size;
 

@@ -5,6 +5,7 @@
 #include <sstream>
 #include <qpoint>
 #include "Console.h"
+#include "TimeUtils.h"
 
 CTimelineWidget::CTimelineWidget(QWidget* parent)
 {
@@ -40,10 +41,6 @@ void CTimelineWidget::mouseMoveEvent(QMouseEvent * event)
 
 		m_timeScrollMoveOffset += (event->pos().x() - m_timeScrollMovePrevXPos);
 
-
-		//std::string a = std::to_string(m_timeScrollMoveOffset);
-		//CConsole::Instance().PrintText(a.c_str(), CConsole::EPrintType::Text);
-
 		if(m_timeScrollMoveOffset < 0 && m_IsPlaying == false)
 			m_timeIndicatorPos += (event->pos().x() - m_timeScrollMovePrevXPos);
 		m_timeScrollMovePrevXPos = event->pos().x();
@@ -56,9 +53,6 @@ void CTimelineWidget::mouseMoveEvent(QMouseEvent * event)
 	{
 		m_pTimeline->OnEdit(true, (m_timeIndicatorPos - m_timeScrollMoveOffset) / m_stepSize);
 		m_timeIndicatorPos = GetTimePosFromWidget(event->pos().x());
-
-		//std::string a = std::to_string(m_timeIndicatorPos);
-		//CConsole::Instance().PrintText(a.c_str(), CConsole::EPrintType::Text);
 	}
 
 }
@@ -72,7 +66,7 @@ void CTimelineWidget::mouseReleaseEvent(QMouseEvent * event)
 	}
 	else if (event->button() == SET_TIME_BUTTON)
 	{
-		m_pTimeline->OnEdit(true, event->pos().x() / m_stepSize);
+		m_pTimeline->OnEdit(true, (event->pos().x()  - m_timeScrollMoveOffset )/ m_stepSize);
 		m_timeIndicatorPos = GetTimePosFromWidget(event->pos().x());
 		m_isSettingTime = false;
 	}
@@ -183,7 +177,7 @@ void CTimelineWidget::DrawTimeAxis()
 		{
 			rect.setRect((sizeIter - offset) - (m_TimeIndicatorSize.x() / 2), thisRect.height() - m_TimeIndicatorSize.y(), m_TimeIndicatorSize.x(), m_TimeIndicatorSize.y());
 
-			m_pCurrentPainter->drawText(QPoint((sizeIter - offset) - 10, thisRect.height() - 22), GetTimeAsString(SecondsToMinutes(seconds)));
+			m_pCurrentPainter->drawText(QPoint((sizeIter - offset) - 10, thisRect.height() - 22), QString(TimeUtils::GetTimeAsString(TimeUtils::SecondsToMinutes(seconds)).c_str()));
 			m_pCurrentPainter->fillRect(rect, QColor(80, 80, 80));
 		}
 		else if(seconds % minorSteps == 0)
@@ -197,7 +191,7 @@ void CTimelineWidget::DrawTimeAxis()
 				m_pCurrentPainter->setPen(penHText);
 				QFont f("Times", 7, QFont::Normal);
 				m_pCurrentPainter->setFont(f);
-				m_pCurrentPainter->drawText(QPoint((sizeIter - offset) - 10, thisRect.height() - 20), GetTimeAsString(SecondsToMinutes(seconds)));
+				m_pCurrentPainter->drawText(QPoint((sizeIter - offset) - 10, thisRect.height() - 20), QString(TimeUtils::GetTimeAsString(TimeUtils::SecondsToMinutes(seconds)).c_str()));
 			}
 
 			m_pCurrentPainter->fillRect(rect, QColor(80.f * m_Opacity, 80.f * m_Opacity, 80.f * m_Opacity));
@@ -247,7 +241,6 @@ void CTimelineWidget::DrawTimeIndicator()
 	a.append("\n");
 	a.append(std::to_string(pos));
 
-	//CConsole::Instance().PrintText(a.c_str(), CConsole::EPrintType::Text);
 	if (m_IsPlaying == true)
 	{
 		m_timeIndicatorPos = m_CurrentTime * m_stepSize;
@@ -324,42 +317,6 @@ void CTimelineWidget::CalculateZoomPos(QPoint pos, float sign)
 	//msg.append(std::to_string((float)pos.x() / 4.0f));
 	//msg.append("\n");
 	//CConsole::Instance().PrintText(msg.c_str(), CConsole::EPrintType::Text);
-}
-
-QString CTimelineWidget::GetTimeAsString(const float time) const
-{
-	float a, b;
-
-	a = modf(time, &b);
-
-	float pi = a;
-	std::stringstream stream;
-	stream << std::fixed << std::setprecision(2) << pi;
-	std::string s = stream.str();
-
-	s.erase(0, 2);
-
-	QString string(std::to_string((int)b).c_str());
-	if (string.size() == 1)
-		string.insert(0, "0");
-	string.append(":");
-	string.append(s.c_str());
-
-	return string;
-}
-
-float CTimelineWidget::SecondsToMinutes(const int seconds) const
-{
-	int min = seconds / 60;
-	if (min < 1)
-		return seconds * 0.01f;
-	else
-	{
-		float e = seconds % 60;
-		float out = min;
-		out += e * 0.01f;
-		return out;
-	}
 }
 
 void CTimelineWidget::AddZoomValue(int secondToZoom, const int strength)

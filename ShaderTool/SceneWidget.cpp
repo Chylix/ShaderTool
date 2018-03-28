@@ -4,6 +4,9 @@
 #include "TimelineWidget.h"
 #include "Console.h"
 #include "SceneManager.h"
+#include <sstream>
+#include <iomanip>
+#include "TimeUtils.h"
 
 CSceneWidget::CSceneWidget(QWidget* pParent)
 {
@@ -56,6 +59,12 @@ void CSceneWidget::paintEvent(QPaintEvent * pEvent)
 	DrawTimeAjusters();
 
 	m_mouseMovePos = QPoint(-1, -1);
+}
+
+void CSceneWidget::resizeEvent(QResizeEvent *event)
+{
+	QWidget::resizeEvent(event);
+	repaint();
 }
 
 void CSceneWidget::mousePressEvent(QMouseEvent* pEvent)
@@ -210,9 +219,18 @@ void CSceneWidget::AdjustScene(QPoint pos)
 {
 	float delta = (pos - m_AdjustStartPoint).x() / TIME_LINE_STEP_SIZE;
 	m_Scenes[m_AdjustScene].pScene->m_DurationTime = m_AdjustDelta + delta;
-	CConsole::Instance().PrintText(std::to_string(delta).c_str(), CConsole::EPrintType::Text);
 
 	m_pSceneManager->UpdateSceneDuration(m_AdjustScene, m_Scenes[m_AdjustScene].pScene->m_DurationTime);
+
+	float time = 0;
+
+	for (size_t i = 0; i <= m_AdjustScene; ++i)
+	{
+		time += m_Scenes[i].pScene->m_DurationTime;
+	}
+
+	CConsole::Instance().PrintText("Scene duration: " + TimeUtils::GetTimeAsString(TimeUtils::SecondsToMinutes(m_Scenes[m_AdjustScene].pScene->m_DurationTime))
+		+ "\n" + "Scene end: " + TimeUtils::GetTimeAsString(TimeUtils::SecondsToMinutes(time)));
 
 	CalculateRects();
 }
@@ -260,6 +278,8 @@ void CSceneWidget::AddScene(CScene* pScene)
 
 void CSceneWidget::RemoveScene(size_t slot)
 {
+	CConsole::Instance().PrintText(m_Scenes[slot].pScene->m_SceneName + " removed");
+
 	m_Scenes.erase(m_Scenes.begin() + slot);
 
 	CalculateRects();
@@ -271,6 +291,11 @@ void CSceneWidget::SetActiveScene(size_t index)
 {
 	m_activeScene = index;
 	repaint();
+}
+
+void CSceneWidget::Clear()
+{
+	m_Scenes.clear();
 }
 
 void CSceneWidget::OnTimelineMove(int time)

@@ -83,6 +83,9 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(ShaderToolMain->sizePolicy().hasHeightForWidth());
         ShaderToolMain->setSizePolicy(sizePolicy);
+        QIcon icon;
+        icon.addFile(QStringLiteral("../x64/Debug/icon1.ico"), QSize(), QIcon::Normal, QIcon::Off);
+        ShaderToolMain->setWindowIcon(icon);
         ShaderToolMain->setWindowOpacity(1);
         ShaderToolMain->setStyleSheet(QStringLiteral(""));
         centralWidget = new QWidget(ShaderToolMain);
@@ -134,7 +137,7 @@ public:
         sizePolicy1.setHeightForWidth(LoadProjectButton->sizePolicy().hasHeightForWidth());
         LoadProjectButton->setSizePolicy(sizePolicy1);
         LoadProjectButton->setMinimumSize(QSize(0, 0));
-        LoadProjectButton->setMaximumSize(QSize(16777215, 50));
+        LoadProjectButton->setMaximumSize(QSize(16777215, 30));
         LoadProjectButton->setStyleSheet(QLatin1String("			.QPushButton\n"
 "			{\n"
 "			background-color: rgb(56, 56, 56);\n"
@@ -153,7 +156,7 @@ public:
         SaveProjectButton->setObjectName(QStringLiteral("SaveProjectButton"));
         sizePolicy1.setHeightForWidth(SaveProjectButton->sizePolicy().hasHeightForWidth());
         SaveProjectButton->setSizePolicy(sizePolicy1);
-        SaveProjectButton->setMaximumSize(QSize(16777215, 50));
+        SaveProjectButton->setMaximumSize(QSize(16777215, 30));
         SaveProjectButton->setBaseSize(QSize(0, 0));
         SaveProjectButton->setStyleSheet(QLatin1String("			.QPushButton\n"
 "			{\n"
@@ -216,6 +219,7 @@ public:
         TimelineActions->setSpacing(0);
         TimelineActions->setContentsMargins(11, 11, 11, 11);
         TimelineActions->setObjectName(QStringLiteral("TimelineActions"));
+        TimelineActions->setSizeConstraint(QLayout::SetMaximumSize);
         TimelineActions->setContentsMargins(0, 0, 0, 0);
         Time = new QLineEdit(gridLayoutWidget_3);
         Time->setObjectName(QStringLiteral("Time"));
@@ -224,6 +228,7 @@ public:
         sizePolicy3.setVerticalStretch(0);
         sizePolicy3.setHeightForWidth(Time->sizePolicy().hasHeightForWidth());
         Time->setSizePolicy(sizePolicy3);
+        Time->setMaximumSize(QSize(16777215, 30));
         Time->setStyleSheet(QLatin1String("			.QLineEdit\n"
 "			{\n"
 "			background-color: rgb(56, 56, 56);\n"
@@ -245,6 +250,7 @@ public:
         sizePolicy4.setVerticalStretch(0);
         sizePolicy4.setHeightForWidth(AddScene->sizePolicy().hasHeightForWidth());
         AddScene->setSizePolicy(sizePolicy4);
+        AddScene->setMaximumSize(QSize(16777215, 30));
         AddScene->setStyleSheet(QLatin1String("			.QPushButton\n"
 "			{\n"
 "			background-color: rgb(56, 56, 56);\n"
@@ -263,6 +269,7 @@ public:
         Pause->setObjectName(QStringLiteral("Pause"));
         sizePolicy4.setHeightForWidth(Pause->sizePolicy().hasHeightForWidth());
         Pause->setSizePolicy(sizePolicy4);
+        Pause->setMaximumSize(QSize(16777215, 30));
         Pause->setStyleSheet(QLatin1String("			.QPushButton\n"
 "			{\n"
 "			background-color: rgb(56, 56, 56);\n"
@@ -281,6 +288,7 @@ public:
         Play->setObjectName(QStringLiteral("Play"));
         sizePolicy4.setHeightForWidth(Play->sizePolicy().hasHeightForWidth());
         Play->setSizePolicy(sizePolicy4);
+        Play->setMaximumSize(QSize(16777215, 30));
         Play->setStyleSheet(QLatin1String("			.QPushButton\n"
 "			{\n"
 "			background-color: rgb(56, 56, 56);\n"
@@ -299,6 +307,7 @@ public:
         Stop->setObjectName(QStringLiteral("Stop"));
         sizePolicy4.setHeightForWidth(Stop->sizePolicy().hasHeightForWidth());
         Stop->setSizePolicy(sizePolicy4);
+        Stop->setMaximumSize(QSize(16777215, 30));
         Stop->setStyleSheet(QLatin1String("			.QPushButton\n"
 "			{\n"
 "			background-color: rgb(56, 56, 56);\n"

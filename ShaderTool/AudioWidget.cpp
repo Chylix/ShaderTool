@@ -4,6 +4,7 @@
 #include <qlist.h>
 #include <CEngine.h>
 #include "Console.h"
+#include "SerializerChunk.h"
 
 CAudioWidget::CAudioWidget(QWidget *parent)
 {
@@ -18,6 +19,8 @@ void CAudioWidget::PlayAudio()
 
 void CAudioWidget::PlayAudioAtPosition(int millisecond)
 {
+	StopAudio();
+
 	if (m_AudioFile.size() > 0)
 		twAudio->PlayAtPosition(twResourceManager->GetSound(m_AudioFile.c_str()), (unsigned int)millisecond);
 }
@@ -25,6 +28,32 @@ void CAudioWidget::PlayAudioAtPosition(int millisecond)
 void CAudioWidget::StopAudio()
 {
 	twAudio->StopAllSounds();
+}
+
+void CAudioWidget::PauseAudio(bool pause)
+{
+	if (pause)
+	{
+		twAudio->PauseBGM();
+	}
+	else
+	{
+		twAudio->ContinueBGM();
+	}
+}
+
+const char* CAudioWidget::SaveData()
+{
+	m_buffer.clear();
+
+	m_buffer = m_AudioFile + "\n";
+
+	return m_buffer.c_str();
+}
+
+void CAudioWidget::LoadData(CSerializerChunk* pData)
+{
+	m_AudioFile = pData->GetLine();
 }
 
 void CAudioWidget::paintEvent(QPaintEvent * e)

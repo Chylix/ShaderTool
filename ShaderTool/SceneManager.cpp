@@ -37,11 +37,6 @@ void CSceneManager::OnAddSceneClick()
 	NotifyListeners();
 }
 
-void CSceneManager::OnDurationChanged(double newVal)
-{
-	SafeTimeValues();
-}
-
 void CSceneManager::Initialize(Ui_ShaderToolMain* pShaderTool, CCodeEditorE* pCodeEditor, CTexturePainter* pTexturePainter, CTimeline* pTimeline)
 {
 	m_pMainUI = pShaderTool;
@@ -69,14 +64,10 @@ void CSceneManager::ChangeActiveSceneTo(const size_t slot)
 	auto textures = m_pTexturePainterHandle->GetLoadedTexture();
 	m_Scenes[m_CurrentActiveScene]->m_TextureNames = textures;
 
-	SafeTimeValues();
-
 	m_Scenes[m_CurrentActiveScene]->m_pShaderManager->SetDisable();
 	m_Scenes[slot]->m_pShaderManager->SetActive();
 
 	m_CurrentActiveScene = slot;
-
-	ChangeTimeValuesToScene(slot);
 
 	// Set the textures of the new scene
 	m_pTexturePainterHandle->SetTextures(m_Scenes[m_CurrentActiveScene]->m_TextureNames);
@@ -112,10 +103,9 @@ void CSceneManager::RemoveScene(const size_t slot)
 	if (m_CurrentActiveScene == slot)
 		ChangeActiveSceneTo(0);
 
-	//m_pSceneLayout->removeWidget(m_Buttons[slot]);
-	//delete m_Buttons[slot];
+	if (slot < m_CurrentActiveScene)
+		m_CurrentActiveScene--;
 
-	//m_Buttons.erase(m_Buttons.begin() + slot);
 
 	m_pSceneWidget->RemoveScene(slot);
 
@@ -129,21 +119,8 @@ void CSceneManager::RemoveScene(const size_t slot)
 	NotifyListeners();
 }
 
-void CSceneManager::SafeTimeValues()
-{
-	//if((float)m_pDurationEdit->value() != m_Scenes[m_CurrentActiveScene]->m_DurationTime)
-	//{
-	//	m_Scenes[m_CurrentActiveScene]->m_DurationTime = (float)m_pDurationEdit->value();
-
-	//	NotifyListeners();
-	//}
-}
-	
 void CSceneManager::UpdateOrder()
 {
-	//for (size_t i = 0; i < m_Buttons.size(); ++i)
-	//	m_Buttons[i]->UpdateSlot(i);
-
 	for (size_t i = 0; i < m_Scenes.size(); ++i)
 		m_Scenes[i]->m_SceneOrder = i;
 }
@@ -170,12 +147,6 @@ void CSceneManager::UnregisterListener(SSceneListener * pListener)
 			m_Listeners.erase(m_Listeners.begin() + i);
 		}
 	}
-}
-
-void CSceneManager::ChangeTimeValuesToScene(size_t slot)
-{
-	//m_pDurationEdit->setValue((double)m_Scenes[slot]->m_DurationTime);
-	//m_pOrderEdit->setValue((double)m_Scenes[slot]->m_SceneOrder);
 }
 
 void CSceneManager::ChangeSizeOrder(const size_t slot, const size_t changeToSlot)
@@ -214,6 +185,10 @@ const char* CSceneManager::SaveData()
 {
 	buffer.clear();
 
+	// Get textures
+	auto textures = m_pTexturePainterHandle->GetLoadedTexture();
+	m_Scenes[m_CurrentActiveScene]->m_TextureNames = textures;
+
 	for (auto* scene : m_Scenes)
 	{
 		buffer.append("-- Scene --\n");
@@ -221,6 +196,13 @@ const char* CSceneManager::SaveData()
 		buffer.append("\n");
 		buffer.append(std::to_string(scene->m_DurationTime));
 		buffer.append("\n");
+		buffer.append(std::to_string(scene->m_TextureNames.size()));
+		buffer.append("\n");
+		for (auto s : scene->m_TextureNames)
+		{
+			buffer.append(s.path.toStdString());
+			buffer.append("\n");
+		}
 		buffer.append(scene->m_pShaderManager->SaveData());
 		buffer.append("----\n");
 	}
@@ -230,9 +212,20 @@ const char* CSceneManager::SaveData()
 
 void CSceneManager::LoadData(CSerializerChunk* pData)
 {
-	size_t slot = m_CurrentActiveScene;
+	size_t slot = 0;
 	size_t iter = 0;
 	size_t iterSceneEnd = 0;
+
+	// Disable shader manager before clearing the scenes (so the layout stays clear)
+	for (auto* scene : m_Scenes)
+	{
+		scene->m_pShaderManager->SetDisable();
+	}
+
+	m_Scenes.clear();
+	m_pSceneWidget->Clear();
+
+	m_CurrentActiveScene = 0;
 
 	bool breakS = false;
 
@@ -241,15 +234,21 @@ void CSceneManager::LoadData(CSerializerChunk* pData)
 		if (pData->IsChunkEnd())
 			break;
 
-		if (iter > 0)
-		{
-			OnAddSceneClick();
-		}
+		OnAddSceneClick();
 
-		size_t sceneEnd = pData->GetChunk().find("----", iterSceneEnd);
+		size_t sceneEnd = pData->GetChunk().find("----", iterSceneEnd) + 4;
 		auto a = pData->GetLine();
 		m_Scenes[slot]->m_SceneName = pData->GetLine();
 		m_Scenes[slot]->m_DurationTime = std::stof(pData->GetLine());
+
+		size_t texNum = std::stoi(pData->GetLine());
+		std::vector<std::string> paths;
+		for (size_t i = 0; i < texNum; ++i)
+		{
+			paths.push_back(pData->GetLine());
+		}
+		m_pTexturePainterHandle->AddTextures(paths);
+
 		auto a3 = pData->GetLine();
 
 		std::string sceneString = pData->GetChunk().substr(iterSceneEnd, sceneEnd - iterSceneEnd).c_str();
@@ -262,12 +261,13 @@ void CSceneManager::LoadData(CSerializerChunk* pData)
 		{
 		}
 
-		iterSceneEnd += sceneEnd + 4;
+		iterSceneEnd = sceneEnd;
 		iter++;
 		slot++;
 	}
 
-
+	m_pSceneWidget->CalculateRects();
+	m_pSceneWidget->repaint();
 }
 
 

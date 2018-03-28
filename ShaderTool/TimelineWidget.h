@@ -58,9 +58,6 @@ private:
 
 	void CalculateZoomPos(QPoint pos, float s);
 private:
-	//Helper functions
-	QString GetTimeAsString(const float time) const;
-	float SecondsToMinutes(const int seconds) const;
 	void AddZoomValue(int secondToZoom, const int strength);
 
 private:

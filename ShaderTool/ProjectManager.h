@@ -39,6 +39,7 @@ private:
 	const QString m_FileType = "Project File (*.spf)";
 	const short m_AutoSaveNumber = 9;
 
+	QString m_savePath;
 	short m_CurrentAutoSaveSlot = 0;
 	QPushButton* m_pOpenButton;
 	QPushButton* m_pSaveButton;

@@ -5,6 +5,7 @@
 #include <qevent.h>
 #include <qmimedata.h>
 #include <qlist.h>
+#include <qdir.h>
 
 CTexturePainter::CTexturePainter(QWidget *parent) 
 	: QWidget(parent)
@@ -156,6 +157,7 @@ void CTexturePainter::ReplaceTexture(const QDropEvent * event, size_t slot)
 	SShaderTexture texture;
 	texture.map = QPixmap(QString(filePath.c_str()));
 	texture.name = GetFileName(filePath);
+	texture.path = QString(GetRelativePath(filePath).c_str());
 
 	//Replace the old texture
 	m_Pictures[slot] = texture;
@@ -178,6 +180,7 @@ void CTexturePainter::AddTexture(const QDropEvent * event)
 		SShaderTexture texture;
 		texture.map = QPixmap(QString(filePath.c_str()));
 		texture.name = GetFileName(filePath);
+		texture.path = QString(GetRelativePath(filePath).c_str());
 
 		m_Pictures.push_back(texture);
 
@@ -188,6 +191,17 @@ void CTexturePainter::AddTexture(const QDropEvent * event)
 QString CTexturePainter::GetFileName(std::string & string)
 {
 	return QString(twResourceManager->AbstractFileNameFromPathOne(twResourceManager->RemoveFileType(string)).c_str());
+}
+
+std::string CTexturePainter::GetRelativePath(std::string path)
+{
+	size_t pos = path.find("/data");
+	if(pos == std::string::npos)
+	{
+		return path;
+	}
+
+	return path.substr(pos, path.size() - pos);
 }
 
 bool CTexturePainter::CheckFilesIfSupported(const QDropEvent* event)
@@ -231,4 +245,30 @@ void CTexturePainter::SetTextures(std::vector<CTexturePainter::SShaderTexture>& 
 
 	// Retrigger painting to draw the new/updated textures.
 	this->repaint();
+}
+
+void CTexturePainter::AddTextures(std::vector<std::string>& textures)
+{
+	for (size_t i = 0; i < textures.size(); i++)
+	{
+		std::string filePath = textures[i];
+
+		//Load the file
+		twResourceManager->LoadSpecificFile(filePath.c_str(), true);
+		QString a = filePath.c_str();
+		if (filePath.find(":") == std::string::npos)
+		{
+			a = QDir::currentPath();
+			a.append(filePath.c_str());
+		}
+
+		//create the texture desc
+		SShaderTexture texture;
+		texture.map = QPixmap(a);
+		texture.name = GetFileName(filePath);
+		texture.path = QString(filePath.c_str());
+		m_Pictures.push_back(texture);
+
+		static_cast<CDefaultScene*>(twSceneManager->m_pActiveScene->m_pScene)->UpdateLoadedTextures(texture.name.toStdString().c_str());
+	}
 }

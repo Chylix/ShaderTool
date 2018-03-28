@@ -12,6 +12,14 @@ class CTimeline : public QObject, public SSceneListener
 {
 	Q_OBJECT
 
+private:
+	struct SPlayScene
+	{
+		float time;
+		size_t sceneSlot;
+	};
+
+
 public:
 	CTimeline();
 	~CTimeline();
@@ -36,7 +44,6 @@ public slots:
 	void OnPlay();
 	void OnPause();
 	void OnStop();
-	void OnPlayScene();
 	void OnTimelineEdit(int);
 	void OnFinishedEdit();
 
@@ -48,13 +55,14 @@ private:
 	QGraphicsView* m_pGraphicsView = nullptr;
 	QLineEdit* m_pTimeDisplay = nullptr;
 
-	std::queue<float> m_SceneTimes;
+	std::queue<SPlayScene> m_SceneTimes;
 
 	bool m_IsStoped = true;
 	bool m_IsPlaying = false;
 	bool m_IsPaused = false;
 
 	int m_EditTime = 0;
+	int m_MoveOffset = 0;
 
 	bool m_IsEditing = false;
 	float m_Time = 0;

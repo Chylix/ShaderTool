@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>CShaderToolMain</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../x64/Debug/icon1.ico</normaloff>../x64/Debug/icon1.ico</iconset>
+  </property>
   <property name="windowOpacity">
    <double>1.000000000000000</double>
   </property>
@@ -94,7 +98,7 @@
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>50</height>
+             <height>30</height>
             </size>
            </property>
            <property name="styleSheet">
@@ -126,7 +130,7 @@
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>50</height>
+             <height>30</height>
             </size>
            </property>
            <property name="baseSize">
@@ -213,6 +217,9 @@
           </property>
           <widget class="QWidget" name="gridLayoutWidget_3">
            <layout class="QGridLayout" name="TimelineActions">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetMaximumSize</enum>
+            </property>
             <property name="spacing">
              <number>0</number>
             </property>
@@ -223,6 +230,12 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>30</height>
+               </size>
               </property>
               <property name="styleSheet">
                <string notr="true">			.QLineEdit
@@ -250,6 +263,12 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>30</height>
+               </size>
+              </property>
               <property name="styleSheet">
                <string notr="true">			.QPushButton
 			{
@@ -275,6 +294,12 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>30</height>
+               </size>
               </property>
               <property name="styleSheet">
                <string notr="true">			.QPushButton
@@ -302,6 +327,12 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>30</height>
+               </size>
+              </property>
               <property name="styleSheet">
                <string notr="true">			.QPushButton
 			{
@@ -327,6 +358,12 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>30</height>
+               </size>
               </property>
               <property name="styleSheet">
                <string notr="true">			.QPushButton

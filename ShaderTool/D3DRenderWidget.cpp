@@ -6,6 +6,7 @@
 #include <qguiapplication.h>
 #include <qscreen.h>
 #include <qlayout.h>
+#include "ShaderToolMain.h"
 
 D3DRenderWidget::D3DRenderWidget(QWidget* parent)
 	: m_pLayout(nullptr)
@@ -117,4 +118,15 @@ void D3DRenderWidget::focusOutEvent(QFocusEvent * event)
 	{
 		ChangeFullscreen();
 	}
+}
+
+void D3DRenderWidget::keyPressEvent(QKeyEvent* event)
+{
+#ifdef SHIP_DEMO
+	if (event->key() == Qt::Key_Escape)
+	{
+		quick_exit(0);
+	}
+#endif
+
 }
