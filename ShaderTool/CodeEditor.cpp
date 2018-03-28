@@ -149,23 +149,25 @@ void CCodeEditorE::updateLineNumberArea(const QRect &rect, int dy)
 
 void CCodeEditorE::wheelEvent(QWheelEvent* event)
 {
-	if (m_IsZooming == false)
-		return;
+	if (m_IsZooming == true)
+	{
+		m_FontSize += event->delta() / 120;
 
-	m_FontSize += event->delta() / 120;
+		if (m_FontSize < m_MinFontSize)
+			m_FontSize = m_MinFontSize;
+		else if (m_FontSize > m_MaxFontSize)
+			m_FontSize = m_MaxFontSize;
 
-	if (m_FontSize < m_MinFontSize)
-		m_FontSize = m_MinFontSize;
-	else if(m_FontSize > m_MaxFontSize)
-		m_FontSize = m_MaxFontSize;
+		m_Font.setFamily("Courier");
+		m_Font.setFixedPitch(true);
+		m_Font.setPointSize(m_FontSize);
 
-	m_Font.setFamily("Courier");
-	m_Font.setFixedPitch(true);
-	m_Font.setPointSize(m_FontSize);
+		CConsole::Instance().PrintText(std::to_string(m_FontSize));
 
-	CConsole::Instance().PrintText(std::to_string(m_FontSize));
+		this->setFont(m_Font);
+	}
 
-	this->setFont(m_Font);
+	QPlainTextEdit::wheelEvent(event);
 }
 
 void CCodeEditorE::keyPressEvent(QKeyEvent* pEvent)
